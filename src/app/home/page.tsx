@@ -1,5 +1,3 @@
-"use client"
-
 import React from 'react';
 import LeftSidebar from 'components/pages/home/LeftSidebar';
 import NewsFeedScreen from 'components/pages/home/NewsFeed';

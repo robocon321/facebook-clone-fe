@@ -1,9 +1,10 @@
 import React from 'react';
 import Link from 'next/link';
-import { usePathname } from 'next/navigation'
+// import { usePathname } from 'next/navigation'
 
 const Navbar: React.FC = () => {
-  const pathName = usePathname().split('/')[1];
+  // const pathName = usePathname().split('/')[1];
+  const pathName: string = '';
   
   return (
     <div className="w-full h-14 bg-white grid grid-cols-7 gap-4 fixed z-50">

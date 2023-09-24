@@ -1,15 +1,20 @@
 "use client";
 
 import { Formik } from "formik";
-import React from "react";
+import React, { useContext } from "react";
 import Button from "components/limb/button/Button";
 import { TextInput } from "components/limb/input/TextInput";
 import * as yup from "yup";
 import Link from "next/link";
+import { LoginContext, LoginContextType } from "providers/LoginProvider";
+import Loading from "components/limb/loading/loading";
 
 const LoginPage: React.FC = () => {
+
+  const { login, loginState } = useContext(LoginContext) as LoginContextType;
+  
   const fieldValidationSchema = yup.object({
-    emailOrPhone: yup.string().required("Email or phone required"),
+    username: yup.string().required("Email or phone required"),
     password: yup.string().required("Password required"),
   });
 
@@ -30,11 +35,11 @@ const LoginPage: React.FC = () => {
               <div className="w-96 h-auto bg-white rounded-md shadow-md p-4">
                 <Formik
                   initialValues={{
-                    emailOrPhone: "",
+                    username: "",
                     password: "",
                   }}
-                  onSubmit={() => {
-                    // console.log(values);
+                  onSubmit={(values, { resetForm }) => {
+                    login(values);
                   }}
                   validationSchema={fieldValidationSchema}
                 >
@@ -44,7 +49,7 @@ const LoginPage: React.FC = () => {
                         inputsize="large"
                         type="text"
                         placeholder="Email address or phone number"
-                        name="emailOrPhone"
+                        name="username"
                       />
                       <TextInput
                         inputsize="large"
@@ -62,6 +67,7 @@ const LoginPage: React.FC = () => {
                       >
                         Login
                       </Button>
+                      <div className="text-sm w-full text-red-500">{loginState.error}</div>
                       <div className="mt-2 text-center pb-3 border-b border-gray-300">
                         <p className="text-primary cursor-pointer underline">
                           Forgot password?
@@ -103,6 +109,7 @@ const LoginPage: React.FC = () => {
           </div>
         </div>
       </div>
+      {loginState.isLoading && <Loading />}
     </>
   );
 };

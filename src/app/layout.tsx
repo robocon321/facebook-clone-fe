@@ -1,6 +1,7 @@
 import './globals.css'
 import type { Metadata } from 'next'
 import { Inter } from 'next/font/google'
+import AppProvider from 'providers/AppProvider'
 
 const inter = Inter({ subsets: ['latin'] })
 
@@ -18,19 +19,23 @@ export default function RootLayout({
     <html lang="en">
       <head>
         <meta charSet="utf-8" />
-        <link rel="icon" href="%PUBLIC_URL%/favicon.ico" />
+        <link rel="icon" href="/favicon.ico" />
         <meta name="viewport" content="width=device-width, initial-scale=1" />
         <meta name="theme-color" content="#000000" />
         <meta name="description" content="React facebook clone" />
-        <link rel="manifest" href="%PUBLIC_URL%/manifest.json" />
+        <link rel="manifest" href="/manifest.json" />
         <link
           rel="stylesheet"
           href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.14.0/css/all.min.css"
         />
         <title>Facebook Clone</title>
       </head>
-        <body className={inter.className}>{children}</body>
+      <body className={inter.className}>
+        <AppProvider>
+          {children}
+        </AppProvider>
+      </body>
     </html>
-    
+
   )
 }
