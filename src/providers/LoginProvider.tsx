@@ -1,11 +1,12 @@
 "use client";
 
-import { createContext, useState, useContext } from "react";
+import { createContext, useState, useContext, useEffect } from "react";
 import { LoginRequest } from "types/requests/LoginRequest";
 import * as LoginService from "services/AuthService";
 import { useRouter } from 'next/navigation'
 import { AppContext, AppContextType } from "./AppProvider";
- 
+import Loading from "components/limb/loading/loading";
+
 type LoginStateType = {
   isLoading: boolean,
   message: string | null,
@@ -29,7 +30,14 @@ const LoginProvider = (props: any) => {
   const router = useRouter()
 
   const [loginState, setLoginstate] = useState(loginStateType);
-  const { loadUser } = useContext(AppContext) as AppContextType;
+  const { loadUser, appState, setAppState } = useContext(AppContext) as AppContextType;
+
+  useEffect(() => {
+    setAppState({
+      ...appState,
+      isLoading: false
+    })
+  }, []);
 
   const login = async (request: LoginRequest) => {
     setLoginstate((prevState) => ({
@@ -37,14 +45,14 @@ const LoginProvider = (props: any) => {
       message: null,
       error: null
     }));
-      await LoginService.login(request)
+    await LoginService.login(request)
       .then((data) => {
         setLoginstate((prevState) => ({
           isLoading: false,
           message: data,
           error: null
         }));
-        loadUser();     
+        loadUser();
         router.push('/home');
       })
       .catch((error: Error) => {
@@ -53,17 +61,20 @@ const LoginProvider = (props: any) => {
           message: null,
           error: error.message
         }));
-      });    
+      });
   }
 
   const value = {
     loginState,
     login
   }
-
-  return (
-    <LoginContext.Provider value={value}>{props.children}</LoginContext.Provider>
-  )
+  if (appState.isLoading) {
+    return <Loading />
+  } else {
+    return (
+      <LoginContext.Provider value={value}>{props.children}</LoginContext.Provider>
+    )
+  }
 }
 
 export default LoginProvider;

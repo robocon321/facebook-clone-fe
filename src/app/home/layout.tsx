@@ -2,6 +2,7 @@ import type { Metadata } from 'next'
 import { Inter } from 'next/font/google'
 import MainContentContainer from 'components/common';
 import Navbar from 'components/limb/navbar';
+import HomeProvider from 'providers/HomeProvider';
 
 const inter = Inter({ subsets: ['latin'] })
 
@@ -16,10 +17,11 @@ export default function Layout({
   children: React.ReactNode
 }) {
   return (
-    <div className="w-full h-full flex flex-col">
-      <Navbar />
-      <MainContentContainer>{children}</MainContentContainer>
-    </div>
-    
+    <HomeProvider>
+      <div className="w-full h-full flex flex-col">
+        <Navbar />
+        <MainContentContainer>{children}</MainContentContainer>
+      </div>
+    </HomeProvider>
   )
 }

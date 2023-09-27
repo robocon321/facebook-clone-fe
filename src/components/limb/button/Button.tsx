@@ -14,7 +14,7 @@ type IProps = ButtonHTMLAttributes<HTMLButtonElement> & {
   fontSize?: IFontSize;
   isDisabled?: boolean;
   isLoading?: boolean;
-  block?: boolean;
+  block?: string;
 };
 
 const Button: React.FC<IProps> = (props) => {

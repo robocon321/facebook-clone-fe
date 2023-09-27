@@ -60,7 +60,7 @@ const LoginPage: React.FC = () => {
                       <Button
                         type="submit"
                         size="large"
-                        block
+                        block="true"
                         fontSize="text-xl"
                         fontWeight="font-bold"
                         bg="bg-blue-600"
@@ -83,7 +83,7 @@ const LoginPage: React.FC = () => {
                       size="large"
                       bg="bg-green-600"
                       fontSize="text-xl"
-                      block
+                      block="true"
                     >
                       Create New Account
                     </Button>
