@@ -7,7 +7,7 @@ import { TextInput } from "components/limb/input/TextInput";
 import * as yup from "yup";
 import Link from "next/link";
 import { RegisterContext, RegisterContextType } from "providers/RegisterProvider";
-import Loading from "components/limb/loading/loading";
+import Loading from "components/limb/loading/Loading";
 import { SelectOptionInput } from "components/limb/input/SelectOptionInput";
 
 const genderData = [

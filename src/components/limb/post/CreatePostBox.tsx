@@ -1,6 +1,10 @@
-import React from 'react';
+"use client"
+import { HomeContext, HomeContextType } from 'providers/HomeProvider';
+import React, { useContext } from 'react';
 
 const CreatePostBox: React.FC = () => {
+  const { setModal } = useContext(HomeContext) as HomeContextType; 
+  
   return (
     <div className="rounded-lg bg-white flex flex-col p-3 px-4 shadow">
       <div className="flex items-center space-x-2 border-b pb-3 mb-2">
@@ -11,7 +15,7 @@ const CreatePostBox: React.FC = () => {
             alt="dp"
           />
         </div>
-        <button className="hover:bg-gray-200 focus:bg-gray-300 focus:outline-none flex-grow bg-gray-100 text-gray-500 text-left rounded-full h-10 pl-5">
+        <button onClick={() => setModal('isShowModal', true)} className="hover:bg-gray-200 focus:bg-gray-300 focus:outline-none flex-grow bg-gray-100 text-gray-500 text-left rounded-full h-10 pl-5">
           What&apos;s on your mind, Shihab?
         </button>
       </div>

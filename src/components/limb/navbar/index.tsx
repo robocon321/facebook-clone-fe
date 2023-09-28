@@ -1,9 +1,14 @@
-import React from 'react';
+"use client";
+
+import React, { useContext } from 'react';
 import Link from 'next/link';
+import { AppContext, AppContextType } from 'providers/AppProvider';
 // import { usePathname } from 'next/navigation'
 
 const Navbar: React.FC = () => {
   // const pathName = usePathname().split('/')[1];
+  const { appState } = useContext(AppContext) as AppContextType;
+
   const pathName: string = '';
   
   return (
@@ -116,7 +121,7 @@ const Navbar: React.FC = () => {
                 />
               </div>
               <div className="h-8 flex items-center justify-content">
-                <p className="font-semibold text-sm">Saiful</p>
+                <p className="font-semibold text-sm">{appState.data.user?.firstName}</p>
               </div>
             </button>
           </Link>

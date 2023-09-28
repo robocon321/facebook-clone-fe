@@ -2,7 +2,7 @@
 
 import { Dispatch, SetStateAction, createContext, useEffect, useState } from "react";
 import { redirect, usePathname } from 'next/navigation';
-import Loading from "components/limb/loading/loading";
+import Loading from "components/limb/loading/Loading";
 import { getSummaryAccount } from "services/AccountService";
 import { AccountSummaryInfoResponse } from "types/responses/AccountSummaryInfoResponseType";
 import { useRouter } from 'next/navigation';
@@ -80,6 +80,7 @@ const AppProvider = (props: any) => {
                             error: error.message
                         }
                     })
+                    router.push('/login');
                 })
         }
     }

@@ -5,7 +5,7 @@ import { LoginRequest } from "types/requests/LoginRequest";
 import * as LoginService from "services/AuthService";
 import { useRouter } from 'next/navigation'
 import { AppContext, AppContextType } from "./AppProvider";
-import Loading from "components/limb/loading/loading";
+import Loading from "components/limb/loading/Loading";
 
 type LoginStateType = {
   isLoading: boolean,
