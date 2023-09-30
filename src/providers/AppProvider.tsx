@@ -42,7 +42,6 @@ const AppProvider = (props: any) => {
 
     useEffect(() => {
         !allowedPaths.find((item) => {
-            console.log(item, pathnameSplit[1], item == pathnameSplit[1]);
             return item == pathnameSplit[1]
         });
         if (pathnameSplit.length > 1 && !allowedPaths.find((item) => item == pathnameSplit[1])) {

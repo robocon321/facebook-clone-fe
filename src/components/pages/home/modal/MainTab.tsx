@@ -55,7 +55,7 @@ const MainTab: React.FC = () => {
                 </div>
                 <div className="flex justify-between items-center py-4 border-[0.5px] rounded border-gray-400">
                     <div onClick={() => changeTabIndexModal(1)} className="px-2 cursor-pointer">Thêm vào bài viết của bạn</div>
-                    <div onClick={() => setModal("isChooseFile", true)} className="px-2 cursor-pointer hover:bg-gray-200 rounded-full w-10 h-10 flex justify-center items-center">
+                    <div onClick={() => setModal("isChooseFile", true)} className={"px-2 cursor-pointer hover:bg-gray-200 active:bg-gray-300  rounded-full w-10 h-10 flex justify-center items-center" + (homeState.modal.isChooseFile ? " bg-gray-200" : " ")}>
                         <img src="/image.png" alt="Not found" />
                     </div>
                     <div className="px-2 cursor-pointer hover:bg-gray-200 rounded-full w-10 h-10 flex justify-center items-center">

@@ -11,7 +11,6 @@ export const getSummaryAccount = async (token: string) : Promise<AccountSummaryI
         });
         const status = response.status;        
         const data = await response.json();
-        console.log(status, data);         
         if(status == 200) {
             return data;
         } else {            

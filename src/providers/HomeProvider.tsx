@@ -1,10 +1,11 @@
 "use client";
 
-import { createContext, useState, useContext, Dispatch, SetStateAction } from "react";
+import { createContext, useState, useContext, Dispatch, SetStateAction, useEffect } from "react";
 import { AppContext, AppContextType } from "./AppProvider";
 import Loading from "components/limb/loading/Loading";
 import { SubTabType } from "components/pages/home/modal/SubTab";
 import * as AddToPost from "components/pages/home/modal/AddToPost";
+import * as EditFile from "components/pages/home/modal/EditFile";
 
 type HomeStateType = {
   modal: {
@@ -13,9 +14,14 @@ type HomeStateType = {
     subTab: SubTabType,
     isChooseFile: boolean,
     data: {
-      images: string[]      
+      images: FileModalType[]      
     }
   }
+}
+
+export type FileModalType = {
+  id: string, 
+  file: File
 }
 
 export type HomeContextType = {
@@ -45,12 +51,16 @@ const defaultHomeState: HomeStateType = {
   }
 }
 
+
 const HomeProvider = (props: any) => {
   const [homeState, setHomeState] = useState(defaultHomeState);
   const { appState } = useContext(AppContext) as AppContextType;
 
+  useEffect(() => {
+    console.log(homeState.modal.data.images);
+  }, [homeState.modal.data.images])
+  
   const setModal = (key: string, value: any) => {
-    console.log(key, value);
     setHomeState({
       ...homeState,
       modal: {
@@ -87,9 +97,23 @@ const HomeProvider = (props: any) => {
             rightIcon: <AddToPost.RightIconComponent />,
             children: <AddToPost.ChildrentIconComponent />  
           }
-                
         }
-      })      
+      })
+    } else if(tabIndex == 2) {
+      setHomeState({
+        ...homeState,
+        modal: {
+          ...homeState.modal,
+          tabIndexModal: 2,
+          subTab: {
+            title: EditFile.title,
+            leftIcon: <EditFile.LeftIconComponent />,
+            rightIcon: <EditFile.RightIconComponent />,
+            children: <EditFile.ChildrentIconComponent />  
+          }
+        }
+      })
+      
     }
   }
 
