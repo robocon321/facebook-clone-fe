@@ -2,7 +2,7 @@ import type { Metadata } from 'next'
 import { Inter } from 'next/font/google'
 import MainContentContainer from 'components/common';
 import Navbar from 'components/limb/navbar';
-import HomeProvider from 'providers/HomeProvider';
+import ModalProvider from 'providers/home/ModalProvider';
 
 const inter = Inter({ subsets: ['latin'] })
 
@@ -17,11 +17,11 @@ export default function Layout({
   children: React.ReactNode
 }) {
   return (
-    <HomeProvider>
+    <ModalProvider>
       <div className="w-full h-full flex flex-col">
         <Navbar />
         <MainContentContainer>{children}</MainContentContainer>
       </div>
-    </HomeProvider>
+    </ModalProvider>
   )
 }

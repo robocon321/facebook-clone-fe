@@ -1,4 +1,5 @@
-export type AccountSummaryInfoResponse = {	
+export type AccountSummaryInfoResponse = {
+    accountId: number,
     firstName: string,
     lastName: string,
     profilePictureUrl: string,

@@ -2,7 +2,7 @@
 
 import React, { useState } from 'react';
 import { TPostView } from 'types/post';
-import PostContainer from 'components/container/PostContainer';
+import PostContainer from 'components/containers/PostContainer';
 import CreatePostBox from 'components/limb/post/CreatePostBox';
 
 const ProfilePage: React.FC = () => {

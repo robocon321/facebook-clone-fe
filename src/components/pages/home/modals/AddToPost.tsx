@@ -1,14 +1,18 @@
 import React, { useContext } from 'react';
 import { faArrowLeft } from '@fortawesome/free-solid-svg-icons';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
-import { HomeContext, HomeContextType } from 'providers/HomeProvider';
-import IconButton from 'components/limb/button/IconButton';
+import IconButton from 'components/limb/buttons/IconButton';
+import { TAB_CODE } from 'constants/HomeConstant';
+import { ModalContext } from 'providers/home/ModalProvider';
+import { ModalContextType } from 'types/pages/HomeType';
 
 export const LeftIconComponent: React.FC = () => {
-    const { setModal } = useContext(HomeContext) as HomeContextType;
+    const { changeTabIndexModal } = useContext(ModalContext) as ModalContextType;
 
     return (
-        <IconButton click={() => setModal('tabIndexModal', 0)} icon={faArrowLeft} />
+        <IconButton click={
+            () => changeTabIndexModal(TAB_CODE.MAIN_TAB)
+        } icon={faArrowLeft} />
     )
 };
 
@@ -18,7 +22,7 @@ export const RightIconComponent: React.FC = () => {
     )
 };
 
-export const ChildrentIconComponent: React.FC = () => {
+export const ChildrenIconComponent: React.FC = () => {
     return (
         <div className="grid grid-cols-2 gap-4">
             <div className="flex items-center hover:bg-gray-100 p-2 rounded cursor-pointer">

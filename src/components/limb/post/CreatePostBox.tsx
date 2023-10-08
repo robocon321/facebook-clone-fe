@@ -1,9 +1,10 @@
 "use client"
-import { HomeContext, HomeContextType } from 'providers/HomeProvider';
+import { ModalContext } from 'providers/home/ModalProvider';
 import React, { useContext } from 'react';
+import { ModalContextType } from 'types/pages/HomeType';
 
 const CreatePostBox: React.FC = () => {
-  const { setModal } = useContext(HomeContext) as HomeContextType; 
+  const { controlModalState, setControlModalState } = useContext(ModalContext) as ModalContextType; 
   
   return (
     <div className="rounded-lg bg-white flex flex-col p-3 px-4 shadow">
@@ -15,7 +16,10 @@ const CreatePostBox: React.FC = () => {
             alt="dp"
           />
         </div>
-        <button onClick={() => setModal('isShowModal', true)} className="hover:bg-gray-200 focus:bg-gray-300 focus:outline-none flex-grow bg-gray-100 text-gray-500 text-left rounded-full h-10 pl-5">
+        <button onClick={() => setControlModalState({
+          ...controlModalState,
+          isShow: true
+        })} className="hover:bg-gray-200 focus:bg-gray-300 focus:outline-none flex-grow bg-gray-100 text-gray-500 text-left rounded-full h-10 pl-5">
           What&apos;s on your mind, Shihab?
         </button>
       </div>

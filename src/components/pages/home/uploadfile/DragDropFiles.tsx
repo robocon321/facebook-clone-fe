@@ -2,14 +2,16 @@
 
 import { faImages, faPenToSquare, faXmark } from "@fortawesome/free-solid-svg-icons";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
-import IconButton from "components/limb/button/IconButton";
-import { FileModalType, HomeContext, HomeContextType } from "providers/HomeProvider";
+import IconButton from "components/limb/buttons/IconButton";
 import { useRef, useContext } from "react";
 import { convertToBlobFile } from "utils/FileUtils";
 import { generateRandomString } from "utils/RandomUtils";
+import { ImageModalType, ModalContextType, VideoModalType } from "../../../../types/pages/HomeType";
+import { TAB_CODE } from "constants/HomeConstant";
+import { ModalContext } from "providers/home/ModalProvider";
 
 const DragDropFiles = () => {
-    const { setDataModal, changeTabIndexModal, homeState, setHomeState } = useContext(HomeContext) as HomeContextType;
+    const { changeTabIndexModal, dataModalState, setDataModalState, controlModalState, setControlModalState } = useContext(ModalContext) as ModalContextType;
     const inputRef = useRef<HTMLInputElement | null>(null);
 
     const handleDragOver = (event: React.DragEvent) => {
@@ -26,32 +28,44 @@ const DragDropFiles = () => {
         upload(event.target.files);
     }
 
-    const upload = async (fileList: FileList) => {
-        const images: FileModalType[] = [...homeState.modal.data.images];
+    const upload = (fileList: FileList) => {
+        const files: (VideoModalType | ImageModalType)[] = [...dataModalState.files];
         for (var i = 0; i < fileList.length; i++) {
-            images.push({
-                id: generateRandomString(5),
-                file: fileList[i]
-            });
+            const file = fileList[i];
+            const { type } = convertToBlobFile(file);
+            if (type.startsWith("video")) {
+                const videoModal: VideoModalType = {
+                    id: generateRandomString(5),
+                    file: fileList[i]
+                };
+                files.push(videoModal);
+            } else {
+                const imageModal: ImageModalType = {
+                    id: generateRandomString(5),
+                    file: fileList[i]
+                }
+                files.push(imageModal);
+            }
         }
-        setDataModal("images", images);
+        setDataModalState({
+            ...dataModalState,
+            files
+        })
     }
 
     const resetImageVideoPost = (event: React.MouseEvent) => {
         event.stopPropagation();
-        setHomeState({
-            ...homeState,
-            modal: {
-                ...homeState.modal,
-                isChooseFile: false,
-                data: {
-                    images: []
-                }
-            }
-        })
+        setControlModalState({
+            ...controlModalState,
+            isChooseFile: false
+        });
+        setDataModalState({
+            ...dataModalState,
+            files: []
+        });
     }
 
-    if (homeState.modal.data.images.length > 0) {
+    if (dataModalState.files.length > 0) {
         return (
             <div className="has-tooltip max-h-[400px] max-h-[200px] relative flex flex-col justify-center items-center my-4 border-[1px] border-gray-200 hover:bg-gray-200 cursor-pointer">
                 <input
@@ -64,8 +78,8 @@ const DragDropFiles = () => {
                 />
                 <div className="flex-wrap overflow-scroll flex items-center">
                     {
-                        homeState.modal.data.images.map((item, index) => {
-                            const { blobUrl, type} = convertToBlobFile(item.file);
+                        dataModalState.files.map((item, index) => {
+                            const { blobUrl, type } = convertToBlobFile(item.file);
                             if (type.startsWith('video')) {
                                 return (
                                     <div key={index} className="max-w-[250px] m-4">
@@ -85,7 +99,7 @@ const DragDropFiles = () => {
                     }
                 </div>
                 <div className="tooltip invisible absolute flex top-[10px] left-[10px]">
-                    <button onClick={() => changeTabIndexModal(2)} className="flex items-center justify-between bg-white min-w-[100px] p-2 rounded hover:bg-gray-200 active:bg-gray-300">
+                    <button onClick={() => changeTabIndexModal(TAB_CODE.EDIT_FILE)} className="flex items-center justify-between bg-white min-w-[100px] p-2 rounded hover:bg-gray-200 active:bg-gray-300">
                         <span className="mr-2"><FontAwesomeIcon icon={faPenToSquare} /></span>
                         <span>Edit all</span>
                     </button>

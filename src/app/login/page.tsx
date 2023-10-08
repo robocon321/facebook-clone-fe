@@ -2,7 +2,7 @@
 
 import { Formik } from "formik";
 import React, { useContext } from "react";
-import Button from "components/limb/button/Button";
+import Button from "components/limb/buttons/Button";
 import { TextInput } from "components/limb/input/TextInput";
 import * as yup from "yup";
 import Link from "next/link";
