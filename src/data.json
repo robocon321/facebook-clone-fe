@@ -1,0 +1,1002 @@
+[
+    {
+        "emotion_id": 0,
+        "text": "hạnh phúc",
+        "imageUrl": "https://static.xx.fbcdn.net/rsrc.php/v3/yl/r/tNYZpPkEnbp.png"
+    },
+    {
+        "emotion_id": 1,
+        "text": "có phúc",
+        "imageUrl": "https://static.xx.fbcdn.net/rsrc.php/v3/yn/r/C4yAC7LRNGf.png"
+    },
+    {
+        "emotion_id": 2,
+        "text": "được yêu",
+        "imageUrl": "https://static.xx.fbcdn.net/rsrc.php/v3/yR/r/qcBQ5HblkNF.png"
+    },
+    {
+        "emotion_id": 3,
+        "text": "buồn",
+        "imageUrl": "https://static.xx.fbcdn.net/rsrc.php/v3/y8/r/vAd0CBmjF8Y.png"
+    },
+    {
+        "emotion_id": 4,
+        "text": "đáng yêu",
+        "imageUrl": "https://static.xx.fbcdn.net/rsrc.php/v3/yR/r/qcBQ5HblkNF.png"
+    },
+    {
+        "emotion_id": 5,
+        "text": "biết ơn",
+        "imageUrl": "https://static.xx.fbcdn.net/rsrc.php/v3/yb/r/8HG4ArhYqqm.png"
+    },
+    {
+        "emotion_id": 6,
+        "text": "hào hứng",
+        "imageUrl": "https://static.xx.fbcdn.net/rsrc.php/v3/yV/r/gGmEl_0Q-iL.png"
+    },
+    {
+        "emotion_id": 7,
+        "text": "đang yêu",
+        "imageUrl": "https://static.xx.fbcdn.net/rsrc.php/v3/yR/r/qcBQ5HblkNF.png"
+    },
+    {
+        "emotion_id": 8,
+        "text": "điên",
+        "imageUrl": "https://static.xx.fbcdn.net/rsrc.php/v3/yN/r/cg2Se8HhHw5.png"
+    },
+    {
+        "emotion_id": 9,
+        "text": "cảm kích",
+        "imageUrl": "https://static.xx.fbcdn.net/rsrc.php/v3/yQ/r/DYkNJ0ffgWK.png"
+    },
+    {
+        "emotion_id": 10,
+        "text": "sung sướng",
+        "imageUrl": "https://static.xx.fbcdn.net/rsrc.php/v3/yl/r/-Oz0Mt1ODxc.png"
+    },
+    {
+        "emotion_id": 11,
+        "text": "tuyệt vời",
+        "imageUrl": "https://static.xx.fbcdn.net/rsrc.php/v3/yZ/r/QN53TpvKl34.png"
+    },
+    {
+        "emotion_id": 12,
+        "text": "khờ khạo",
+        "imageUrl": "https://static.xx.fbcdn.net/rsrc.php/v3/y4/r/ni4Armmrf3P.png"
+    },
+    {
+        "emotion_id": 13,
+        "text": "vui vẻ",
+        "imageUrl": "https://static.xx.fbcdn.net/rsrc.php/v3/yE/r/kAMgAySnuDJ.png"
+    },
+    {
+        "emotion_id": 14,
+        "text": "tuyệt vời",
+        "imageUrl": "https://static.xx.fbcdn.net/rsrc.php/v3/yl/r/tNYZpPkEnbp.png"
+    },
+    {
+        "emotion_id": 15,
+        "text": "tuyệt",
+        "imageUrl": "https://static.xx.fbcdn.net/rsrc.php/v3/yz/r/TLm2OJzKubg.png"
+    },
+    {
+        "emotion_id": 16,
+        "text": "thú vị",
+        "imageUrl": "https://static.xx.fbcdn.net/rsrc.php/v3/yl/r/tNYZpPkEnbp.png"
+    },
+    {
+        "emotion_id": 17,
+        "text": "thư giãn",
+        "imageUrl": "https://static.xx.fbcdn.net/rsrc.php/v3/y7/r/v5eHKNBqjkz.png"
+    },
+    {
+        "emotion_id": 18,
+        "text": "tích cực",
+        "imageUrl": "https://static.xx.fbcdn.net/rsrc.php/v3/y7/r/v5eHKNBqjkz.png"
+    },
+    {
+        "emotion_id": 19,
+        "text": "thoải mái",
+        "imageUrl": "https://static.xx.fbcdn.net/rsrc.php/v3/y7/r/v5eHKNBqjkz.png"
+    },
+    {
+        "emotion_id": 20,
+        "text": "đầy hy vọng",
+        "imageUrl": "https://static.xx.fbcdn.net/rsrc.php/v3/yJ/r/-QMIhlwCYdo.png"
+    },
+    {
+        "emotion_id": 21,
+        "text": "hân hoan",
+        "imageUrl": "https://static.xx.fbcdn.net/rsrc.php/v3/yl/r/-Oz0Mt1ODxc.png"
+    },
+    {
+        "emotion_id": 22,
+        "text": "mệt mỏi",
+        "imageUrl": "https://static.xx.fbcdn.net/rsrc.php/v3/yj/r/XUxJKsLyvQ4.png"
+    },
+    {
+        "emotion_id": 23,
+        "text": "có động lực",
+        "imageUrl": "https://static.xx.fbcdn.net/rsrc.php/v3/yv/r/mkXcJ_5Lz42.png"
+    },
+    {
+        "emotion_id": 24,
+        "text": "tự hào",
+        "imageUrl": "https://static.xx.fbcdn.net/rsrc.php/v3/yv/r/mkXcJ_5Lz42.png"
+    },
+    {
+        "emotion_id": 25,
+        "text": "cô đơn",
+        "imageUrl": "https://static.xx.fbcdn.net/rsrc.php/v3/ye/r/Sx4Sy7SMYUb.png"
+    },
+    {
+        "emotion_id": 26,
+        "text": "chu đáo",
+        "imageUrl": "https://static.xx.fbcdn.net/rsrc.php/v3/yG/r/DYjeWWIP6lV.png"
+    },
+    {
+        "emotion_id": 27,
+        "text": "OK",
+        "imageUrl": "https://static.xx.fbcdn.net/rsrc.php/v3/yQ/r/2-xshZHrMzJ.png"
+    },
+    {
+        "emotion_id": 28,
+        "text": "hoài niệm",
+        "imageUrl": "https://static.xx.fbcdn.net/rsrc.php/v3/yR/r/xX0WVa88-tJ.png"
+    },
+    {
+        "emotion_id": 29,
+        "text": "giận dữ",
+        "imageUrl": "https://static.xx.fbcdn.net/rsrc.php/v3/y9/r/USUgQ58uDx-.png"
+    },
+    {
+        "emotion_id": 30,
+        "text": "ốm yếu",
+        "imageUrl": "https://static.xx.fbcdn.net/rsrc.php/v3/yr/r/1Se99YgIwLT.png"
+    },
+    {
+        "emotion_id": 31,
+        "text": "hài lòng",
+        "imageUrl": "https://static.xx.fbcdn.net/rsrc.php/v3/yZ/r/QN53TpvKl34.png"
+    },
+    {
+        "emotion_id": 32,
+        "text": "kiệt sức",
+        "imageUrl": "https://static.xx.fbcdn.net/rsrc.php/v3/yX/r/gXjnOZhx3oz.png"
+    },
+    {
+        "emotion_id": 33,
+        "text": "xúc động",
+        "imageUrl": "https://static.xx.fbcdn.net/rsrc.php/v3/y2/r/KQnfhKFrEJ6.png"
+    },
+    {
+        "emotion_id": 34,
+        "text": "tự tin",
+        "imageUrl": "https://static.xx.fbcdn.net/rsrc.php/v3/yv/r/mkXcJ_5Lz42.png"
+    },
+    {
+        "emotion_id": 35,
+        "text": "rất tuyệt",
+        "imageUrl": "https://static.xx.fbcdn.net/rsrc.php/v3/yb/r/8HG4ArhYqqm.png"
+    },
+    {
+        "emotion_id": 36,
+        "text": "tươi mới",
+        "imageUrl": "https://static.xx.fbcdn.net/rsrc.php/v3/yv/r/mkXcJ_5Lz42.png"
+    },
+    {
+        "emotion_id": 37,
+        "text": "quyết đoán",
+        "imageUrl": "https://static.xx.fbcdn.net/rsrc.php/v3/yR/r/X71Se0IjjoA.png"
+    },
+    {
+        "emotion_id": 38,
+        "text": "kiệt sức",
+        "imageUrl": "https://static.xx.fbcdn.net/rsrc.php/v3/y-/r/94kyFsW4pl3.png"
+    },
+    {
+        "emotion_id": 39,
+        "text": "bực mình",
+        "imageUrl": "https://static.xx.fbcdn.net/rsrc.php/v3/y9/r/USUgQ58uDx-.png"
+    },
+    {
+        "emotion_id": 40,
+        "text": "vui vẻ",
+        "imageUrl": "https://static.xx.fbcdn.net/rsrc.php/v3/yb/r/Zq_QZwVGoqX.png"
+    },
+    {
+        "emotion_id": 41,
+        "text": "may mắn",
+        "imageUrl": "https://static.xx.fbcdn.net/rsrc.php/v3/yp/r/_rhXOH8CsRB.png"
+    },
+    {
+        "emotion_id": 42,
+        "text": "đau khổ",
+        "imageUrl": "https://static.xx.fbcdn.net/rsrc.php/v3/yN/r/uExps4LXYsl.png"
+    },
+    {
+        "emotion_id": 43,
+        "text": "buồn tẻ",
+        "imageUrl": "https://static.xx.fbcdn.net/rsrc.php/v3/yo/r/liHnDhve3V-.png"
+    },
+    {
+        "emotion_id": 44,
+        "text": "buồn ngủ",
+        "imageUrl": "https://static.xx.fbcdn.net/rsrc.php/v3/yj/r/XUxJKsLyvQ4.png"
+    },
+    {
+        "emotion_id": 45,
+        "text": "tràn đầy sinh lực",
+        "imageUrl": "https://static.xx.fbcdn.net/rsrc.php/v3/yZ/r/QN53TpvKl34.png"
+    },
+    {
+        "emotion_id": 46,
+        "text": "đói",
+        "imageUrl": "https://static.xx.fbcdn.net/rsrc.php/v3/yg/r/Puw1zycDBVG.png"
+    },
+    {
+        "emotion_id": 47,
+        "text": "chuyên nghiệp",
+        "imageUrl": "https://static.xx.fbcdn.net/rsrc.php/v3/yv/r/mkXcJ_5Lz42.png"
+    },
+    {
+        "emotion_id": 48,
+        "text": "đau đớn",
+        "imageUrl": "https://static.xx.fbcdn.net/rsrc.php/v3/yJ/r/bJLEtuB841O.png"
+    },
+    {
+        "emotion_id": 49,
+        "text": "thanh thản",
+        "imageUrl": "https://static.xx.fbcdn.net/rsrc.php/v3/y7/r/v5eHKNBqjkz.png"
+    },
+    {
+        "emotion_id": 50,
+        "text": "thất vọng",
+        "imageUrl": "https://static.xx.fbcdn.net/rsrc.php/v3/y8/r/vAd0CBmjF8Y.png"
+    },
+    {
+        "emotion_id": 51,
+        "text": "lạc quan",
+        "imageUrl": "https://static.xx.fbcdn.net/rsrc.php/v3/yv/r/mkXcJ_5Lz42.png"
+    },
+    {
+        "emotion_id": 52,
+        "text": "lạnh",
+        "imageUrl": "https://static.xx.fbcdn.net/rsrc.php/v3/yX/r/j4N2EHLjFcG.png"
+    },
+    {
+        "emotion_id": 53,
+        "text": "dễ thương",
+        "imageUrl": "https://static.xx.fbcdn.net/rsrc.php/v3/yZ/r/WstlxnuAlJf.png"
+    },
+    {
+        "emotion_id": 54,
+        "text": "tuyệt cú mèo",
+        "imageUrl": "https://static.xx.fbcdn.net/rsrc.php/v3/yz/r/TLm2OJzKubg.png"
+    },
+    {
+        "emotion_id": 55,
+        "text": "thật tuyệt",
+        "imageUrl": "https://static.xx.fbcdn.net/rsrc.php/v3/yb/r/8HG4ArhYqqm.png"
+    },
+    {
+        "emotion_id": 56,
+        "text": "hối tiếc",
+        "imageUrl": "https://static.xx.fbcdn.net/rsrc.php/v3/yH/r/zNPuI3DdlO0.png"
+    },
+    {
+        "emotion_id": 57,
+        "text": "thật giỏi",
+        "imageUrl": "https://static.xx.fbcdn.net/rsrc.php/v3/yL/r/ViDymeQ2vS7.png"
+    },
+    {
+        "emotion_id": 58,
+        "text": "lo lắng",
+        "imageUrl": "https://static.xx.fbcdn.net/rsrc.php/v3/yU/r/r25QaKZcE9s.png"
+    },
+    {
+        "emotion_id": 59,
+        "text": "vui nhộn",
+        "imageUrl": "https://static.xx.fbcdn.net/rsrc.php/v3/y7/r/K11hrTHTyfg.png"
+    },
+    {
+        "emotion_id": 60,
+        "text": "tồi tệ",
+        "imageUrl": "https://static.xx.fbcdn.net/rsrc.php/v3/y8/r/vAd0CBmjF8Y.png"
+    },
+    {
+        "emotion_id": 61,
+        "text": "xuống tinh thần",
+        "imageUrl": "https://static.xx.fbcdn.net/rsrc.php/v3/ye/r/Sx4Sy7SMYUb.png"
+    },
+    {
+        "emotion_id": 62,
+        "text": "đầy cảm hứng",
+        "imageUrl": "https://static.xx.fbcdn.net/rsrc.php/v3/yW/r/Gog0z_oEPLa.png"
+    },
+    {
+        "emotion_id": 63,
+        "text": "hài lòng",
+        "imageUrl": "https://static.xx.fbcdn.net/rsrc.php/v3/yl/r/tNYZpPkEnbp.png"
+    },
+    {
+        "emotion_id": 64,
+        "text": "phấn khích",
+        "imageUrl": "https://static.xx.fbcdn.net/rsrc.php/v3/yv/r/mkXcJ_5Lz42.png"
+    },
+    {
+        "emotion_id": 65,
+        "text": "bình tĩnh",
+        "imageUrl": "https://static.xx.fbcdn.net/rsrc.php/v3/y7/r/v5eHKNBqjkz.png"
+    },
+    {
+        "emotion_id": 66,
+        "text": "bối rối",
+        "imageUrl": "https://static.xx.fbcdn.net/rsrc.php/v3/y1/r/hAjN0l2I0-y.png"
+    },
+    {
+        "emotion_id": 67,
+        "text": "ngớ ngẩn",
+        "imageUrl": "https://static.xx.fbcdn.net/rsrc.php/v3/y4/r/ni4Armmrf3P.png"
+    },
+    {
+        "emotion_id": 68,
+        "text": "trống vắng",
+        "imageUrl": "https://static.xx.fbcdn.net/rsrc.php/v3/yQ/r/DYkNJ0ffgWK.png"
+    },
+    {
+        "emotion_id": 69,
+        "text": "tốt",
+        "imageUrl": "https://static.xx.fbcdn.net/rsrc.php/v3/yl/r/tNYZpPkEnbp.png"
+    },
+    {
+        "emotion_id": 70,
+        "text": "mỉa mai",
+        "imageUrl": "https://static.xx.fbcdn.net/rsrc.php/v3/ya/r/EsVCKErmClv.png"
+    },
+    {
+        "emotion_id": 71,
+        "text": "cô đơn",
+        "imageUrl": "https://static.xx.fbcdn.net/rsrc.php/v3/y8/r/vAd0CBmjF8Y.png"
+    },
+    {
+        "emotion_id": 72,
+        "text": "mạnh mẽ",
+        "imageUrl": "https://static.xx.fbcdn.net/rsrc.php/v3/yL/r/ViDymeQ2vS7.png"
+    },
+    {
+        "emotion_id": 73,
+        "text": "lo lắng",
+        "imageUrl": "https://static.xx.fbcdn.net/rsrc.php/v3/yd/r/fFaSv61BiCy.png"
+    },
+    {
+        "emotion_id": 74,
+        "text": "đặc biệt",
+        "imageUrl": "https://static.xx.fbcdn.net/rsrc.php/v3/yV/r/gGmEl_0Q-iL.png"
+    },
+    {
+        "emotion_id": 75,
+        "text": "chán nản",
+        "imageUrl": "https://static.xx.fbcdn.net/rsrc.php/v3/ye/r/Sx4Sy7SMYUb.png"
+    },
+    {
+        "emotion_id": 76,
+        "text": "vui vẻ",
+        "imageUrl": "https://static.xx.fbcdn.net/rsrc.php/v3/yf/r/7eo15DE44--.png"
+    },
+    {
+        "emotion_id": 77,
+        "text": "tò mò",
+        "imageUrl": "https://static.xx.fbcdn.net/rsrc.php/v3/yW/r/Gog0z_oEPLa.png"
+    },
+    {
+        "emotion_id": 78,
+        "text": "ủ dột",
+        "imageUrl": "https://static.xx.fbcdn.net/rsrc.php/v3/y8/r/vAd0CBmjF8Y.png"
+    },
+    {
+        "emotion_id": 79,
+        "text": "được chào đón",
+        "imageUrl": "https://static.xx.fbcdn.net/rsrc.php/v3/yl/r/tNYZpPkEnbp.png"
+    },
+    {
+        "emotion_id": 80,
+        "text": "đau khổ",
+        "imageUrl": "https://static.xx.fbcdn.net/rsrc.php/v3/yO/r/hBlmNHlPwyJ.png"
+    },
+    {
+        "emotion_id": 81,
+        "text": "xinh đẹp",
+        "imageUrl": "https://static.xx.fbcdn.net/rsrc.php/v3/yp/r/BVe1f0GjDgS.png"
+    },
+    {
+        "emotion_id": 82,
+        "text": "tuyệt vời",
+        "imageUrl": "https://static.xx.fbcdn.net/rsrc.php/v3/yV/r/gGmEl_0Q-iL.png"
+    },
+    {
+        "emotion_id": 83,
+        "text": "cáu",
+        "imageUrl": "https://static.xx.fbcdn.net/rsrc.php/v3/yO/r/GhRDii4zrL4.png"
+    },
+    {
+        "emotion_id": 84,
+        "text": "căng thẳng",
+        "imageUrl": "https://static.xx.fbcdn.net/rsrc.php/v3/y8/r/vAd0CBmjF8Y.png"
+    },
+    {
+        "emotion_id": 85,
+        "text": "thiếu vắng",
+        "imageUrl": "https://static.xx.fbcdn.net/rsrc.php/v3/ym/r/b0uai6DkBKW.png"
+    },
+    {
+        "emotion_id": 86,
+        "text": "quá siêu",
+        "imageUrl": "https://static.xx.fbcdn.net/rsrc.php/v3/y4/r/ni4Armmrf3P.png"
+    },
+    {
+        "emotion_id": 87,
+        "text": "tinh quái",
+        "imageUrl": "https://static.xx.fbcdn.net/rsrc.php/v3/yI/r/3toQEDxYsXi.png"
+    },
+    {
+        "emotion_id": 88,
+        "text": "kinh ngạc",
+        "imageUrl": "https://static.xx.fbcdn.net/rsrc.php/v3/yZ/r/QN53TpvKl34.png"
+    },
+    {
+        "emotion_id": 89,
+        "text": "tức giận",
+        "imageUrl": "https://static.xx.fbcdn.net/rsrc.php/v3/y9/r/USUgQ58uDx-.png"
+    },
+    {
+        "emotion_id": 90,
+        "text": "buồn chán",
+        "imageUrl": "https://static.xx.fbcdn.net/rsrc.php/v3/yJ/r/bJLEtuB841O.png"
+    },
+    {
+        "emotion_id": 91,
+        "text": "bối rối",
+        "imageUrl": "https://static.xx.fbcdn.net/rsrc.php/v3/yf/r/6Lnq4sgFwNe.png"
+    },
+    {
+        "emotion_id": 92,
+        "text": "giận dữ",
+        "imageUrl": "https://static.xx.fbcdn.net/rsrc.php/v3/yI/r/plwtt5-3_s7.png"
+    },
+    {
+        "emotion_id": 93,
+        "text": "phẫn nộ",
+        "imageUrl": "https://static.xx.fbcdn.net/rsrc.php/v3/y9/r/USUgQ58uDx-.png"
+    },
+    {
+        "emotion_id": 94,
+        "text": "mới mẻ",
+        "imageUrl": "https://static.xx.fbcdn.net/rsrc.php/v3/yl/r/tNYZpPkEnbp.png"
+    },
+    {
+        "emotion_id": 95,
+        "text": "thành công",
+        "imageUrl": "https://static.xx.fbcdn.net/rsrc.php/v3/yI/r/3toQEDxYsXi.png"
+    },
+    {
+        "emotion_id": 96,
+        "text": "ngạc nhiên",
+        "imageUrl": "https://static.xx.fbcdn.net/rsrc.php/v3/yx/r/koNZzuTQDOP.png"
+    },
+    {
+        "emotion_id": 97,
+        "text": "bối rối",
+        "imageUrl": "https://static.xx.fbcdn.net/rsrc.php/v3/yf/r/6Lnq4sgFwNe.png"
+    },
+    {
+        "emotion_id": 98,
+        "text": "nản lòng",
+        "imageUrl": "https://static.xx.fbcdn.net/rsrc.php/v3/y8/r/vAd0CBmjF8Y.png"
+    },
+    {
+        "emotion_id": 99,
+        "text": "tẻ nhạt",
+        "imageUrl": "https://static.xx.fbcdn.net/rsrc.php/v3/yQ/r/nrz0teaAY94.png"
+    },
+    {
+        "emotion_id": 100,
+        "text": "xinh xắn",
+        "imageUrl": "https://static.xx.fbcdn.net/rsrc.php/v3/yZ/r/WstlxnuAlJf.png"
+    },
+    {
+        "emotion_id": 101,
+        "text": "khá hơn",
+        "imageUrl": "https://static.xx.fbcdn.net/rsrc.php/v3/yb/r/Zq_QZwVGoqX.png"
+    },
+    {
+        "emotion_id": 102,
+        "text": "tội lỗi",
+        "imageUrl": "https://static.xx.fbcdn.net/rsrc.php/v3/y8/r/vAd0CBmjF8Y.png"
+    },
+    {
+        "emotion_id": 103,
+        "text": "an toàn",
+        "imageUrl": "https://static.xx.fbcdn.net/rsrc.php/v3/yx/r/vTeCt9V__aX.png"
+    },
+    {
+        "emotion_id": 104,
+        "text": "tự do",
+        "imageUrl": "https://static.xx.fbcdn.net/rsrc.php/v3/yl/r/tNYZpPkEnbp.png"
+    },
+    {
+        "emotion_id": 105,
+        "text": "hoang mang",
+        "imageUrl": "https://static.xx.fbcdn.net/rsrc.php/v3/y1/r/hAjN0l2I0-y.png"
+    },
+    {
+        "emotion_id": 106,
+        "text": "già nua",
+        "imageUrl": "https://static.xx.fbcdn.net/rsrc.php/v3/yh/r/zqvH3Bm-BsF.png"
+    },
+    {
+        "emotion_id": 107,
+        "text": "lười biếng",
+        "imageUrl": "https://static.xx.fbcdn.net/rsrc.php/v3/y7/r/v5eHKNBqjkz.png"
+    },
+    {
+        "emotion_id": 108,
+        "text": "tồi tệ hơn",
+        "imageUrl": "https://static.xx.fbcdn.net/rsrc.php/v3/y8/r/vAd0CBmjF8Y.png"
+    },
+    {
+        "emotion_id": 109,
+        "text": "khủng khiếp",
+        "imageUrl": "https://static.xx.fbcdn.net/rsrc.php/v3/y9/r/USUgQ58uDx-.png"
+    },
+    {
+        "emotion_id": 110,
+        "text": "thoải mái",
+        "imageUrl": "https://static.xx.fbcdn.net/rsrc.php/v3/yl/r/tNYZpPkEnbp.png"
+    },
+    {
+        "emotion_id": 111,
+        "text": "ngốc nghếch",
+        "imageUrl": "https://static.xx.fbcdn.net/rsrc.php/v3/yj/r/XUxJKsLyvQ4.png"
+    },
+    {
+        "emotion_id": 112,
+        "text": "hổ thẹn",
+        "imageUrl": "https://static.xx.fbcdn.net/rsrc.php/v3/yH/r/zNPuI3DdlO0.png"
+    },
+    {
+        "emotion_id": 113,
+        "text": "kinh khủng",
+        "imageUrl": "https://static.xx.fbcdn.net/rsrc.php/v3/ye/r/Sx4Sy7SMYUb.png"
+    },
+    {
+        "emotion_id": 114,
+        "text": "đang ngủ",
+        "imageUrl": "https://static.xx.fbcdn.net/rsrc.php/v3/yj/r/XUxJKsLyvQ4.png"
+    },
+    {
+        "emotion_id": 115,
+        "text": "khỏe",
+        "imageUrl": "https://static.xx.fbcdn.net/rsrc.php/v3/yl/r/tNYZpPkEnbp.png"
+    },
+    {
+        "emotion_id": 116,
+        "text": "nhanh nhẹn",
+        "imageUrl": "https://static.xx.fbcdn.net/rsrc.php/v3/yl/r/tNYZpPkEnbp.png"
+    },
+    {
+        "emotion_id": 117,
+        "text": "ngại ngùng",
+        "imageUrl": "https://static.xx.fbcdn.net/rsrc.php/v3/yZ/r/WstlxnuAlJf.png"
+    },
+    {
+        "emotion_id": 118,
+        "text": "gay go",
+        "imageUrl": "https://static.xx.fbcdn.net/rsrc.php/v3/yR/r/f920MfleIcI.png"
+    },
+    {
+        "emotion_id": 119,
+        "text": "kỳ lạ",
+        "imageUrl": "https://static.xx.fbcdn.net/rsrc.php/v3/yD/r/qOniWzNSEHP.png"
+    },
+    {
+        "emotion_id": 120,
+        "text": "như con người",
+        "imageUrl": "https://static.xx.fbcdn.net/rsrc.php/v3/yl/r/tNYZpPkEnbp.png"
+    },
+    {
+        "emotion_id": 121,
+        "text": "bị tổn thương",
+        "imageUrl": "https://static.xx.fbcdn.net/rsrc.php/v3/yJ/r/bJLEtuB841O.png"
+    },
+    {
+        "emotion_id": 122,
+        "text": "khủng khiếp",
+        "imageUrl": "https://static.xx.fbcdn.net/rsrc.php/v3/yN/r/7a10cYmnbZn.png"
+    },
+    {
+        "emotion_id": 123,
+        "text": "bình thường",
+        "imageUrl": "https://static.xx.fbcdn.net/rsrc.php/v3/yb/r/Zq_QZwVGoqX.png"
+    },
+    {
+        "emotion_id": 124,
+        "text": "ấm áp",
+        "imageUrl": "https://static.xx.fbcdn.net/rsrc.php/v3/yn/r/vm_19q6gADx.png"
+    },
+    {
+        "emotion_id": 125,
+        "text": "không an toàn",
+        "imageUrl": "https://static.xx.fbcdn.net/rsrc.php/v3/yQ/r/nrz0teaAY94.png"
+    },
+    {
+        "emotion_id": 126,
+        "text": "yếu",
+        "imageUrl": "https://static.xx.fbcdn.net/rsrc.php/v3/yj/r/XUxJKsLyvQ4.png"
+    },
+    {
+        "emotion_id": 127,
+        "text": "tốt đẹp",
+        "imageUrl": "https://static.xx.fbcdn.net/rsrc.php/v3/yb/r/Zq_QZwVGoqX.png"
+    },
+    {
+        "emotion_id": 128,
+        "text": "khỏe",
+        "imageUrl": "https://static.xx.fbcdn.net/rsrc.php/v3/yb/r/Zq_QZwVGoqX.png"
+    },
+    {
+        "emotion_id": 129,
+        "text": "ngu ngốc",
+        "imageUrl": "https://static.xx.fbcdn.net/rsrc.php/v3/yj/r/XUxJKsLyvQ4.png"
+    },
+    {
+        "emotion_id": 130,
+        "text": "dễ chịu",
+        "imageUrl": "https://static.xx.fbcdn.net/rsrc.php/v3/yl/r/tNYZpPkEnbp.png"
+    },
+    {
+        "emotion_id": 131,
+        "text": "quan trọng",
+        "imageUrl": "https://static.xx.fbcdn.net/rsrc.php/v3/yI/r/3toQEDxYsXi.png"
+    },
+    {
+        "emotion_id": 132,
+        "text": "dở tệ",
+        "imageUrl": "https://static.xx.fbcdn.net/rsrc.php/v3/yN/r/7a10cYmnbZn.png"
+    },
+    {
+        "emotion_id": 133,
+        "text": "không thoải mái",
+        "imageUrl": "https://static.xx.fbcdn.net/rsrc.php/v3/y8/r/vAd0CBmjF8Y.png"
+    },
+    {
+        "emotion_id": 134,
+        "text": "chẳng được tích sự gì",
+        "imageUrl": "https://static.xx.fbcdn.net/rsrc.php/v3/yj/r/XUxJKsLyvQ4.png"
+    },
+    {
+        "emotion_id": 135,
+        "text": "sẵn sàng",
+        "imageUrl": "https://static.xx.fbcdn.net/rsrc.php/v3/yv/r/mkXcJ_5Lz42.png"
+    },
+    {
+        "emotion_id": 136,
+        "text": "khác biệt",
+        "imageUrl": "https://static.xx.fbcdn.net/rsrc.php/v3/y7/r/K11hrTHTyfg.png"
+    },
+    {
+        "emotion_id": 137,
+        "text": "bất lực",
+        "imageUrl": "https://static.xx.fbcdn.net/rsrc.php/v3/y8/r/vAd0CBmjF8Y.png"
+    },
+    {
+        "emotion_id": 138,
+        "text": "hèn nhát",
+        "imageUrl": "https://static.xx.fbcdn.net/rsrc.php/v3/yQ/r/nrz0teaAY94.png"
+    },
+    {
+        "emotion_id": 139,
+        "text": "say",
+        "imageUrl": "https://static.xx.fbcdn.net/rsrc.php/v3/yx/r/4Gr0W7Gyo02.png"
+    },
+    {
+        "emotion_id": 140,
+        "text": "choáng ngợp",
+        "imageUrl": "https://static.xx.fbcdn.net/rsrc.php/v3/yz/r/Hug6hCcvXt_.png"
+    },
+    {
+        "emotion_id": 141,
+        "text": "vô vọng",
+        "imageUrl": "https://static.xx.fbcdn.net/rsrc.php/v3/y8/r/vAd0CBmjF8Y.png"
+    },
+    {
+        "emotion_id": 142,
+        "text": "toàn vẹn",
+        "imageUrl": "https://static.xx.fbcdn.net/rsrc.php/v3/yl/r/tNYZpPkEnbp.png"
+    },
+    {
+        "emotion_id": 143,
+        "text": "khổ sở",
+        "imageUrl": "https://static.xx.fbcdn.net/rsrc.php/v3/y9/r/USUgQ58uDx-.png"
+    },
+    {
+        "emotion_id": 144,
+        "text": "tức điên",
+        "imageUrl": "https://static.xx.fbcdn.net/rsrc.php/v3/y9/r/USUgQ58uDx-.png"
+    },
+    {
+        "emotion_id": 145,
+        "text": "thâm trầm",
+        "imageUrl": "https://static.xx.fbcdn.net/rsrc.php/v3/yl/r/tNYZpPkEnbp.png"
+    },
+    {
+        "emotion_id": 146,
+        "text": "kinh tởm",
+        "imageUrl": "https://static.xx.fbcdn.net/rsrc.php/v3/yN/r/7a10cYmnbZn.png"
+    },
+    {
+        "emotion_id": 147,
+        "text": "bồn chồn",
+        "imageUrl": "https://static.xx.fbcdn.net/rsrc.php/v3/y8/r/vAd0CBmjF8Y.png"
+    },
+    {
+        "emotion_id": 148,
+        "text": "buồn bã",
+        "imageUrl": "https://static.xx.fbcdn.net/rsrc.php/v3/yZ/r/VzlqZoIu0jx.png"
+    },
+    {
+        "emotion_id": 149,
+        "text": "được yêu mến",
+        "imageUrl": "https://static.xx.fbcdn.net/rsrc.php/v3/yl/r/tNYZpPkEnbp.png"
+    },
+    {
+        "emotion_id": 150,
+        "text": "vinh dự",
+        "imageUrl": "https://static.xx.fbcdn.net/rsrc.php/v3/yb/r/Zq_QZwVGoqX.png"
+    },
+    {
+        "emotion_id": 151,
+        "text": "thư thái",
+        "imageUrl": "https://static.xx.fbcdn.net/rsrc.php/v3/yl/r/tNYZpPkEnbp.png"
+    },
+    {
+        "emotion_id": 152,
+        "text": "choáng váng",
+        "imageUrl": "https://static.xx.fbcdn.net/rsrc.php/v3/yN/r/7a10cYmnbZn.png"
+    },
+    {
+        "emotion_id": 153,
+        "text": "an toàn",
+        "imageUrl": "https://static.xx.fbcdn.net/rsrc.php/v3/yx/r/vTeCt9V__aX.png"
+    },
+    {
+        "emotion_id": 154,
+        "text": "trống rỗng",
+        "imageUrl": "https://static.xx.fbcdn.net/rsrc.php/v3/yS/r/4E288lReLaT.png"
+    },
+    {
+        "emotion_id": 155,
+        "text": "bẩn thỉu",
+        "imageUrl": "https://static.xx.fbcdn.net/rsrc.php/v3/yT/r/_XMc_VgqmiB.png"
+    },
+    {
+        "emotion_id": 156,
+        "text": "không quan trọng",
+        "imageUrl": "https://static.xx.fbcdn.net/rsrc.php/v3/yj/r/XUxJKsLyvQ4.png"
+    },
+    {
+        "emotion_id": 157,
+        "text": "vĩ đại",
+        "imageUrl": "https://static.xx.fbcdn.net/rsrc.php/v3/yb/r/8HG4ArhYqqm.png"
+    },
+    {
+        "emotion_id": 158,
+        "text": "sợ hãi",
+        "imageUrl": "https://static.xx.fbcdn.net/rsrc.php/v3/yA/r/Dxg7LlsBAFd.png"
+    },
+    {
+        "emotion_id": 159,
+        "text": "ghen tuông",
+        "imageUrl": "https://static.xx.fbcdn.net/rsrc.php/v3/yI/r/plwtt5-3_s7.png"
+    },
+    {
+        "emotion_id": 160,
+        "text": "đau nhức",
+        "imageUrl": "https://static.xx.fbcdn.net/rsrc.php/v3/yJ/r/bJLEtuB841O.png"
+    },
+    {
+        "emotion_id": 161,
+        "text": "không ai cần mình",
+        "imageUrl": "https://static.xx.fbcdn.net/rsrc.php/v3/yj/r/XUxJKsLyvQ4.png"
+    },
+    {
+        "emotion_id": 162,
+        "text": "được coi trọng",
+        "imageUrl": "https://static.xx.fbcdn.net/rsrc.php/v3/yv/r/mkXcJ_5Lz42.png"
+    },
+    {
+        "emotion_id": 163,
+        "text": "đầy đủ",
+        "imageUrl": "https://static.xx.fbcdn.net/rsrc.php/v3/yl/r/tNYZpPkEnbp.png"
+    },
+    {
+        "emotion_id": 164,
+        "text": "bận bịu",
+        "imageUrl": "https://static.xx.fbcdn.net/rsrc.php/v3/yQ/r/nrz0teaAY94.png"
+    },
+    {
+        "emotion_id": 165,
+        "text": "nhỏ bé",
+        "imageUrl": "https://static.xx.fbcdn.net/rsrc.php/v3/yS/r/Bd7HCEX2uJ4.png"
+    },
+    {
+        "emotion_id": 166,
+        "text": "không được yêu",
+        "imageUrl": "https://static.xx.fbcdn.net/rsrc.php/v3/yN/r/uExps4LXYsl.png"
+    },
+    {
+        "emotion_id": 167,
+        "text": "vô dụng",
+        "imageUrl": "https://static.xx.fbcdn.net/rsrc.php/v3/ye/r/Sx4Sy7SMYUb.png"
+    },
+    {
+        "emotion_id": 168,
+        "text": "đủ điều kiện",
+        "imageUrl": "https://static.xx.fbcdn.net/rsrc.php/v3/yI/r/3toQEDxYsXi.png"
+    },
+    {
+        "emotion_id": 169,
+        "text": "thờ ơ",
+        "imageUrl": "https://static.xx.fbcdn.net/rsrc.php/v3/yX/r/GulyrspGCCK.png"
+    },
+    {
+        "emotion_id": 170,
+        "text": "nôn nóng",
+        "imageUrl": "https://static.xx.fbcdn.net/rsrc.php/v3/yo/r/liHnDhve3V-.png"
+    },
+    {
+        "emotion_id": 171,
+        "text": "được ưu tiên",
+        "imageUrl": "https://static.xx.fbcdn.net/rsrc.php/v3/y7/r/xc9LQV_j3yr.png"
+    },
+    {
+        "emotion_id": 172,
+        "text": "mắc lừa",
+        "imageUrl": "https://static.xx.fbcdn.net/rsrc.php/v3/yM/r/TqCq4cbifvz.png"
+    },
+    {
+        "emotion_id": 173,
+        "text": "khát",
+        "imageUrl": "https://static.xx.fbcdn.net/rsrc.php/v3/yN/r/7a10cYmnbZn.png"
+    },
+    {
+        "emotion_id": 174,
+        "text": "gớm ghiếc",
+        "imageUrl": "https://static.xx.fbcdn.net/rsrc.php/v3/yr/r/1Se99YgIwLT.png"
+    },
+    {
+        "emotion_id": 175,
+        "text": "khó chịu",
+        "imageUrl": "https://static.xx.fbcdn.net/rsrc.php/v3/y8/r/vAd0CBmjF8Y.png"
+    },
+    {
+        "emotion_id": 176,
+        "text": "phản cảm",
+        "imageUrl": "https://static.xx.fbcdn.net/rsrc.php/v3/y9/r/USUgQ58uDx-.png"
+    },
+    {
+        "emotion_id": 177,
+        "text": "vô cảm",
+        "imageUrl": "https://static.xx.fbcdn.net/rsrc.php/v3/yX/r/j4N2EHLjFcG.png"
+    },
+    {
+        "emotion_id": 178,
+        "text": "hoàn hảo",
+        "imageUrl": "https://static.xx.fbcdn.net/rsrc.php/v3/yV/r/gGmEl_0Q-iL.png"
+    },
+    {
+        "emotion_id": 179,
+        "text": "bị thách thức",
+        "imageUrl": "https://static.xx.fbcdn.net/rsrc.php/v3/yG/r/DYjeWWIP6lV.png"
+    },
+    {
+        "emotion_id": 180,
+        "text": "bị đe dọa",
+        "imageUrl": "https://static.xx.fbcdn.net/rsrc.php/v3/y-/r/94kyFsW4pl3.png"
+    },
+    {
+        "emotion_id": 181,
+        "text": "yên lòng",
+        "imageUrl": "https://static.xx.fbcdn.net/rsrc.php/v3/yf/r/DxnxXXkYiSX.png"
+    },
+    {
+        "emotion_id": 182,
+        "text": "bế tắc",
+        "imageUrl": "https://static.xx.fbcdn.net/rsrc.php/v3/yX/r/gXjnOZhx3oz.png"
+    },
+    {
+        "emotion_id": 183,
+        "text": "lạ lùng",
+        "imageUrl": "https://static.xx.fbcdn.net/rsrc.php/v3/yD/r/qOniWzNSEHP.png"
+    },
+    {
+        "emotion_id": 184,
+        "text": "xấu hổ",
+        "imageUrl": "https://static.xx.fbcdn.net/rsrc.php/v3/yZ/r/WstlxnuAlJf.png"
+    },
+    {
+        "emotion_id": 185,
+        "text": "đầy năng lượng",
+        "imageUrl": "https://static.xx.fbcdn.net/rsrc.php/v3/y7/r/v5eHKNBqjkz.png"
+    },
+    {
+        "emotion_id": 186,
+        "text": "lanh lợi",
+        "imageUrl": "https://static.xx.fbcdn.net/rsrc.php/v3/yL/r/xOjVJ2q9bEF.png"
+    },
+    {
+        "emotion_id": 187,
+        "text": "bị lừa",
+        "imageUrl": "https://static.xx.fbcdn.net/rsrc.php/v3/y8/r/vAd0CBmjF8Y.png"
+    },
+    {
+        "emotion_id": 188,
+        "text": "bị phản bội",
+        "imageUrl": "https://static.xx.fbcdn.net/rsrc.php/v3/y8/r/vAd0CBmjF8Y.png"
+    },
+    {
+        "emotion_id": 189,
+        "text": "lo âu",
+        "imageUrl": "https://static.xx.fbcdn.net/rsrc.php/v3/y-/r/94kyFsW4pl3.png"
+    },
+    {
+        "emotion_id": 190,
+        "text": "tức tối",
+        "imageUrl": "https://static.xx.fbcdn.net/rsrc.php/v3/y9/r/USUgQ58uDx-.png"
+    },
+    {
+        "emotion_id": 191,
+        "text": "xấu xa",
+        "imageUrl": "https://static.xx.fbcdn.net/rsrc.php/v3/y9/r/USUgQ58uDx-.png"
+    },
+    {
+        "emotion_id": 192,
+        "text": "bị thờ ơ",
+        "imageUrl": "https://static.xx.fbcdn.net/rsrc.php/v3/yj/r/XUxJKsLyvQ4.png"
+    },
+    {
+        "emotion_id": 193,
+        "text": "hối hận",
+        "imageUrl": "https://static.xx.fbcdn.net/rsrc.php/v3/yj/r/XUxJKsLyvQ4.png"
+    },
+    {
+        "emotion_id": 194,
+        "text": "khỏe mạnh",
+        "imageUrl": "https://static.xx.fbcdn.net/rsrc.php/v3/yl/r/-Oz0Mt1ODxc.png"
+    },
+    {
+        "emotion_id": 195,
+        "text": "hào phóng",
+        "imageUrl": "https://static.xx.fbcdn.net/rsrc.php/v3/yb/r/Zq_QZwVGoqX.png"
+    },
+    {
+        "emotion_id": 196,
+        "text": "giàu có",
+        "imageUrl": "https://static.xx.fbcdn.net/rsrc.php/v3/yD/r/6Nc6PBM5UGj.png"
+    },
+    {
+        "emotion_id": 197,
+        "text": "lo sợ",
+        "imageUrl": "https://static.xx.fbcdn.net/rsrc.php/v3/yz/r/Hug6hCcvXt_.png"
+    },
+    {
+        "emotion_id": 198,
+        "text": "hết tiền",
+        "imageUrl": "https://static.xx.fbcdn.net/rsrc.php/v3/yn/r/HwQfWk1cyVc.png"
+    },
+    {
+        "emotion_id": 199,
+        "text": "vô hình",
+        "imageUrl": "https://static.xx.fbcdn.net/rsrc.php/v3/y1/r/hAjN0l2I0-y.png"
+    }
+]

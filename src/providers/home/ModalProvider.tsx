@@ -5,6 +5,7 @@ import * as AddToPost from "components/pages/home/modals/AddToPost";
 import * as DetailImage from "components/pages/home/modals/detail-image";
 import * as DetailVideo from "components/pages/home/modals/DetailVideo";
 import * as EditFile from "components/pages/home/modals/EditFile";
+import * as TagFriend from "components/pages/home/modals/TagFriend";
 import { TAB_CODE } from "constants/HomeConstant";
 import { createContext, useContext, useEffect, useState } from "react";
 import { ControlStateType, DataStateType, ImageModalType, ModalContextType, TabStateType, TagImageType, VideoModalType } from "types/pages/HomeType";
@@ -35,7 +36,8 @@ const defaultTabState = {
 }
 
 const defaultDataState = {
-  files: []
+  files: [],
+  tags: []
 }
 
 const ModalProvider = (props: any) => {
@@ -103,6 +105,16 @@ const ModalProvider = (props: any) => {
           }
         });
       }
+    } else if (tabIndex == TAB_CODE.TAG_FRIEND) {
+      setTabState({
+        ...tabState,
+        funcTab: {
+          title: TagFriend.title,
+          leftIcon: <TagFriend.LeftIconComponent />,
+          rightIcon: <TagFriend.RightIconComponent />,
+          children: <TagFriend.ChildrenIconComponent />
+        }
+      })
     }
   }
 

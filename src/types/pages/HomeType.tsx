@@ -1,4 +1,5 @@
 import { Dispatch, SetStateAction } from "react"
+import { AccountSummaryInfoResponse } from "types/responses/AccountSummaryInfoResponseType"
 
 export type SubTabType = {
   title: string,
@@ -64,7 +65,8 @@ export type TabStateType = {
 }
 
 export type DataStateType = {
-  files: (ImageModalType | VideoModalType)[]
+  files: (ImageModalType | VideoModalType)[],
+  tags: AccountSummaryInfoResponse[]
 }
 
 export type ModalParameterType = {
