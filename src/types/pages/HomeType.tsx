@@ -12,6 +12,7 @@ export type SubTabType = {
 export type ImageModalType = {
   id: string,
   file: File,
+  selectedText?: string,
   tags?: TagImageType[],
   note?: string,
   texts?: TextImageType[]
@@ -25,10 +26,12 @@ export type TagImageType = {
 }
 
 export type TextImageType = {
+  id: string,
   text: string,
   color: string,
   x_pos: number,
-  y_pos: number
+  y_pos: number,
+  size: number
 }
 
 export type VideoModalType = {
@@ -52,7 +55,7 @@ export type ControlStateType = {
   tabIndex: number,
   isShow: boolean,
   isChooseFile: boolean,
-  navTabDetailIndex: number
+  navTabDetailIndex: number,
 }
 
 export type TabStateType = {

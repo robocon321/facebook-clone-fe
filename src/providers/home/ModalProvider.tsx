@@ -2,7 +2,7 @@
 
 import Loading from "components/limb/loading/Loading";
 import * as AddToPost from "components/pages/home/modals/AddToPost";
-import * as DetailImage from "components/pages/home/modals/DetailImage";
+import * as DetailImage from "components/pages/home/modals/detail-image";
 import * as DetailVideo from "components/pages/home/modals/DetailVideo";
 import * as EditFile from "components/pages/home/modals/EditFile";
 import { TAB_CODE } from "constants/HomeConstant";
@@ -16,7 +16,7 @@ const defaultControlState = {
   tabIndex: 0,
   isShow: false,
   isChooseFile: false,
-  navTabDetailIndex: 0
+  navTabDetailIndex: 0,
 }
 
 const defaultTabState = {
@@ -50,7 +50,6 @@ const ModalProvider = (props: any) => {
   }, [dataState]);
 
   const changeTabIndex = (tabIndex: number, fileModal?: VideoModalType | ImageModalType, navTabDetailIndex?: number) => {
-    console.log(tabIndex, navTabDetailIndex);
     setControlState({
       ...controlState,
       tabIndex,
