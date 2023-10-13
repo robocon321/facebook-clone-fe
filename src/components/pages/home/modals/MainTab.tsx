@@ -40,6 +40,13 @@ const MainTab: React.FC = () => {
                             <li><a className="hover:underline" href="#"><b>
                                 {appState.data.user?.lastName + " " + appState.data.user?.firstName}
                             </b></a></li>
+                            {dataModalState.emotion && (
+                                <div className="flex">
+                                    <span className="mx-1">is feeling</span>
+                                    <span className="mx-1">{dataModalState.emotion.text}</span>
+                                    <img className="mx-1 w-[25px] h-[25px]" src={dataModalState.emotion.imageUrl} alt="Not found" />
+                                </div>
+                            )}
                             {dataModalState.tags.length > 0 && <span className='mx-1'>with</span>}
                             {
                                 dataModalState.tags.slice(0, 3).map((item, index) => {
@@ -84,7 +91,7 @@ const MainTab: React.FC = () => {
                     <div onClick={() => changeTabIndexModal(TAB_CODE.TAG_FRIEND)} className={"px-2 cursor-pointer hover:bg-gray-200 rounded-full w-10 h-10 flex justify-center items-center" + (dataModalState.tags.length > 0 ? " bg-gray-200" : " ")}>
                         <img src="/tag.png" alt="Not found" />
                     </div>
-                    <div className="px-2 cursor-pointer hover:bg-gray-200 rounded-full w-10 h-10 flex justify-center items-center">
+                    <div onClick={() => changeTabIndexModal(TAB_CODE.EMOTION)} className={"px-2 cursor-pointer hover:bg-gray-200 rounded-full w-10 h-10 flex justify-center items-center" + (dataModalState.emotion ? " bg-gray-200" : " ")}>
                         <img src="/emoji-yellow.png" alt="Not found" />
                     </div>
                     <div className="px-2 cursor-pointer hover:bg-gray-200 rounded-full w-10 h-10 flex justify-center items-center">

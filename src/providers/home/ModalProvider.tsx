@@ -6,6 +6,7 @@ import * as DetailImage from "components/pages/home/modals/detail-image";
 import * as DetailVideo from "components/pages/home/modals/DetailVideo";
 import * as EditFile from "components/pages/home/modals/EditFile";
 import * as TagFriend from "components/pages/home/modals/TagFriend";
+import * as Emotion from "components/pages/home/modals/Emotion";
 import { TAB_CODE } from "constants/HomeConstant";
 import { createContext, useContext, useEffect, useState } from "react";
 import { ControlStateType, DataStateType, ImageModalType, ModalContextType, TabStateType, TagImageType, VideoModalType } from "types/pages/HomeType";
@@ -113,7 +114,25 @@ const ModalProvider = (props: any) => {
           leftIcon: <TagFriend.LeftIconComponent />,
           rightIcon: <TagFriend.RightIconComponent />,
           children: <TagFriend.ChildrenIconComponent />
-        }
+        },
+        detailFuncTab: defaultTabState.detailFuncTab
+      })
+    } else if(tabIndex == TAB_CODE.EMOTION) {
+      setTabState({
+        ...tabState,
+        funcTab: {
+          title: Emotion.title,
+          leftIcon: <Emotion.LeftIconComponent />,
+          rightIcon: <Emotion.RightIconComponent />,
+          children: <Emotion.ChildrenIconComponent />
+        },
+        detailFuncTab: defaultTabState.detailFuncTab
+      })
+    } else if(tabIndex == TAB_CODE.MAIN_TAB) {
+      setTabState({
+        ...tabState,
+        funcTab: defaultTabState.funcTab,
+        detailFuncTab: defaultTabState.detailFuncTab
       })
     }
   }

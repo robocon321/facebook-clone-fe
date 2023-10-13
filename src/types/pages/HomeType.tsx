@@ -1,3 +1,4 @@
+import { EmotionType } from "components/pages/home/modals/Emotion"
 import { Dispatch, SetStateAction } from "react"
 import { AccountSummaryInfoResponse } from "types/responses/AccountSummaryInfoResponseType"
 
@@ -7,8 +8,6 @@ export type SubTabType = {
   rightIcon?: React.ReactNode,
   children?: React.ReactNode
 }
-
-
 
 export type ImageModalType = {
   id: string,
@@ -66,7 +65,8 @@ export type TabStateType = {
 
 export type DataStateType = {
   files: (ImageModalType | VideoModalType)[],
-  tags: AccountSummaryInfoResponse[]
+  tags: AccountSummaryInfoResponse[],
+  emotion?: EmotionType
 }
 
 export type ModalParameterType = {

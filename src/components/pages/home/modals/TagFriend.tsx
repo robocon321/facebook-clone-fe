@@ -64,7 +64,7 @@ export const ChildrenIconComponent: React.FC = () => {
         <div className="p-1">
             <div className="flex items-center p-2 border border-gray-200 bg-white rounded">
                 <span className="mr-2"><FontAwesomeIcon icon={faSearch} /></span>
-                <input onChange={onTextInputChange} type="text" className="outline-none" placeholder="Friend's name" />
+                <input onChange={onTextInputChange} type="text" className="outline-none grow" placeholder="Friend's name" />
             </div>
             {
                 isTagNonEmpty() && <div className="border border-gray-200 my-2 max-h-[300px] text-sm p-2">
