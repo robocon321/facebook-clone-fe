@@ -70,7 +70,7 @@ const LoginPage: React.FC = () => {
                       </Button>
                       <div className="text-sm w-full text-red-500">{loginState.error}</div>
                       <div className="mt-2 text-center pb-3 border-b border-gray-300">
-                        <p className="text-primary cursor-pointer underline">
+                        <p className="text-white cursor-pointer underline">
                           Forgot password?
                         </p>
                       </div>

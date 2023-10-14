@@ -26,7 +26,7 @@ export const RightIconComponent: React.FC = () => {
 };
 
 export const ChildrenIconComponent: React.FC = () => {
-    const { dataModalState, setDataModalState } = useContext(ModalContext) as ModalContextType;
+    const { dataModalState, setDataModalState, changeTabIndexModal } = useContext(ModalContext) as ModalContextType;
     const [locations, setLocations] = useState<CheckinResponseType[]>([]);
 
     useEffect(() => {
@@ -72,7 +72,8 @@ export const ChildrenIconComponent: React.FC = () => {
             setDataModalState({
                 ...dataModalState,
                 checkin
-            })
+            });
+            changeTabIndexModal(TAB_CODE.MAIN_TAB);
         }
     }
 

@@ -18,7 +18,7 @@ let restartSize = 32;
 let imageInfo: any = null;
 
 const InsertTextControl = forwardRef((props: EditImageType, ref) => {
-    const { changeFieldDataFieldModal } = useContext(ModalContext) as ModalContextType;
+    const { changeFieldDataFileModal } = useContext(ModalContext) as ModalContextType;
     const { fileModal, imageRef } = props;
 
     useEffect(() => {
@@ -61,7 +61,7 @@ const InsertTextControl = forwardRef((props: EditImageType, ref) => {
                         }
 
                         fileModal.texts = fileModal.texts ? [...fileModal.texts, newText] : [newText];
-                        changeFieldDataFieldModal(fileModal);
+                        changeFieldDataFileModal(fileModal);
 
                     }
                 }
@@ -72,7 +72,7 @@ const InsertTextControl = forwardRef((props: EditImageType, ref) => {
 
     const onRemoveTextModal = (id: string) => {
         fileModal.texts = fileModal.texts?.filter(item => item.id != id);
-        changeFieldDataFieldModal(fileModal);
+        changeFieldDataFileModal(fileModal);
     }
 
     const changePosition = (d: DraggableData, previousItem: TextImageType) => {
@@ -91,13 +91,13 @@ const InsertTextControl = forwardRef((props: EditImageType, ref) => {
                     return item;
                 }
             })
-            changeFieldDataFieldModal(fileModal);
+            changeFieldDataFileModal(fileModal);
         }
     }
 
     const changeSelectedText = (id: string) => {
         fileModal.selectedText = id;
-        changeFieldDataFieldModal(fileModal);
+        changeFieldDataFileModal(fileModal);
     }
 
     const changeSize = (delta: ResizableDelta, ref: HTMLElement, previousItem: TextImageType) => {
@@ -116,7 +116,7 @@ const InsertTextControl = forwardRef((props: EditImageType, ref) => {
                 }
             });
 
-            changeFieldDataFieldModal(fileModal);
+            changeFieldDataFileModal(fileModal);
         }
     }
 
@@ -133,7 +133,7 @@ const InsertTextControl = forwardRef((props: EditImageType, ref) => {
                     return item;
                 }
             });
-            changeFieldDataFieldModal(fileModal);
+            changeFieldDataFileModal(fileModal);
         }
     }
 

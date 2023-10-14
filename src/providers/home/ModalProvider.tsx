@@ -1,17 +1,19 @@
 "use client";
 
 import Loading from "components/limb/loading/Loading";
-import * as AddToPost from "components/pages/home/modals/sub-tab/func-tab/AddToPost";
 import * as DetailImage from "components/pages/home/modals/sub-tab/detail-func-tab/detail-image";
 import * as DetailVideo from "components/pages/home/modals/sub-tab/detail-func-tab/detail-video/DetailVideo";
-import * as EditFile from "components/pages/home/modals/sub-tab/func-tab/EditFile";
-import * as TagFriend from "components/pages/home/modals/sub-tab/func-tab/TagFriend";
-import * as Emotion from "components/pages/home/modals/sub-tab/func-tab/Emotion";
+import * as AddToPost from "components/pages/home/modals/sub-tab/func-tab/AddToPost";
 import * as Checkin from "components/pages/home/modals/sub-tab/func-tab/CheckinLocation";
+import * as EditFile from "components/pages/home/modals/sub-tab/func-tab/EditFile";
+import * as Emotion from "components/pages/home/modals/sub-tab/func-tab/Emotion";
+import * as PostScope from "components/pages/home/modals/sub-tab/func-tab/PostScope";
+import * as TagFriend from "components/pages/home/modals/sub-tab/func-tab/TagFriend";
 import { TAB_CODE } from "constants/HomeConstant";
-import { createContext, useContext, useEffect, useState } from "react";
-import { ControlStateType, DataStateType, ImageModalType, ModalContextType, TabStateType, TagImageType, VideoModalType } from "types/pages/HomeType";
-import { AppContext, AppContextType } from "../AppProvider";
+import { AppContext } from "providers/AppProvider";
+import { createContext, useContext, useState } from "react";
+import { AppContextType } from "types/pages/AppType";
+import { ControlStateType, DataStateType, ImageModalType, ModalContextType, TabStateType, VideoModalType } from "types/pages/HomeType";
 
 export const ModalContext = createContext<ModalContextType | null>(null);
 
@@ -41,7 +43,8 @@ const defaultTabState = {
 const defaultDataState = {
   text: '',
   files: [],
-  tags: []
+  tags: [],
+  scope: 'PUBLIC'
 }
 
 const ModalProvider = (props: any) => {
@@ -56,11 +59,13 @@ const ModalProvider = (props: any) => {
   // }, [dataState]);
 
   const changeTabIndex = (tabIndex: number, fileModal?: VideoModalType | ImageModalType, navTabDetailIndex?: number) => {
-    setControlState({
-      ...controlState,
-      tabIndex,
-      navTabDetailIndex: navTabDetailIndex ? navTabDetailIndex : 0
-    })
+    setControlState((previous) => {
+      return {
+        ...previous,
+        tabIndex,
+        navTabDetailIndex: navTabDetailIndex ? navTabDetailIndex : 0
+      }
+    });
     if (tabIndex == TAB_CODE.ADD_TO_POST) {
       setTabState({
         ...tabState,
@@ -120,7 +125,7 @@ const ModalProvider = (props: any) => {
         },
         detailFuncTab: defaultTabState.detailFuncTab
       })
-    } else if(tabIndex == TAB_CODE.EMOTION) {
+    } else if (tabIndex == TAB_CODE.EMOTION) {
       setTabState({
         ...tabState,
         funcTab: {
@@ -131,14 +136,13 @@ const ModalProvider = (props: any) => {
         },
         detailFuncTab: defaultTabState.detailFuncTab
       })
-    } else if(tabIndex == TAB_CODE.MAIN_TAB) {
-      console.log(defaultTabState);
+    } else if (tabIndex == TAB_CODE.MAIN_TAB) {
       setTabState({
         ...tabState,
         funcTab: defaultTabState.funcTab,
         detailFuncTab: defaultTabState.detailFuncTab
       })
-    } else if(tabIndex == TAB_CODE.CHECKIN) {
+    } else if (tabIndex == TAB_CODE.CHECKIN) {
       setTabState({
         ...tabState,
         funcTab: {
@@ -149,10 +153,21 @@ const ModalProvider = (props: any) => {
         },
         detailFuncTab: defaultTabState.detailFuncTab
       })
+    } else if (tabIndex == TAB_CODE.SCOPE) {
+      setTabState({
+        ...tabState,
+        funcTab: {
+          title: PostScope.title,
+          leftIcon: <PostScope.LeftIconComponent />,
+          rightIcon: <PostScope.RightIconComponent />,
+          children: <PostScope.ChildrenIconComponent />
+        },
+        detailFuncTab: defaultTabState.detailFuncTab
+      })
     }
   }
 
-  const changeFieldDataField = (fileModal: VideoModalType | ImageModalType) => {
+  const changeFieldDataFile = (fileModal: VideoModalType | ImageModalType) => {
     const index = dataState.files.findIndex(item => item.id == fileModal.id);
     setDataState({
       ...dataState,
@@ -168,7 +183,7 @@ const ModalProvider = (props: any) => {
     dataModalState: dataState,
     setDataModalState: setDataState,
     changeTabIndexModal: changeTabIndex,
-    changeFieldDataFieldModal: changeFieldDataField
+    changeFieldDataFileModal: changeFieldDataFile
   }
 
   if (appState.isLoading || appState.data.user == null) {

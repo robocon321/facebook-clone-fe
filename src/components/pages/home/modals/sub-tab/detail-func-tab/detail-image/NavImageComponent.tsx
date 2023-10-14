@@ -15,13 +15,13 @@ type NavPropsType = {
 const colors = ['#c45f00', '#6900c4', '#e5eb34', '#eb4034', '#9634eb', '#4ceb34', '#34c9eb', '#9feb34', '#3474eb', '#e234eb', '#34ebb4', '#eb3480']
 
 const NavImageComponent: React.FC<NavPropsType> = (props) => {
-    const { changeFieldDataFieldModal, setControlModalState, controlModalState } = useContext(ModalContext) as ModalContextType;
+    const { changeFieldDataFileModal, setControlModalState, controlModalState } = useContext(ModalContext) as ModalContextType;
     const { navTabDetailIndex } = controlModalState;
     const { fileModal } = props;
     const onRemoveFriendTag = (accountId: number) => {
         if (fileModal.tags) {
             fileModal.tags = fileModal.tags.filter(item => item.account != null && item.account.accountId != accountId);
-            changeFieldDataFieldModal(fileModal);
+            changeFieldDataFileModal(fileModal);
         }
     }
 
@@ -36,7 +36,7 @@ const NavImageComponent: React.FC<NavPropsType> = (props) => {
             }
             return item;
         });
-        changeFieldDataFieldModal(fileModal);
+        changeFieldDataFileModal(fileModal);
     } 
 
     return (
@@ -48,7 +48,7 @@ const NavImageComponent: React.FC<NavPropsType> = (props) => {
                 })}
                 onChange={(e: React.ChangeEvent<HTMLTextAreaElement>) => {
                     fileModal.note = e.target.value;
-                    changeFieldDataFieldModal(fileModal);
+                    changeFieldDataFileModal(fileModal);
                 }}
                 value={fileModal.note}
                 className="w-full p-2 outline-none resize-none border border-gray-300 hover:border-blue-300" rows={3} placeholder="Subtitle">

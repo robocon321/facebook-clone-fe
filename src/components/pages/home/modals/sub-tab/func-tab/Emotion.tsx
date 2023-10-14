@@ -23,7 +23,7 @@ export const RightIconComponent: React.FC = () => {
 };
 
 export const ChildrenIconComponent: React.FC = () => {
-    const { dataModalState, setDataModalState } = useContext(ModalContext) as ModalContextType;
+    const { dataModalState, setDataModalState, changeTabIndexModal } = useContext(ModalContext) as ModalContextType;
     const [emotions, setEmotions] = useState<EmotionType[]>();
     const [searchText, setSearchText] = useState("");
 
@@ -54,7 +54,8 @@ export const ChildrenIconComponent: React.FC = () => {
             setDataModalState({
                 ...dataModalState,
                 emotion
-            })    
+            });
+            changeTabIndexModal(TAB_CODE.MAIN_TAB);
         }
     }
 

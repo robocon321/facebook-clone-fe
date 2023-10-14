@@ -48,7 +48,7 @@ export type ModalContextType = {
   dataModalState: DataStateType
   setDataModalState: Dispatch<SetStateAction<DataStateType>>,
   changeTabIndexModal: (tabIndex: number, fileModal?: VideoModalType | ImageModalType, navTabDetailIndex?: number) => void,
-  changeFieldDataFieldModal: (fileModal: VideoModalType | ImageModalType) => void
+  changeFieldDataFileModal: (fileModal: VideoModalType | ImageModalType) => void
 };
 
 export type ControlStateType = {
@@ -65,11 +65,12 @@ export type TabStateType = {
 }
 
 export type DataStateType = {
-  text: string,
+  text?: string,
   files: (ImageModalType | VideoModalType)[],
   tags: AccountSummaryInfoResponse[],
   emotion?: EmotionType,
-  checkin?: CheckinResponseType
+  checkin?: CheckinResponseType,
+  scope: string
 }
 
 export type ModalParameterType = {

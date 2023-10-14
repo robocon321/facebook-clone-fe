@@ -1,7 +1,7 @@
 import { faEarthAmericas, faEllipsis, faSortDown, faXmark } from '@fortawesome/free-solid-svg-icons';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import ModalTemplate from 'components/limb/modal/ModalTemplate';
-import { AppContext, AppContextType } from 'providers/AppProvider';
+import { AppContext } from 'providers/AppProvider';
 import React, { useContext, useState } from 'react';
 import EmojiPicker, { EmojiClickData } from 'emoji-picker-react';
 
@@ -10,6 +10,8 @@ import IconButton from 'components/limb/buttons/IconButton';
 import { TAB_CODE } from 'constants/HomeConstant';
 import { ModalContextType } from 'types/pages/HomeType';
 import { ModalContext } from 'providers/home/ModalProvider';
+import { AppContextType } from 'types/pages/AppType';
+import Button from 'components/limb/buttons/Button';
 
 const LeftIconComponent: React.FC = () => {
     return (
@@ -34,10 +36,10 @@ const MainTab: React.FC = () => {
     const { appState } = useContext(AppContext) as AppContextType;
 
     const onChooseEmoji = (emojiData: EmojiClickData, event: MouseEvent) => {
-        setDataModalState((preview) => {
+        setDataModalState((previous) => {
             return {
                 ...dataModalState,
-                text: preview.text + (emojiData.isCustom ? emojiData.unified : emojiData.emoji)
+                text: previous.text + (emojiData.isCustom ? emojiData.unified : emojiData.emoji)
             }
         })
     }
@@ -47,6 +49,22 @@ const MainTab: React.FC = () => {
             ...dataModalState,
             text: e.currentTarget ? e.currentTarget.value : ""
         })
+    }
+
+    const isEnableToSubmit = () => {
+        return (
+            dataModalState.checkin || 
+            dataModalState.emotion || 
+            dataModalState.files.length > 0 || 
+            dataModalState.tags.length > 0 || 
+            (dataModalState.text ? (dataModalState.text.length > 0 ? true : false) : false)
+        )
+    }
+
+    const submit = () => {
+        if(isEnableToSubmit()) {
+            console.log("Haha");
+        }
     }
 
     return (
@@ -81,16 +99,16 @@ const MainTab: React.FC = () => {
                                 dataModalState.tags.slice(0, 3).map((item, index) => {
                                     return (
                                         <li key={item.accountId}><a className="hover:underline" href="#"><b>
-                                            {item.lastName + " " + item.firstName + (index < 2 ? ", " : " ")}
+                                            {item.lastName + " " + item.firstName + (index < 2 && dataModalState.tags.length - 1 != index ? ", " : " ")}
                                         </b></a></li>
                                     )
                                 })
                             }
                             {dataModalState.tags.length > 3 && <li><span className='mx-1'>and</span><a className="hover:underline" href="#"><b> {dataModalState.tags.length - 3} other people</b></a></li>}
                         </ul>
-                        <div className='text-sm bg-gray-300 flex items-center justify-center py-1 px-2 rounded-lg max-w-[150px]'>
+                        <div onClick={() => changeTabIndexModal(TAB_CODE.SCOPE)} className='text-sm bg-gray-300 flex items-center justify-center py-1 px-2 rounded-lg max-w-[150px] cursor-pointer'>
                             <span><FontAwesomeIcon icon={faEarthAmericas} /></span>
-                            <span className='mx-3'>Public</span>
+                            <span className='mx-3'>{dataModalState.scope == 'PUBLIC' ? "Public" : dataModalState.scope == "FRIEND" ? 'Friends' : 'Private'}</span>
                             <span><FontAwesomeIcon icon={faSortDown} /></span>
                         </div>
                     </div>
@@ -105,7 +123,7 @@ const MainTab: React.FC = () => {
                             <img className='w-full h-full' src="/choose-bg.png" alt="Not found" />
                         </div>
                         <div className='relative w-8 h-8 cursor-pointer'>
-                            {controlModalState.isShowEmoji && <div className='fixed'>
+                            {controlModalState.isShowEmoji && <div onClick={(e: React.MouseEvent) => e.stopPropagation()} className='fixed bottom-[10px]'>
                                 <EmojiPicker
                                     onEmojiClick={onChooseEmoji}
                                     height={400}
@@ -113,11 +131,12 @@ const MainTab: React.FC = () => {
                                         showPreview: false
                                     }} />
                             </div>}
-                            <img onClick={() => {
+                            <img onClick={(e: React.MouseEvent<HTMLImageElement>) => {
+                                e.stopPropagation();
                                 setControlModalState({
                                     ...controlModalState,
                                     isShowEmoji: true
-                                })
+                                });
                             }} className='w-full h-full' src="/emoji.png" alt="Not found" />
                         </div>
                     </div>
@@ -145,6 +164,21 @@ const MainTab: React.FC = () => {
                     <div className="px-2 cursor-pointer hover:bg-gray-200 rounded-full w-10 h-10 flex justify-center items-center">
                         <FontAwesomeIcon icon={faEllipsis} />
                     </div>
+                </div>
+                <div className="my-2">
+                    <Button
+                        onClick={() => submit()}
+                        type="button"
+                        size="large"
+                        block="true"
+                        fontSize="text-xl"
+                        fontWeight="font-bold"
+                        bg={isEnableToSubmit() ? "bg-blue-600" : "bg-gray-300"}
+                        color={isEnableToSubmit() ? "text-white" : "text-gray-600"}
+                        isDisabled={!isEnableToSubmit()}
+                    >
+                        Post
+                    </Button>
                 </div>
             </div>
         </ModalTemplate>

@@ -2,7 +2,8 @@
 
 import React, { useContext } from 'react';
 import Link from 'next/link';
-import { AppContext, AppContextType } from 'providers/AppProvider';
+import { AppContext } from 'providers/AppProvider';
+import { AppContextType } from 'types/pages/AppType';
 // import { usePathname } from 'next/navigation'
 
 const Navbar: React.FC = () => {
@@ -35,7 +36,7 @@ const Navbar: React.FC = () => {
               <div
                 className={`${
                   pathName === '' || undefined
-                    ? 'text-primary'
+                    ? 'text-white'
                     : 'text-gray-400'
                 }`}
               >
@@ -68,7 +69,7 @@ const Navbar: React.FC = () => {
               </div>
               <div
                 className={`${
-                  pathName === 'marketplace' ? 'text-primary' : 'text-gray-400'
+                  pathName === 'marketplace' ? 'text-white' : 'text-gray-400'
                 }`}
               >
                 <i className="text-2xl fas fa-store"></i>
@@ -100,7 +101,7 @@ const Navbar: React.FC = () => {
               </div>
               <div
                 className={`${
-                  pathName === 'gaming' ? 'text-primary' : 'text-gray-400'
+                  pathName === 'gaming' ? 'text-white' : 'text-gray-400'
                 }`}
               >
                 <i className="text-2xl fas fa-gamepad"></i>

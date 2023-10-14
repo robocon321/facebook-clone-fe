@@ -47,13 +47,13 @@ type NavPropsType = {
 }
 
 const NavVideoComponent: React.FC<NavPropsType> = (props) => {
-    const { changeFieldDataFieldModal } = useContext(ModalContext) as ModalContextType;
+    const { changeFieldDataFileModal } = useContext(ModalContext) as ModalContextType;
     const { fileModal } = props;
     return (
         <div className="p-4">
             <textarea onChange={(e: React.ChangeEvent<HTMLTextAreaElement>) => {
                 fileModal.note = e.target.value;
-                changeFieldDataFieldModal(fileModal);
+                changeFieldDataFileModal(fileModal);
             }} 
             value={fileModal.note}
             className="w-full p-2 outline-none resize-none border border-gray-300 hover:border-blue-300" rows={3} placeholder="Subtitle"></textarea>

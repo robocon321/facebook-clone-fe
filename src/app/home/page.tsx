@@ -36,7 +36,15 @@ const HomePage: React.FC = () => {
             'max-w-[1550px]' : controlModalState.tabIndex >= TAB_CODE_GROUP.FUNC_GROUP ?
               'max-w-3xl' : 'max-w-2xl'
         }>
-          <div className={"flex relative transition-[right] duration-200" + (
+          <div onClick={() => {
+                setControlModalState((previous) => {
+                    return {
+                        ...previous,
+                        isShowEmoji: false
+                    }
+                }
+                )
+            }} className={"flex relative transition-[right] duration-200" + (
             controlModalState.tabIndex >= TAB_CODE_GROUP.DETAIL_FUNC_GROUP ?
               ' right-[200%]' : controlModalState.tabIndex >= TAB_CODE_GROUP.FUNC_GROUP ?
                 ' right-[100%]' : ' right-0')

@@ -13,7 +13,7 @@ type TagEditPropsType = {
 }
 
 const Tag = forwardRef((props: TagEditPropsType, ref) => {
-    const { changeFieldDataFieldModal } = useContext(ModalContext) as ModalContextType;
+    const { changeFieldDataFileModal } = useContext(ModalContext) as ModalContextType;
     const { fileModal, imageRef } = props;
 
     const [searchFriends, setSearchFriends] = useState<AccountSummaryInfoResponse[]>();
@@ -21,7 +21,6 @@ const Tag = forwardRef((props: TagEditPropsType, ref) => {
     useImperativeHandle(ref, () => {
         return {
             handleClick: (event: React.MouseEvent) => {
-                console.log(1);
                 setSearchFriends([]);
                 if (imageRef.current) {
                     const image = imageRef.current;
@@ -45,7 +44,7 @@ const Tag = forwardRef((props: TagEditPropsType, ref) => {
 
                     fileModal.tags = fileModal.tags?.filter(item => item.account != null);
                     fileModal.tags = fileModal.tags ? [...fileModal.tags, newTag] : [newTag];
-                    changeFieldDataFieldModal(fileModal);
+                    changeFieldDataFileModal(fileModal);
                 }
             }
         };
@@ -70,14 +69,14 @@ const Tag = forwardRef((props: TagEditPropsType, ref) => {
             const lastTag = fileModal.tags[fileModal.tags.length - 1];
             lastTag.account = account;
             fileModal.tags[fileModal.tags.length - 1] = lastTag;
-            changeFieldDataFieldModal(fileModal);
+            changeFieldDataFileModal(fileModal);
         }
     }
 
     const onRemoveFriendTag = (accountId: number) => {
         if (fileModal.tags) {
             fileModal.tags = fileModal.tags.filter(item => item.account != null && item.account.accountId != accountId);
-            changeFieldDataFieldModal(fileModal);
+            changeFieldDataFileModal(fileModal);
         }
     }
 
