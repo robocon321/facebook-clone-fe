@@ -1,26 +1,9 @@
 "use client";
 
-import { Dispatch, SetStateAction, createContext, useEffect, useState } from "react";
-import { redirect, usePathname } from 'next/navigation';
-import Loading from "components/limb/loading/Loading";
+import { usePathname, useRouter } from 'next/navigation';
+import { createContext, useEffect, useState } from "react";
 import { getSummaryAccount } from "services/AccountService";
-import { AccountSummaryInfoResponse } from "types/responses/AccountSummaryInfoResponseType";
-import { useRouter } from 'next/navigation';
-
-type AppStateType = {
-    isLoading: boolean,
-    data: {
-        user: AccountSummaryInfoResponse | null,
-        message: string | null,
-        error: string | null,
-    }
-}
-
-export type AppContextType = {
-    loadUser: () => Promise<void>,
-    setAppState: Dispatch<SetStateAction<AppStateType>>,
-    appState: AppStateType
-};
+import { AppContextType, AppStateType } from "types/pages/AppType";
 
 export const AppContext = createContext<AppContextType | null>(null);
 

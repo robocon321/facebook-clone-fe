@@ -5,7 +5,7 @@ import { AppContext, AppContextType } from 'providers/AppProvider';
 import React, { useContext, useState } from 'react';
 import EmojiPicker, { EmojiClickData } from 'emoji-picker-react';
 
-import DragDropFiles from '../uploadfile/DragDropFiles';
+import DragDropFiles from 'components/pages/home/modals/main-tab/DragDropFiles';
 import IconButton from 'components/limb/buttons/IconButton';
 import { TAB_CODE } from 'constants/HomeConstant';
 import { ModalContextType } from 'types/pages/HomeType';

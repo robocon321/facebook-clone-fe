@@ -4,19 +4,10 @@ import { createContext, useState, useContext, useEffect } from "react";
 import { LoginRequest } from "types/requests/LoginRequest";
 import * as LoginService from "services/AuthService";
 import { useRouter } from 'next/navigation'
-import { AppContext, AppContextType } from "./AppProvider";
+import { AppContext } from "./AppProvider";
 import Loading from "components/limb/loading/Loading";
-
-type LoginStateType = {
-  isLoading: boolean,
-  message: string | null,
-  error: string | null
-}
-
-export type LoginContextType = {
-  loginState: LoginStateType,
-  login: (request: LoginRequest) => void
-};
+import { AppContextType } from "types/pages/AppType";
+import { LoginContextType, LoginStateType } from "types/pages/LoginType";
 
 export const LoginContext = createContext<LoginContextType | null>(null);
 

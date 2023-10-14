@@ -5,7 +5,7 @@ import { TAB_CODE, TAB_IMAGE_NAV_CODE, TAB_VIDEO_NAV_CODE } from 'constants/Home
 import React, { useContext, useRef } from 'react';
 import { convertToBlobFile } from 'utils/FileUtils';
 import { generateRandomString } from 'utils/RandomUtils';
-import { ImageModalType, ModalContextType, VideoModalType } from '../../../../types/pages/HomeType';
+import { ImageModalType, ModalContextType, VideoModalType } from '../../../../../../types/pages/HomeType';
 import { ModalContext } from 'providers/home/ModalProvider';
 
 export const LeftIconComponent: React.FC = () => {

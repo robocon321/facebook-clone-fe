@@ -1,4 +1,4 @@
-export interface PageRequest {
+export type PageRequest = {
     page: number,
     size: number,
     sortBy: string[],

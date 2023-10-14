@@ -4,17 +4,7 @@ import { createContext, useState, useContext, useEffect } from "react";
 import { RegisterRequest } from "types/requests/RegisterRequest";
 import * as RegisterService from "services/AuthService";
 import { useRouter } from 'next/navigation'
- 
-type RegisterStateType = {
-  isLoading: boolean,
-  message: string | null,
-  error: string | null
-}
-
-export type RegisterContextType = {
-  registerState: RegisterStateType,
-  register: (request: RegisterRequest) => void
-};
+import { RegisterContextType, RegisterStateType } from "types/pages/Register";
 
 export const RegisterContext = createContext<RegisterContextType | null>(null);
 

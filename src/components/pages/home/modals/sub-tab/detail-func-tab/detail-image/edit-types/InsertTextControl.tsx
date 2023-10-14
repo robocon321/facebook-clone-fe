@@ -1,11 +1,11 @@
-import React, { FormEvent, forwardRef, useContext, useEffect, useImperativeHandle, useRef, useState } from 'react';
-import { ImageModalType, ModalContextType, TextImageType } from "types/pages/HomeType";
+import { faXmark } from '@fortawesome/free-solid-svg-icons';
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
+import { ModalContext } from 'providers/home/ModalProvider';
+import React, { FormEvent, forwardRef, useContext, useEffect, useImperativeHandle } from 'react';
 import ContentEditable from 'react-contenteditable';
 import { DraggableData, ResizableDelta, Rnd } from "react-rnd";
+import { ImageModalType, ModalContextType, TextImageType } from "types/pages/HomeType";
 import { generateRandomString } from 'utils/RandomUtils';
-import { ModalContext } from 'providers/home/ModalProvider';
-import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
-import { faXmark } from '@fortawesome/free-solid-svg-icons';
 
 type EditImageType = {
     fileModal: ImageModalType,

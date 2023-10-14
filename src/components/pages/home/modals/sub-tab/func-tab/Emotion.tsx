@@ -4,7 +4,7 @@ import IconButton from 'components/limb/buttons/IconButton';
 import { TAB_CODE } from 'constants/HomeConstant';
 import { ModalContext } from 'providers/home/ModalProvider';
 import React, { useContext, useEffect, useState } from 'react';
-import { ModalContextType } from 'types/pages/HomeType';
+import { EmotionType, ModalContextType } from 'types/pages/HomeType';
 
 export const LeftIconComponent: React.FC = () => {
     const { changeTabIndexModal } = useContext(ModalContext) as ModalContextType;
@@ -21,12 +21,6 @@ export const RightIconComponent: React.FC = () => {
         <div className="w-12 h-12"></div>
     )
 };
-
-export type EmotionType = {
-    emotion_id: number,
-    text: string,
-    imageUrl: string
-}
 
 export const ChildrenIconComponent: React.FC = () => {
     const { dataModalState, setDataModalState } = useContext(ModalContext) as ModalContextType;

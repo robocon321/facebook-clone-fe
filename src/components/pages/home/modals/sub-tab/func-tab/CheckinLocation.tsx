@@ -25,12 +25,6 @@ export const RightIconComponent: React.FC = () => {
     )
 };
 
-export type EmotionType = {
-    emotion_id: number,
-    text: string,
-    imageUrl: string
-}
-
 export const ChildrenIconComponent: React.FC = () => {
     const { dataModalState, setDataModalState } = useContext(ModalContext) as ModalContextType;
     const [locations, setLocations] = useState<CheckinResponseType[]>([]);

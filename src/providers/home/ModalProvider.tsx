@@ -1,13 +1,13 @@
 "use client";
 
 import Loading from "components/limb/loading/Loading";
-import * as AddToPost from "components/pages/home/modals/AddToPost";
-import * as DetailImage from "components/pages/home/modals/detail-image";
-import * as DetailVideo from "components/pages/home/modals/DetailVideo";
-import * as EditFile from "components/pages/home/modals/EditFile";
-import * as TagFriend from "components/pages/home/modals/TagFriend";
-import * as Emotion from "components/pages/home/modals/Emotion";
-import * as Checkin from "components/pages/home/modals/CheckinLocation";
+import * as AddToPost from "components/pages/home/modals/sub-tab/func-tab/AddToPost";
+import * as DetailImage from "components/pages/home/modals/sub-tab/detail-func-tab/detail-image";
+import * as DetailVideo from "components/pages/home/modals/sub-tab/detail-func-tab/detail-video/DetailVideo";
+import * as EditFile from "components/pages/home/modals/sub-tab/func-tab/EditFile";
+import * as TagFriend from "components/pages/home/modals/sub-tab/func-tab/TagFriend";
+import * as Emotion from "components/pages/home/modals/sub-tab/func-tab/Emotion";
+import * as Checkin from "components/pages/home/modals/sub-tab/func-tab/CheckinLocation";
 import { TAB_CODE } from "constants/HomeConstant";
 import { createContext, useContext, useEffect, useState } from "react";
 import { ControlStateType, DataStateType, ImageModalType, ModalContextType, TabStateType, TagImageType, VideoModalType } from "types/pages/HomeType";

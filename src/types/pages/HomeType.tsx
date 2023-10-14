@@ -1,4 +1,3 @@
-import { EmotionType } from "components/pages/home/modals/Emotion"
 import { Dispatch, SetStateAction } from "react"
 import { AccountSummaryInfoResponse } from "types/responses/AccountSummaryInfoResponseType"
 import { CheckinResponseType } from "types/responses/CheckinResponseType"
@@ -78,4 +77,10 @@ export type ModalParameterType = {
   isShow: boolean,
   width?: "max-w-2xl" | "max-w-3xl" | "max-w-[1550px]",
   onClickOutside?: () => void
+}
+
+export type EmotionType = {
+  emotion_id: number,
+  text: string,
+  imageUrl: string
 }

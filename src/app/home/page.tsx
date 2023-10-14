@@ -1,14 +1,14 @@
 "use client"
 
-import React, { useContext } from 'react';
+import Modal from 'components/limb/modal/Modal';
 import LeftSidebar from 'components/pages/home/layouts/LeftSidebar';
 import NewsFeedScreen from 'components/pages/home/layouts/NewsFeed';
 import RightSidebar from 'components/pages/home/layouts/RightSidebar';
-import Modal from 'components/limb/modal/Modal';
-import MainTab from 'components/pages/home/modals/MainTab';
-import SubTab from 'components/pages/home/modals/SubTab';
-import { TAB_CODE, TAB_CODE_GROUP } from 'constants/HomeConstant';
+import MainTab from 'components/pages/home/modals/main-tab';
+import SubTab from 'components/pages/home/modals/sub-tab';
+import { TAB_CODE_GROUP } from 'constants/HomeConstant';
 import { ModalContext } from 'providers/home/ModalProvider';
+import React, { useContext } from 'react';
 import { ModalContextType } from 'types/pages/HomeType';
 
 const HomePage: React.FC = () => {
@@ -20,7 +20,7 @@ const HomePage: React.FC = () => {
       </div>
       <div className="col-span-3 h-full">
         <Modal onClickOutside={() => {
-          if(controlModalState.isShowEmoji) {
+          if (controlModalState.isShowEmoji) {
             setControlModalState({
               ...controlModalState,
               isShowEmoji: false
@@ -32,14 +32,14 @@ const HomePage: React.FC = () => {
             });
           }
         }} isShow={controlModalState.isShowModal} width={
-            controlModalState.tabIndex >= TAB_CODE_GROUP.DETAIL_FUNC_GROUP ? 
-            'max-w-[1550px]' : controlModalState.tabIndex >= TAB_CODE_GROUP.FUNC_GROUP ? 
-            'max-w-3xl' : 'max-w-2xl'
-          }>       
+          controlModalState.tabIndex >= TAB_CODE_GROUP.DETAIL_FUNC_GROUP ?
+            'max-w-[1550px]' : controlModalState.tabIndex >= TAB_CODE_GROUP.FUNC_GROUP ?
+              'max-w-3xl' : 'max-w-2xl'
+        }>
           <div className={"flex relative transition-[right] duration-200" + (
-            controlModalState.tabIndex >= TAB_CODE_GROUP.DETAIL_FUNC_GROUP ? 
-            ' right-[200%]' : controlModalState.tabIndex >= TAB_CODE_GROUP.FUNC_GROUP ? 
-            ' right-[100%]' : ' right-0')
+            controlModalState.tabIndex >= TAB_CODE_GROUP.DETAIL_FUNC_GROUP ?
+              ' right-[200%]' : controlModalState.tabIndex >= TAB_CODE_GROUP.FUNC_GROUP ?
+                ' right-[100%]' : ' right-0')
           }>
             <MainTab />
             <SubTab {...tabModalState.funcTab} />

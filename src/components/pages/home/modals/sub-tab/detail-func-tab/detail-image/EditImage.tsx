@@ -1,10 +1,9 @@
+import InsertTextControl from 'components/pages/home/modals/sub-tab/detail-func-tab/detail-image/edit-types/InsertTextControl';
+import TagControl from 'components/pages/home/modals/sub-tab/detail-func-tab/detail-image/edit-types/TagControl';
 import { TAB_IMAGE_NAV_CODE } from 'constants/HomeConstant';
 import { ModalContext } from "providers/home/ModalProvider";
-import React, { useContext, useRef, useEffect } from 'react';
+import React, { useContext, useRef } from 'react';
 import { ImageModalType, ModalContextType } from "types/pages/HomeType";
-import TagControl from './edit-type/TagControl';
-import CommonControl from './edit-type/CommonControl';
-import InsertTextControl from './edit-type/InsertTextControl';
 import { convertToBlobFile } from 'utils/FileUtils';
 
 type EditImageType = {

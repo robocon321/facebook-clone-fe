@@ -1,4 +1,4 @@
-export interface LoginRequest {
+export type LoginRequest = {
     username: String,
     password: String
 }
