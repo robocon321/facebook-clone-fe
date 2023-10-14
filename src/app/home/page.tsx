@@ -12,14 +12,26 @@ import { ModalContext } from 'providers/home/ModalProvider';
 import { ModalContextType } from 'types/pages/HomeType';
 
 const HomePage: React.FC = () => {
-  const { controlModalState, tabModalState } = useContext(ModalContext) as ModalContextType;
+  const { controlModalState, tabModalState, setControlModalState } = useContext(ModalContext) as ModalContextType;
   return (
     <div className="w-full h-full grid grid-cols-7">
       <div className="col-span-2 flex justify-start ml-2">
         <LeftSidebar />
       </div>
       <div className="col-span-3 h-full">
-        <Modal isShow={controlModalState.isShow} width={
+        <Modal onClickOutside={() => {
+          if(controlModalState.isShowEmoji) {
+            setControlModalState({
+              ...controlModalState,
+              isShowEmoji: false
+            });
+          } else {
+            setControlModalState({
+              ...controlModalState,
+              isShowModal: false
+            });
+          }
+        }} isShow={controlModalState.isShowModal} width={
             controlModalState.tabIndex >= TAB_CODE_GROUP.DETAIL_FUNC_GROUP ? 
             'max-w-[1550px]' : controlModalState.tabIndex >= TAB_CODE_GROUP.FUNC_GROUP ? 
             'max-w-3xl' : 'max-w-2xl'

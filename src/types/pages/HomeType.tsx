@@ -1,6 +1,7 @@
 import { EmotionType } from "components/pages/home/modals/Emotion"
 import { Dispatch, SetStateAction } from "react"
 import { AccountSummaryInfoResponse } from "types/responses/AccountSummaryInfoResponseType"
+import { CheckinResponseType } from "types/responses/CheckinResponseType"
 
 export type SubTabType = {
   title: string,
@@ -53,9 +54,10 @@ export type ModalContextType = {
 
 export type ControlStateType = {
   tabIndex: number,
-  isShow: boolean,
+  isShowModal: boolean,
   isChooseFile: boolean,
   navTabDetailIndex: number,
+  isShowEmoji: boolean
 }
 
 export type TabStateType = {
@@ -64,13 +66,16 @@ export type TabStateType = {
 }
 
 export type DataStateType = {
+  text: string,
   files: (ImageModalType | VideoModalType)[],
   tags: AccountSummaryInfoResponse[],
-  emotion?: EmotionType
+  emotion?: EmotionType,
+  checkin?: CheckinResponseType
 }
 
 export type ModalParameterType = {
   children?: React.ReactNode,
   isShow: boolean,
-  width?: "max-w-2xl" | "max-w-3xl" | "max-w-[1550px]"
+  width?: "max-w-2xl" | "max-w-3xl" | "max-w-[1550px]",
+  onClickOutside?: () => void
 }

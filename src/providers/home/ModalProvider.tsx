@@ -7,6 +7,7 @@ import * as DetailVideo from "components/pages/home/modals/DetailVideo";
 import * as EditFile from "components/pages/home/modals/EditFile";
 import * as TagFriend from "components/pages/home/modals/TagFriend";
 import * as Emotion from "components/pages/home/modals/Emotion";
+import * as Checkin from "components/pages/home/modals/CheckinLocation";
 import { TAB_CODE } from "constants/HomeConstant";
 import { createContext, useContext, useEffect, useState } from "react";
 import { ControlStateType, DataStateType, ImageModalType, ModalContextType, TabStateType, TagImageType, VideoModalType } from "types/pages/HomeType";
@@ -16,9 +17,10 @@ export const ModalContext = createContext<ModalContextType | null>(null);
 
 const defaultControlState = {
   tabIndex: 0,
-  isShow: false,
+  isShowModal: false,
   isChooseFile: false,
   navTabDetailIndex: 0,
+  isShowEmoji: false
 }
 
 const defaultTabState = {
@@ -37,6 +39,7 @@ const defaultTabState = {
 }
 
 const defaultDataState = {
+  text: '',
   files: [],
   tags: []
 }
@@ -48,9 +51,9 @@ const ModalProvider = (props: any) => {
 
   const { appState } = useContext(AppContext) as AppContextType;
 
-  useEffect(() => {
-    console.log(dataState);
-  }, [dataState]);
+  // useEffect(() => {
+  //   console.log(dataState);
+  // }, [dataState]);
 
   const changeTabIndex = (tabIndex: number, fileModal?: VideoModalType | ImageModalType, navTabDetailIndex?: number) => {
     setControlState({
@@ -129,9 +132,21 @@ const ModalProvider = (props: any) => {
         detailFuncTab: defaultTabState.detailFuncTab
       })
     } else if(tabIndex == TAB_CODE.MAIN_TAB) {
+      console.log(defaultTabState);
       setTabState({
         ...tabState,
         funcTab: defaultTabState.funcTab,
+        detailFuncTab: defaultTabState.detailFuncTab
+      })
+    } else if(tabIndex == TAB_CODE.CHECKIN) {
+      setTabState({
+        ...tabState,
+        funcTab: {
+          title: Checkin.title,
+          leftIcon: <Checkin.LeftIconComponent />,
+          rightIcon: <Checkin.RightIconComponent />,
+          children: <Checkin.ChildrenIconComponent />
+        },
         detailFuncTab: defaultTabState.detailFuncTab
       })
     }

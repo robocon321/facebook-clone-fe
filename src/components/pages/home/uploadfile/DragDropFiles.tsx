@@ -67,7 +67,10 @@ const DragDropFiles = () => {
 
     if (dataModalState.files.length > 0) {
         return (
-            <div className="has-tooltip max-h-[400px] max-h-[200px] relative flex flex-col justify-center items-center my-4 border-[1px] border-gray-200 hover:bg-gray-200 cursor-pointer">
+            <div
+                onDragOver={handleDragOver}
+                onDrop={handleDrop}
+                className="has-tooltip max-h-[400px] max-h-[200px] relative flex flex-col justify-center items-center my-4 border-[1px] border-gray-200 hover:bg-gray-200 cursor-pointer">
                 <input
                     type="file"
                     multiple

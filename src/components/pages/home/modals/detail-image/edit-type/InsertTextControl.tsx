@@ -1,6 +1,6 @@
-import React, { forwardRef, useContext, useImperativeHandle, useRef, useState } from 'react';
+import React, { FormEvent, forwardRef, useContext, useEffect, useImperativeHandle, useRef, useState } from 'react';
 import { ImageModalType, ModalContextType, TextImageType } from "types/pages/HomeType";
-import { convertToBlobFile } from "utils/FileUtils";
+import ContentEditable from 'react-contenteditable';
 import { DraggableData, ResizableDelta, Rnd } from "react-rnd";
 import { generateRandomString } from 'utils/RandomUtils';
 import { ModalContext } from 'providers/home/ModalProvider';
@@ -12,62 +12,63 @@ type EditImageType = {
     imageRef: React.MutableRefObject<HTMLImageElement | null>
 }
 
+
 let restartWidth = 0;
 let restartSize = 32;
 let imageInfo: any = null;
-
 
 const InsertTextControl = forwardRef((props: EditImageType, ref) => {
     const { changeFieldDataFieldModal } = useContext(ModalContext) as ModalContextType;
     const { fileModal, imageRef } = props;
 
-    useImperativeHandle(ref, () => {
-        return {
-            handleClick: (event: React.MouseEvent) => {
-                if (imageRef.current) {
-                    const image = imageRef.current;
-                    if (imageInfo == null) {
-                        const imageLeft = image.getBoundingClientRect().left;
-                        const imageTop = image.getBoundingClientRect().top;
-                        const imageWidth = image.getBoundingClientRect().width;
-                        const imageHeight = image.getBoundingClientRect().height;
+    useEffect(() => {
+        if (imageRef.current) {
+            const image = imageRef.current;
+            if (imageInfo == null) {
+                const imageLeft = image.getBoundingClientRect().left;
+                const imageTop = image.getBoundingClientRect().top;
+                const imageWidth = image.getBoundingClientRect().width;
+                const imageHeight = image.getBoundingClientRect().height;
 
-                        imageInfo = {
-                            left: imageLeft,
-                            top: imageTop,
-                            width: imageWidth,
-                            height: imageHeight
-                        }
-                    }
-
-                    addNewTextToFileModal(event);
+                imageInfo = {
+                    left: imageLeft,
+                    top: imageTop,
+                    width: imageWidth,
+                    height: imageHeight
                 }
             }
         }
     }, []);
 
-    const addNewTextToFileModal = (event: React.MouseEvent) => {
-        if (imageInfo) {
-            const x = event.clientX - imageInfo.left;
-            const y = event.clientY - imageInfo.top;
+    useImperativeHandle(ref, () => {
+        return {
+            handleClick: (event: React.MouseEvent) => {
+                if (imageRef.current) {
+                    if (imageInfo) {
+                        const x = event.clientX - imageInfo.left;
+                        const y = event.clientY - imageInfo.top;
 
-            const percentX = x * 100 / imageInfo.width;
-            const percentY = y * 100 / imageInfo.height;
+                        const percentX = x * 100 / imageInfo.width;
+                        const percentY = y * 100 / imageInfo.height;
 
-            const newText: TextImageType = {
-                id: generateRandomString(10),
-                text: 'ABC',
-                color: 'white',
-                size: 32,
-                x_pos: percentX,
-                y_pos: percentY
+                        const newText: TextImageType = {
+                            id: generateRandomString(10),
+                            text: '',
+                            color: 'white',
+                            size: 32 / imageInfo.width,
+                            x_pos: percentX,
+                            y_pos: percentY
+                        }
+
+                        fileModal.texts = fileModal.texts ? [...fileModal.texts, newText] : [newText];
+                        changeFieldDataFieldModal(fileModal);
+
+                    }
+                }
             }
-
-            fileModal.texts = fileModal.texts ? [...fileModal.texts, newText] : [newText];
-            changeFieldDataFieldModal(fileModal);
-
         }
-    }
+    }, []);
+
 
     const onRemoveTextModal = (id: string) => {
         fileModal.texts = fileModal.texts?.filter(item => item.id != id);
@@ -119,6 +120,23 @@ const InsertTextControl = forwardRef((props: EditImageType, ref) => {
         }
     }
 
+    const onInputText = (e: FormEvent<HTMLSpanElement>, previousItem: TextImageType) => {
+        if (e.currentTarget) {
+            const newItem: TextImageType = {
+                ...previousItem,
+                text: e.currentTarget.innerHTML ? e.currentTarget.innerHTML : ''
+            };
+            fileModal.texts = fileModal.texts?.map(item => {
+                if (item.id == previousItem.id) {
+                    return newItem;
+                } else {
+                    return item;
+                }
+            });
+            changeFieldDataFieldModal(fileModal);
+        }
+    }
+
     return (<>
         {
             fileModal.texts && fileModal.texts.map(item => {
@@ -131,8 +149,8 @@ const InsertTextControl = forwardRef((props: EditImageType, ref) => {
 
                 const itemStyle = {
                     padding: '5px',
-                    fontSize: `${item.size}px`,
-                    color: item.color
+                    fontSize: `${item.size * imageInfo.width}px`,
+                    color: item.color                    
                 }
 
                 return (
@@ -153,13 +171,16 @@ const InsertTextControl = forwardRef((props: EditImageType, ref) => {
                         className="group"
                     >
                         <div
-                            onClick={() => changeSelectedText(item.id)} 
+                            onClick={() => changeSelectedText(item.id)}
                             className="relative hover:border hover:border-white py-2 box-border">
-                            <span 
+                            <ContentEditable
                                 placeholder='Enter your text'
+                                className="outline-none font-semibold" 
                                 style={itemStyle}
-                                className="outline-none font-semibold" contentEditable="true" suppressContentEditableWarning={true}>                                
-                            </span>
+                                html={item.text}
+                                disabled={false}
+                                onChange={(e) => onInputText(e, item)}
+                            />
                             <span
                                 onClick={() => onRemoveTextModal(item.id)}
                                 className="z-10 absolute invisible group-hover:visible rounded-full bg-white border w-[30px] h-[30px] flex justify-center items-center top-0 left-0 translate-x-[-50%] translate-y-[-50%] cursor-pointer">

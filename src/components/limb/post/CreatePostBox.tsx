@@ -18,7 +18,7 @@ const CreatePostBox: React.FC = () => {
         </div>
         <button onClick={() => setControlModalState({
           ...controlModalState,
-          isShow: true
+          isShowModal: true
         })} className="hover:bg-gray-200 focus:bg-gray-300 focus:outline-none flex-grow bg-gray-100 text-gray-500 text-left rounded-full h-10 pl-5">
           What&apos;s on your mind, Shihab?
         </button>

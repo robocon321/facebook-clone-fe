@@ -9,13 +9,10 @@ import { ImageModalType, ModalContextType, VideoModalType } from '../../../../ty
 import { ModalContext } from 'providers/home/ModalProvider';
 
 export const LeftIconComponent: React.FC = () => {
-    const { controlModalState, setControlModalState, dataModalState ,setDataModalState } = useContext(ModalContext) as ModalContextType;
+    const { changeTabIndexModal } = useContext(ModalContext) as ModalContextType;
 
     return (
-        <IconButton click={() => setControlModalState({
-            ...controlModalState,
-            tabIndex: TAB_CODE.MAIN_TAB
-        })} icon={faArrowLeft} />
+        <IconButton click={() => changeTabIndexModal(TAB_CODE.MAIN_TAB)} icon={faArrowLeft} />
     )
 };
 
@@ -49,6 +46,7 @@ const FileComponent: React.FC<FilePropsType> = (props) => {
                 }
                 <div className="tooltip invisible absolute flex top-[20px] right-[10px]">
                     <IconButton click={() => setDataModalState({
+                        ...dataModalState,
                         files: dataModalState.files.filter(current => current.id != fileModal.id)
                     })} icon={faXmark} />
                 </div>
@@ -113,6 +111,7 @@ export const ChildrenIconComponent: React.FC = () => {
             }
         }
         setDataModalState({
+            ...dataModalState,
             files
         });
     }

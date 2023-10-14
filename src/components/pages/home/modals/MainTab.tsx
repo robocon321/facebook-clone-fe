@@ -2,30 +2,51 @@ import { faEarthAmericas, faEllipsis, faSortDown, faXmark } from '@fortawesome/f
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import ModalTemplate from 'components/limb/modal/ModalTemplate';
 import { AppContext, AppContextType } from 'providers/AppProvider';
-import React, { useContext } from 'react';
+import React, { useContext, useState } from 'react';
+import EmojiPicker, { EmojiClickData } from 'emoji-picker-react';
+
 import DragDropFiles from '../uploadfile/DragDropFiles';
 import IconButton from 'components/limb/buttons/IconButton';
 import { TAB_CODE } from 'constants/HomeConstant';
 import { ModalContextType } from 'types/pages/HomeType';
 import { ModalContext } from 'providers/home/ModalProvider';
 
+const LeftIconComponent: React.FC = () => {
+    return (
+        <div className='rounded-50 w-12 h-12'>
+        </div>
+    )
+}
+
+const RightIconComponent: React.FC = () => {
+    const { controlModalState, setControlModalState } = useContext(ModalContext) as ModalContextType;
+    return (
+        <IconButton click={() => setControlModalState({
+            ...controlModalState,
+            isShowModal: false,
+            isShowEmoji: false
+        })} icon={faXmark} />
+    )
+}
+
 const MainTab: React.FC = () => {
-    const { dataModalState, controlModalState, setControlModalState, changeTabIndexModal } = useContext(ModalContext) as ModalContextType;
+    const { dataModalState, setDataModalState, controlModalState, setControlModalState, changeTabIndexModal } = useContext(ModalContext) as ModalContextType;
     const { appState } = useContext(AppContext) as AppContextType;
-    const LeftIconComponent: React.FC = () => {
-        return (
-            <div className='rounded-50 w-12 h-12'>
-            </div>
-        )
+
+    const onChooseEmoji = (emojiData: EmojiClickData, event: MouseEvent) => {
+        setDataModalState((preview) => {
+            return {
+                ...dataModalState,
+                text: preview.text + (emojiData.isCustom ? emojiData.unified : emojiData.emoji)
+            }
+        })
     }
 
-    const RightIconComponent: React.FC = () => {
-        return (
-            <IconButton click={() => setControlModalState({
-                ...controlModalState,
-                isShow: false
-            })} icon={faXmark} />
-        )
+    const onChangeText = (e: React.ChangeEvent<HTMLTextAreaElement>) => {
+        setDataModalState({
+            ...dataModalState,
+            text: e.currentTarget ? e.currentTarget.value : ""
+        })
     }
 
     return (
@@ -47,6 +68,14 @@ const MainTab: React.FC = () => {
                                     <img className="mx-1 w-[25px] h-[25px]" src={dataModalState.emotion.imageUrl} alt="Not found" />
                                 </div>
                             )}
+                            {
+                                dataModalState.checkin && (
+                                    <div className="flex">
+                                        <span className="mx-1">is living</span>
+                                        <span className="mx-1 hover:underline"><a href="#"><b>{dataModalState.checkin.address + ", " + dataModalState.checkin.city + ", " + dataModalState.checkin.country}</b></a></span>
+                                    </div>
+                                )
+                            }
                             {dataModalState.tags.length > 0 && <span className='mx-1'>with</span>}
                             {
                                 dataModalState.tags.slice(0, 3).map((item, index) => {
@@ -57,7 +86,7 @@ const MainTab: React.FC = () => {
                                     )
                                 })
                             }
-                            {dataModalState.tags.length >= 3 && <li><span className='mx-1'>and</span><a className="hover:underline" href="#"><b> {dataModalState.tags.length - 3} other people</b></a></li>}
+                            {dataModalState.tags.length > 3 && <li><span className='mx-1'>and</span><a className="hover:underline" href="#"><b> {dataModalState.tags.length - 3} other people</b></a></li>}
                         </ul>
                         <div className='text-sm bg-gray-300 flex items-center justify-center py-1 px-2 rounded-lg max-w-[150px]'>
                             <span><FontAwesomeIcon icon={faEarthAmericas} /></span>
@@ -67,16 +96,29 @@ const MainTab: React.FC = () => {
                     </div>
                 </div>
                 <div className='py-4'>
-                    <textarea rows={5} className='max-h-20 overflow-hidden w-full outline-0 text-xl resize-none' placeholder="Hi you, what's on your mind?"></textarea>
+                    <textarea value={dataModalState.text} onChange={onChangeText} rows={5} className='max-h-20 w-full outline-0 text-xl resize-none' placeholder="Hi you, what's on your mind?"></textarea>
                     {
-                        controlModalState.isChooseFile && <DragDropFiles />
+                        (dataModalState.files.length > 0 || controlModalState.isChooseFile) && <DragDropFiles />
                     }
                     <div className='py-4 flex justify-between items-center'>
                         <div className='w-10 h-10 cursor-pointer'>
                             <img className='w-full h-full' src="/choose-bg.png" alt="Not found" />
                         </div>
-                        <div className='w-8 h-8 cursor-pointer'>
-                            <img className='w-full h-full' src="/emoji.png" alt="Not found" />
+                        <div className='relative w-8 h-8 cursor-pointer'>
+                            {controlModalState.isShowEmoji && <div className='fixed'>
+                                <EmojiPicker
+                                    onEmojiClick={onChooseEmoji}
+                                    height={400}
+                                    previewConfig={{
+                                        showPreview: false
+                                    }} />
+                            </div>}
+                            <img onClick={() => {
+                                setControlModalState({
+                                    ...controlModalState,
+                                    isShowEmoji: true
+                                })
+                            }} className='w-full h-full' src="/emoji.png" alt="Not found" />
                         </div>
                     </div>
                 </div>
@@ -85,7 +127,7 @@ const MainTab: React.FC = () => {
                     <div onClick={() => setControlModalState({
                         ...controlModalState,
                         isChooseFile: true
-                    })} className={"px-2 cursor-pointer hover:bg-gray-200 active:bg-gray-300  rounded-full w-10 h-10 flex justify-center items-center" + (controlModalState.isChooseFile ? " bg-gray-200" : " ")}>
+                    })} className={"px-2 cursor-pointer hover:bg-gray-200 active:bg-gray-300  rounded-full w-10 h-10 flex justify-center items-center" + (dataModalState.files.length > 0 ? " bg-gray-200" : " ")}>
                         <img src="/image.png" alt="Not found" />
                     </div>
                     <div onClick={() => changeTabIndexModal(TAB_CODE.TAG_FRIEND)} className={"px-2 cursor-pointer hover:bg-gray-200 rounded-full w-10 h-10 flex justify-center items-center" + (dataModalState.tags.length > 0 ? " bg-gray-200" : " ")}>
@@ -94,7 +136,7 @@ const MainTab: React.FC = () => {
                     <div onClick={() => changeTabIndexModal(TAB_CODE.EMOTION)} className={"px-2 cursor-pointer hover:bg-gray-200 rounded-full w-10 h-10 flex justify-center items-center" + (dataModalState.emotion ? " bg-gray-200" : " ")}>
                         <img src="/emoji-yellow.png" alt="Not found" />
                     </div>
-                    <div className="px-2 cursor-pointer hover:bg-gray-200 rounded-full w-10 h-10 flex justify-center items-center">
+                    <div onClick={() => changeTabIndexModal(TAB_CODE.CHECKIN)} className={"px-2 cursor-pointer hover:bg-gray-200 rounded-full w-10 h-10 flex justify-center items-center" + (dataModalState.checkin ? " bg-gray-200" : " ")}>
                         <img src="/locate.png" alt="Not found" />
                     </div>
                     <div className="px-2 cursor-pointer hover:bg-gray-200 rounded-full w-10 h-10 flex justify-center items-center">
