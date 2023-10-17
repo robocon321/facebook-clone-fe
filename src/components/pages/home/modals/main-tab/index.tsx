@@ -1,17 +1,18 @@
 import { faEarthAmericas, faEllipsis, faSortDown, faXmark } from '@fortawesome/free-solid-svg-icons';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import ModalTemplate from 'components/limb/modal/ModalTemplate';
-import { AppContext } from 'providers/AppProvider';
-import React, { useContext, useState } from 'react';
 import EmojiPicker, { EmojiClickData } from 'emoji-picker-react';
+import { AppContext } from 'providers/AppProvider';
+import React, { useContext } from 'react';
 
-import DragDropFiles from 'components/pages/home/modals/main-tab/DragDropFiles';
-import IconButton from 'components/limb/buttons/IconButton';
-import { TAB_CODE } from 'constants/HomeConstant';
-import { ModalContextType } from 'types/pages/HomeType';
-import { ModalContext } from 'providers/home/ModalProvider';
-import { AppContextType } from 'types/pages/AppType';
 import Button from 'components/limb/buttons/Button';
+import IconButton from 'components/limb/buttons/IconButton';
+import DragDropFiles from 'components/pages/home/modals/main-tab/DragDropFiles';
+import { TAB_CODE } from 'constants/HomeConstant';
+import { ModalContext } from 'providers/home/ModalProvider';
+import { createNewPost } from 'services/PostService';
+import { AppContextType } from 'types/pages/AppType';
+import { ModalContextType } from 'types/pages/HomeType';
 
 const LeftIconComponent: React.FC = () => {
     return (
@@ -32,7 +33,7 @@ const RightIconComponent: React.FC = () => {
 }
 
 const MainTab: React.FC = () => {
-    const { dataModalState, setDataModalState, controlModalState, setControlModalState, changeTabIndexModal } = useContext(ModalContext) as ModalContextType;
+    const { dataModalState, setDataModalState, controlModalState, setControlModalState, changeTabIndexModal, resetDataModal } = useContext(ModalContext) as ModalContextType;
     const { appState } = useContext(AppContext) as AppContextType;
 
     const onChooseEmoji = (emojiData: EmojiClickData, event: MouseEvent) => {
@@ -53,17 +54,34 @@ const MainTab: React.FC = () => {
 
     const isEnableToSubmit = () => {
         return (
-            dataModalState.checkin || 
-            dataModalState.emotion || 
-            dataModalState.files.length > 0 || 
-            dataModalState.tags.length > 0 || 
+            dataModalState.checkin ||
+            dataModalState.emotion ||
+            dataModalState.files.length > 0 ||
+            dataModalState.tags.length > 0 ||
             (dataModalState.text ? (dataModalState.text.length > 0 ? true : false) : false)
         )
     }
 
-    const submit = () => {
-        if(isEnableToSubmit()) {
-            console.log("Haha");
+    const submit = async () => {
+        if (isEnableToSubmit()) {
+            setControlModalState((previous) => ({
+                ...previous,
+                isLoading: true
+            }));
+            await createNewPost(dataModalState).then(response => {
+                setControlModalState((previous) => ({
+                    ...previous,
+                    isLoading: false
+                }));
+                resetDataModal();
+            }).catch(error => {
+                setControlModalState((previous) => ({
+                    ...previous,
+                    isLoading: false
+                }));
+                alert(error);
+            })
+
         }
     }
 
@@ -175,7 +193,8 @@ const MainTab: React.FC = () => {
                         fontWeight="font-bold"
                         bg={isEnableToSubmit() ? "bg-blue-600" : "bg-gray-300"}
                         color={isEnableToSubmit() ? "text-white" : "text-gray-600"}
-                        isDisabled={!isEnableToSubmit()}
+                        isdisabled={!isEnableToSubmit() + ""}
+                        isloading={controlModalState.isLoading + ""}
                     >
                         Post
                     </Button>

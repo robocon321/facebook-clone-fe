@@ -60,7 +60,7 @@ const InsertTextControl = forwardRef((props: EditImageType, ref) => {
                             y_pos: percentY
                         }
 
-                        fileModal.texts = fileModal.texts ? [...fileModal.texts, newText] : [newText];
+                        fileModal.texts = [...fileModal.texts, newText];
                         changeFieldDataFileModal(fileModal);
 
                     }
@@ -71,7 +71,7 @@ const InsertTextControl = forwardRef((props: EditImageType, ref) => {
 
 
     const onRemoveTextModal = (id: string) => {
-        fileModal.texts = fileModal.texts?.filter(item => item.id != id);
+        fileModal.texts = fileModal.texts.filter(item => item.id != id);
         changeFieldDataFileModal(fileModal);
     }
 
@@ -84,7 +84,7 @@ const InsertTextControl = forwardRef((props: EditImageType, ref) => {
                 x_pos: newXPos,
                 y_pos: newYPos
             }
-            fileModal.texts = fileModal.texts?.map(item => {
+            fileModal.texts = fileModal.texts.map(item => {
                 if (item.id == previousItem.id) {
                     return newItem
                 } else {
@@ -108,7 +108,7 @@ const InsertTextControl = forwardRef((props: EditImageType, ref) => {
                 size: newSize
             }
 
-            fileModal.texts = fileModal.texts?.map(item => {
+            fileModal.texts = fileModal.texts.map(item => {
                 if (item.id == previousItem.id) {
                     return newItem;
                 } else {
@@ -126,7 +126,7 @@ const InsertTextControl = forwardRef((props: EditImageType, ref) => {
                 ...previousItem,
                 text: e.currentTarget.innerHTML ? e.currentTarget.innerHTML : ''
             };
-            fileModal.texts = fileModal.texts?.map(item => {
+            fileModal.texts = fileModal.texts.map(item => {
                 if (item.id == previousItem.id) {
                     return newItem;
                 } else {
@@ -139,7 +139,7 @@ const InsertTextControl = forwardRef((props: EditImageType, ref) => {
 
     return (<>
         {
-            fileModal.texts && fileModal.texts.map(item => {
+            fileModal.texts.map(item => {
                 let x = 0;
                 let y = 0;
                 if (imageInfo) {

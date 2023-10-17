@@ -12,10 +12,11 @@ export type SubTabType = {
 export type ImageModalType = {
   id: string,
   file: File,
-  selectedText?: string,
-  tags?: TagImageType[],
+  created_date: Date,
+  selectedText?: string,  
+  tags: TagImageType[],
   note?: string,
-  texts?: TextImageType[]
+  texts: TextImageType[]
 }
 
 export type TagImageType = {
@@ -37,6 +38,7 @@ export type TextImageType = {
 export type VideoModalType = {
   id: string,
   file: File,
+  created_date: Date,
   note?: string
 }
 
@@ -48,7 +50,8 @@ export type ModalContextType = {
   dataModalState: DataStateType
   setDataModalState: Dispatch<SetStateAction<DataStateType>>,
   changeTabIndexModal: (tabIndex: number, fileModal?: VideoModalType | ImageModalType, navTabDetailIndex?: number) => void,
-  changeFieldDataFileModal: (fileModal: VideoModalType | ImageModalType) => void
+  changeFieldDataFileModal: (fileModal: VideoModalType | ImageModalType) => void,
+  resetDataModal: () => void
 };
 
 export type ControlStateType = {
@@ -56,7 +59,8 @@ export type ControlStateType = {
   isShowModal: boolean,
   isChooseFile: boolean,
   navTabDetailIndex: number,
-  isShowEmoji: boolean
+  isShowEmoji: boolean,
+  isLoading: boolean
 }
 
 export type TabStateType = {

@@ -19,14 +19,12 @@ const NavImageComponent: React.FC<NavPropsType> = (props) => {
     const { navTabDetailIndex } = controlModalState;
     const { fileModal } = props;
     const onRemoveFriendTag = (accountId: number) => {
-        if (fileModal.tags) {
-            fileModal.tags = fileModal.tags.filter(item => item.account != null && item.account.accountId != accountId);
-            changeFieldDataFileModal(fileModal);
-        }
+        fileModal.tags = fileModal.tags.filter(item => item.account != null && item.account.accountId != accountId);
+        changeFieldDataFileModal(fileModal);
     }
 
     const isTagNonEmpty = (): boolean => {
-        return fileModal.tags != undefined && fileModal.tags.filter(item => item.account != null).length != 0;
+        return fileModal.tags.filter(item => item.account != null).length != 0;
     }
 
     const changeColorSelectedText = (color: string) => {
@@ -86,7 +84,7 @@ const NavImageComponent: React.FC<NavPropsType> = (props) => {
                         <li className="flex flex-wrap border border-gray-200 p-2 max-h-[300px] text-sm">
                             <div className="text-gray-500">Tagged in image</div>
                             {
-                                fileModal.tags?.filter(item => item.account != null).map(item => (
+                                fileModal.tags.filter(item => item.account != null).map(item => (
                                     <div key={item.id} className="flex justify-between items-center m-2 bg-blue-100 text-blue-600 min-w-[150px] rounded p-2">
                                         <div>{item.account.firstName + " " + item.account.lastName}</div>
                                         <div className="hover:bg-gray-200 rounded-full w-[25px] h-[25px] flex justify-center items-center cursor-pointer"

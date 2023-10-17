@@ -36,13 +36,17 @@ const DragDropFiles = () => {
             if (type.startsWith("video")) {
                 const videoModal: VideoModalType = {
                     id: generateRandomString(5),
-                    file: fileList[i]
+                    file: fileList[i],
+                    created_date: new Date()
                 };
                 files.push(videoModal);
             } else {
                 const imageModal: ImageModalType = {
                     id: generateRandomString(5),
-                    file: fileList[i]
+                    file: fileList[i],
+                    created_date: new Date(),
+                    tags: [],
+                    texts: []
                 }
                 files.push(imageModal);
             }

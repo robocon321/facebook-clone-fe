@@ -42,8 +42,8 @@ const Tag = forwardRef((props: TagEditPropsType, ref) => {
                         y_pos: percentY
                     }
 
-                    fileModal.tags = fileModal.tags?.filter(item => item.account != null);
-                    fileModal.tags = fileModal.tags ? [...fileModal.tags, newTag] : [newTag];
+                    fileModal.tags = fileModal.tags.filter(item => item.account != null);
+                    fileModal.tags = [...fileModal.tags, newTag];
                     changeFieldDataFileModal(fileModal);
                 }
             }
@@ -52,37 +52,31 @@ const Tag = forwardRef((props: TagEditPropsType, ref) => {
 
     const onTextInputChange = (event: React.ChangeEvent<HTMLInputElement>) => {
         const content = event.currentTarget.value;
-        if (fileModal.tags) {
-            const excludeIds = fileModal.tags?.filter(item => item.account != null).map(item => item.account.accountId);
-            getAccountFriendshipAndStatus('ACCEPTED', content, excludeIds)
-                .then(data => {
-                    setSearchFriends(data.data);
-                })
-                .catch(error => {
-                    console.log(error);
-                })
-        }
+        const excludeIds = fileModal.tags.filter(item => item.account != null).map(item => item.account.accountId);
+        getAccountFriendshipAndStatus('ACCEPTED', content, excludeIds)
+            .then(data => {
+                setSearchFriends(data.data);
+            })
+            .catch(error => {
+                console.log(error);
+            })
     }
 
     const onAddFriendTag = (account: AccountSummaryInfoResponse) => {
-        if (fileModal.tags) {
-            const lastTag = fileModal.tags[fileModal.tags.length - 1];
-            lastTag.account = account;
-            fileModal.tags[fileModal.tags.length - 1] = lastTag;
-            changeFieldDataFileModal(fileModal);
-        }
+        const lastTag = fileModal.tags[fileModal.tags.length - 1];
+        lastTag.account = account;
+        fileModal.tags[fileModal.tags.length - 1] = lastTag;
+        changeFieldDataFileModal(fileModal);
     }
 
     const onRemoveFriendTag = (accountId: number) => {
-        if (fileModal.tags) {
-            fileModal.tags = fileModal.tags.filter(item => item.account != null && item.account.accountId != accountId);
-            changeFieldDataFileModal(fileModal);
-        }
+        fileModal.tags = fileModal.tags.filter(item => item.account != null && item.account.accountId != accountId);
+        changeFieldDataFileModal(fileModal);
     }
 
     return (<>
         {
-            fileModal.tags?.map(item => {
+            fileModal.tags.map(item => {
                 let imageHeight = 0;
                 let imageWidth = 0;
                 if (imageRef.current) {

@@ -22,7 +22,8 @@ const defaultControlState = {
   isShowModal: false,
   isChooseFile: false,
   navTabDetailIndex: 0,
-  isShowEmoji: false
+  isShowEmoji: false,
+  isLoading: false
 }
 
 const defaultTabState = {
@@ -58,7 +59,7 @@ const ModalProvider = (props: any) => {
   //   console.log(dataState);
   // }, [dataState]);
 
-  const changeTabIndex = (tabIndex: number, fileModal?: VideoModalType | ImageModalType, navTabDetailIndex?: number) => {
+  const changeTabIndex = (tabIndex: number, fileModal?: (VideoModalType | ImageModalType), navTabDetailIndex?: number) => {
     setControlState((previous) => {
       return {
         ...previous,
@@ -89,7 +90,8 @@ const ModalProvider = (props: any) => {
         detailFuncTab: defaultTabState.detailFuncTab
       })
     } else if (tabIndex == TAB_CODE.DETAIL_IMAGE) {
-      if (fileModal != undefined) {
+      console.log(fileModal);
+      if (fileModal != undefined && 'tags' in fileModal) {
         setTabState({
           ...tabState,
           funcTab: defaultTabState.funcTab,
@@ -175,6 +177,12 @@ const ModalProvider = (props: any) => {
     })
   }
 
+  const resetData = () => {
+    setTabState(defaultTabState);
+    setControlState(defaultControlState);
+    setDataState(defaultDataState);
+  }
+
   const value = {
     controlModalState: controlState,
     setControlModalState: setControlState,
@@ -183,7 +191,8 @@ const ModalProvider = (props: any) => {
     dataModalState: dataState,
     setDataModalState: setDataState,
     changeTabIndexModal: changeTabIndex,
-    changeFieldDataFileModal: changeFieldDataFile
+    changeFieldDataFileModal: changeFieldDataFile,
+    resetDataModal: resetData
   }
 
   if (appState.isLoading || appState.data.user == null) {
