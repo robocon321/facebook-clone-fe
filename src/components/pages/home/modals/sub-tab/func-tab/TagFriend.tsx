@@ -5,7 +5,7 @@ import { TAB_CODE } from 'constants/HomeConstant';
 import { ModalContext } from 'providers/home/ModalProvider';
 import React, { useContext, useState } from 'react';
 import { getAccountFriendshipAndStatus } from 'services/AccountService';
-import { ModalContextType } from 'types/pages/HomeType';
+import { ModalContextType } from 'types/pages/home/ModalType';
 import { AccountSummaryInfoResponse } from 'types/responses/AccountSummaryInfoResponseType';
 
 export const LeftIconComponent: React.FC = () => {

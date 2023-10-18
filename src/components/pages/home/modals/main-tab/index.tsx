@@ -12,7 +12,7 @@ import { TAB_CODE } from 'constants/HomeConstant';
 import { ModalContext } from 'providers/home/ModalProvider';
 import { createNewPost } from 'services/PostService';
 import { AppContextType } from 'types/pages/AppType';
-import { ModalContextType } from 'types/pages/HomeType';
+import { ModalContextType } from 'types/pages/home/ModalType';
 
 const LeftIconComponent: React.FC = () => {
     return (

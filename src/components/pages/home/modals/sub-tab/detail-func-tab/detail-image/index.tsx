@@ -5,7 +5,7 @@ import IconButton from 'components/limb/buttons/IconButton';
 import { TAB_CODE } from 'constants/HomeConstant';
 import { ModalContext } from 'providers/home/ModalProvider';
 import React, { useContext } from 'react';
-import { ImageModalType, ModalContextType } from 'types/pages/HomeType';
+import { ImageModalType, ModalContextType } from 'types/pages/home/ModalType';
 import EditImageComponent from './EditImage';
 import NavImageComponent from './NavImageComponent';
 

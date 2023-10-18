@@ -1,5 +1,5 @@
 import React from 'react';
-import { ModalParameterType } from 'types/pages/HomeType';
+import { ModalParameterType } from 'types/pages/home/ModalType';
 
 const Modal: React.FC<ModalParameterType> = (props) => {
     const { children, isShow, width, onClickOutside } = props;

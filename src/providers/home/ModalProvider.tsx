@@ -13,7 +13,7 @@ import { TAB_CODE } from "constants/HomeConstant";
 import { AppContext } from "providers/AppProvider";
 import { createContext, useContext, useState } from "react";
 import { AppContextType } from "types/pages/AppType";
-import { ControlStateType, DataStateType, ImageModalType, ModalContextType, TabStateType, VideoModalType } from "types/pages/HomeType";
+import { ControlStateType, DataStateType, ImageModalType, ModalContextType, TabStateType, VideoModalType } from "types/pages/home/ModalType";
 
 export const ModalContext = createContext<ModalContextType | null>(null);
 

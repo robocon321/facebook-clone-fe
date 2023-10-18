@@ -8,8 +8,9 @@ import MainTab from 'components/pages/home/modals/main-tab';
 import SubTab from 'components/pages/home/modals/sub-tab';
 import { TAB_CODE_GROUP } from 'constants/HomeConstant';
 import { ModalContext } from 'providers/home/ModalProvider';
+import NewsFeedProvider from 'providers/home/NewFeedsProvider';
 import React, { useContext } from 'react';
-import { ModalContextType } from 'types/pages/HomeType';
+import { ModalContextType } from 'types/pages/home/ModalType';
 
 const HomePage: React.FC = () => {
   const { controlModalState, tabModalState, setControlModalState } = useContext(ModalContext) as ModalContextType;
@@ -54,7 +55,9 @@ const HomePage: React.FC = () => {
             <SubTab {...tabModalState.detailFuncTab} />
           </div>
         </Modal>
-        <NewsFeedScreen />
+        <NewsFeedProvider>
+          <NewsFeedScreen />
+        </NewsFeedProvider>
       </div>
       <div className="col-span-2 flex justify-end pr-2">
         <RightSidebar />

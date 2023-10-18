@@ -6,7 +6,7 @@ import RoundedIcon from "components/limb/icon/RoundedIcon";
 import { TAB_IMAGE_NAV_CODE } from "constants/HomeConstant";
 import { ModalContext } from "providers/home/ModalProvider";
 import { useContext } from "react";
-import { ImageModalType, ModalContextType } from "types/pages/HomeType";
+import { ImageModalType, ModalContextType } from "types/pages/home/ModalType";
 
 type NavPropsType = {
     fileModal: ImageModalType

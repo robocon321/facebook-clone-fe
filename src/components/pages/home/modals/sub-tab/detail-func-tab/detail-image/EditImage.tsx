@@ -3,7 +3,7 @@ import TagControl from 'components/pages/home/modals/sub-tab/detail-func-tab/det
 import { TAB_IMAGE_NAV_CODE } from 'constants/HomeConstant';
 import { ModalContext } from "providers/home/ModalProvider";
 import React, { useContext, useRef } from 'react';
-import { ImageModalType, ModalContextType } from "types/pages/HomeType";
+import { ImageModalType, ModalContextType } from "types/pages/home/ModalType";
 import { convertToBlobFile } from 'utils/FileUtils';
 
 type EditImageType = {

@@ -3,7 +3,7 @@ import IconButton from 'components/limb/buttons/IconButton';
 import { TAB_CODE } from 'constants/HomeConstant';
 import { ModalContext } from 'providers/home/ModalProvider';
 import React, { useContext } from 'react';
-import { ModalContextType } from 'types/pages/HomeType';
+import { ModalContextType } from 'types/pages/home/ModalType';
 
 export const LeftIconComponent: React.FC = () => {
     const { changeTabIndexModal } = useContext(ModalContext) as ModalContextType;

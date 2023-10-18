@@ -1,7 +1,7 @@
 "use client"
 import { ModalContext } from 'providers/home/ModalProvider';
 import React, { useContext } from 'react';
-import { ModalContextType } from 'types/pages/HomeType';
+import { ModalContextType } from 'types/pages/home/ModalType';
 
 const CreatePostBox: React.FC = () => {
   const { controlModalState, setControlModalState } = useContext(ModalContext) as ModalContextType; 

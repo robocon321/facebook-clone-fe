@@ -4,7 +4,7 @@ import IconButton from 'components/limb/buttons/IconButton';
 import { TAB_CODE } from 'constants/HomeConstant';
 import { ModalContext } from 'providers/home/ModalProvider';
 import React, { useContext, useEffect, useState } from 'react';
-import { ModalContextType } from 'types/pages/HomeType';
+import { ModalContextType } from 'types/pages/home/ModalType';
 import { PageRequest } from "types/requests/PageRequest";
 import { getCheckinLocation } from "services/CheckinService";
 import { CheckinResponseType } from 'types/responses/CheckinResponseType';

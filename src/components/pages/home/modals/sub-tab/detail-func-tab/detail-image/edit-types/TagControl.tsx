@@ -1,6 +1,6 @@
 import React, { ForwardedRef, forwardRef, useContext, useImperativeHandle, useRef, useState } from 'react';
 import { ModalContext } from "providers/home/ModalProvider";
-import { ImageModalType, ModalContextType, TagImageType } from "types/pages/HomeType";
+import { ImageModalType, ModalContextType, TagImageType } from "types/pages/home/ModalType";
 import { AccountSummaryInfoResponse } from 'types/responses/AccountSummaryInfoResponseType';
 import { generateRandomString } from 'utils/RandomUtils';
 import { getAccountFriendshipAndStatus } from 'services/AccountService';

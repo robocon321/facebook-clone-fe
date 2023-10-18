@@ -1,5 +1,5 @@
 import React from 'react';
-import { ImageModalType } from "types/pages/HomeType";
+import { ImageModalType } from "types/pages/home/ModalType";
 import { convertToBlobFile } from "utils/FileUtils";
 type EditImageType = {
     fileModal: ImageModalType

@@ -1,6 +1,6 @@
 import ModalTemplate from 'components/limb/modal/ModalTemplate';
 import React from 'react';
-import { SubTabType } from 'types/pages/HomeType';
+import { SubTabType } from 'types/pages/home/ModalType';
 
 const SubTab: React.FC<SubTabType> = (props) => {
     const { title, leftIcon, rightIcon, children } = props;

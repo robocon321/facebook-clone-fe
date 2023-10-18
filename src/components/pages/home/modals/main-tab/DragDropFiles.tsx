@@ -6,7 +6,7 @@ import IconButton from "components/limb/buttons/IconButton";
 import { useRef, useContext } from "react";
 import { convertToBlobFile } from "utils/FileUtils";
 import { generateRandomString } from "utils/RandomUtils";
-import { ImageModalType, ModalContextType, VideoModalType } from "types/pages/HomeType";
+import { ImageModalType, ModalContextType, VideoModalType } from "types/pages/home/ModalType";
 import { TAB_CODE } from "constants/HomeConstant";
 import { ModalContext } from "providers/home/ModalProvider";
 

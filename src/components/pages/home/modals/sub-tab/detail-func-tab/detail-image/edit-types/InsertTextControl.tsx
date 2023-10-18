@@ -4,7 +4,7 @@ import { ModalContext } from 'providers/home/ModalProvider';
 import React, { FormEvent, forwardRef, useContext, useEffect, useImperativeHandle } from 'react';
 import ContentEditable from 'react-contenteditable';
 import { DraggableData, ResizableDelta, Rnd } from "react-rnd";
-import { ImageModalType, ModalContextType, TextImageType } from "types/pages/HomeType";
+import { ImageModalType, ModalContextType, TextImageType } from "types/pages/home/ModalType";
 import { generateRandomString } from 'utils/RandomUtils';
 
 type EditImageType = {

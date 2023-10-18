@@ -4,7 +4,7 @@ import RoundedIcon from 'components/limb/icon/RoundedIcon';
 import { TAB_CODE } from 'constants/HomeConstant';
 import { ModalContext } from 'providers/home/ModalProvider';
 import React, { useContext } from 'react';
-import { ModalContextType, VideoModalType } from 'types/pages/HomeType';
+import { ModalContextType, VideoModalType } from 'types/pages/home/ModalType';
 import { convertToBlobFile } from 'utils/FileUtils';
 
 export const LeftIconComponent: React.FC = () => {
