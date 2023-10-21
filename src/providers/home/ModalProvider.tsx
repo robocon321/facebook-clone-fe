@@ -11,7 +11,7 @@ import * as PostScope from "components/pages/home/modals/sub-tab/func-tab/PostSc
 import * as TagFriend from "components/pages/home/modals/sub-tab/func-tab/TagFriend";
 import { TAB_CODE } from "constants/HomeConstant";
 import { AppContext } from "providers/AppProvider";
-import { createContext, useContext, useState } from "react";
+import { createContext, useContext, useEffect, useState } from "react";
 import { AppContextType } from "types/pages/AppType";
 import { ControlStateType, DataStateType, ImageModalType, ModalContextType, TabStateType, VideoModalType } from "types/pages/home/ModalType";
 
@@ -54,10 +54,6 @@ const ModalProvider = (props: any) => {
   const [dataState, setDataState] = useState<DataStateType>(defaultDataState);
 
   const { appState } = useContext(AppContext) as AppContextType;
-
-  // useEffect(() => {
-  //   console.log(dataState);
-  // }, [dataState]);
 
   const changeTabIndex = (tabIndex: number, fileModal?: (VideoModalType | ImageModalType), navTabDetailIndex?: number) => {
     setControlState((previous) => {

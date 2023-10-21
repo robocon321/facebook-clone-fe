@@ -9,7 +9,7 @@ import SubTab from 'components/pages/home/modals/sub-tab';
 import { TAB_CODE_GROUP } from 'constants/HomeConstant';
 import { ModalContext } from 'providers/home/ModalProvider';
 import NewsFeedProvider from 'providers/home/NewFeedsProvider';
-import React, { useContext } from 'react';
+import React, { useContext, useEffect } from 'react';
 import { ModalContextType } from 'types/pages/home/ModalType';
 
 const HomePage: React.FC = () => {

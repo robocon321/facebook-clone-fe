@@ -43,12 +43,23 @@ const NewsFeedProvider = (props: any) => {
       });
   }, []);
 
+  const setPost = (newPost: PostResponse) => {
+    const index = dataState.posts.findIndex(item => item.postId == newPost.postId);
+    if(index >= 0) {
+      setDataState({
+        ...dataState,
+        posts: [...dataState.posts.slice(0, index), newPost, ...dataState.posts.slice(index + 1)]
+      })
+    }
+  }
+
   const value = {
     newsFeedData: dataState,
     setNewsFeedData: setDataState,
     newsFeedControl: controlState,
     setNewsFeedControl: setControlState,
-    newsFeedEmotions: emotions
+    newsFeedEmotions: emotions,
+    setNewsFeedPost: setPost
   }
 
   if (appState.isLoading || appState.data.user == null) {

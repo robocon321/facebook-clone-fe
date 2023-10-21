@@ -1,5 +1,5 @@
 import React from 'react';
-import CreatePostBox from 'components/limb/post/CreatePostBox';
+import CreatePostBox from 'components/pages/home/post/create-post';
 import PostContainer from 'components/containers/PostContainer';
 import Story from 'components/limb/story';
 import { storiesData } from 'database';

@@ -11,7 +11,16 @@ export type PostResponse = {
     checkin?: CheckinResponse,
     tags?: AccountResponse[],
     images?: ImagePostResponse[],
-    videos?: VideoPostResponse[]
+    videos?: VideoPostResponse[],
+    emotions?: EmotionPostType[]
+}
+
+export type EmotionPostType = {
+    emotionId: number,
+    account: AccountResponse,
+    createTime: Date,
+    modTime: Date,
+    type: string
 }
 
 export type AccountResponse = {
@@ -71,7 +80,8 @@ export type NewsFeedContextType = {
     setNewsFeedData: Dispatch<SetStateAction<DataStateType>>,
     newsFeedControl: ControlStateType,
     setNewsFeedControl: Dispatch<SetStateAction<ControlStateType>>,
-    newsFeedEmotions: EmotionType[]
+    newsFeedEmotions: EmotionType[],
+    setNewsFeedPost: (post: PostResponse) => void
 };
 
 export type DataStateType = {

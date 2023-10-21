@@ -1,7 +1,6 @@
-import React, { useContext } from 'react';
-import { postsData } from '../../database';
-import Post from 'components/limb/post';
+import Post from 'components/pages/home/post/single-post';
 import { NewsFeedContext } from 'providers/home/NewFeedsProvider';
+import React, { useContext } from 'react';
 import { NewsFeedContextType } from 'types/pages/home/NewsFeedType';
 
 type TPostView = 'gridView' | 'listView';
@@ -21,7 +20,7 @@ const PostContainer: React.FC<IProps> = (props) => {
         } gap-2`}
       >
         {newsFeedData.posts.length ? (
-          newsFeedData.posts.map((post, idx) => <Post key={idx} post={post} />)
+          newsFeedData.posts.map((post, idx) => <Post key={post.postId} post={post} />)
         ) : (
           <p>No posts yet!</p>
         )}

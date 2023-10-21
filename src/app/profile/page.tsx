@@ -3,7 +3,7 @@
 import React, { useState } from 'react';
 import { TPostView } from 'types/post';
 import PostContainer from 'components/containers/PostContainer';
-import CreatePostBox from 'components/limb/post/CreatePostBox';
+import CreatePostBox from 'components/pages/home/post/create-post';
 
 const ProfilePage: React.FC = () => {
   const [postsView, setPostsView] = useState<TPostView>('listView');

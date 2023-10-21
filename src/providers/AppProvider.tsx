@@ -7,11 +7,12 @@ import { AppContextType, AppStateType } from "types/pages/AppType";
 
 export const AppContext = createContext<AppContextType | null>(null);
 
+
 const AppProvider = (props: any) => {
     const router = useRouter();
     const pathname = usePathname();
     const pathnameSplit = pathname.split('/');
-    const allowedPaths = ['login', 'signup'];
+    const allowedPaths = ['login', 'signup', 'gaming'];
 
     const [appState, setAppState] = useState<AppStateType>({
         isLoading: true,
