@@ -4,6 +4,7 @@ import { faEllipsis } from '@fortawesome/free-solid-svg-icons';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { EMOTION_LIST } from 'constants/HomeConstant';
 import { EditorState, convertFromRaw } from 'draft-js';
+import moment from 'moment';
 
 import React, { useMemo, useState } from 'react';
 
@@ -11,14 +12,17 @@ import { CommentPostResponse } from 'types/responses/PostResponse';
 
 type CommentTypeProps = {
     comment: CommentPostResponse,
+    comments: CommentPostResponse[],
     onReply: (comment: CommentPostResponse) => void
 }
 
 const SingleComment: React.FC<CommentTypeProps> = (props) => {
-    const { comment } = props;
+    const { comment, comments, onReply } = props;
     const [editorState, setEditorState] = useState(() =>
         EditorState.createWithContent(convertFromRaw(JSON.parse(comment.text)))
     );
+    const nestedComments = comments.filter(item => item.parentId == comment.commentId);
+    console.log(nestedComments);
 
     const { plugins } = useMemo(() => {
         const mentionPlugin = createMentionPlugin({
@@ -77,7 +81,7 @@ const SingleComment: React.FC<CommentTypeProps> = (props) => {
                                 <div className="tooltip flex absolute bottom-full rounded-full bg-white shadow-md p-1 items-center justify-between">
                                     {
                                         EMOTION_LIST.map(item => (
-                                            <div key={item.id}className="w-10 h-10 p-1 relative">
+                                            <div key={item.id} className="w-10 h-10 p-1 relative">
                                                 <img className="w-full h-full rounded-full" src={item.gif} alt='Not found' />
                                             </div>
                                         ))
@@ -85,16 +89,22 @@ const SingleComment: React.FC<CommentTypeProps> = (props) => {
                                 </div>
                             </div>
                             <div onClick={() => {
-                                props.comment.commentId && props.onReply(props.comment);
+                                onReply(props.comment)
                             }} className="mr-4 font-medium cursor-pointer">Reply</div>
                             <div className="mr-4 font-medium cursor-pointer">Share</div>
-                            <div className="font-light">1 minute before</div>
+                            <div className="font-light">{moment(comment.modTime).fromNow()}</div>
                         </div>
                     </div>
                     <div className="ml-2 mt-2 rounded hover:bg-gray-100 w-5 h-5 flex justify-center items-center rounded-full cursor-pointer">
                         <FontAwesomeIcon icon={faEllipsis} />
                     </div>
                 </div>
+            </div>
+            <div className="ml-8">
+            {
+               nestedComments.map((item) => <SingleComment key={item.commentId} comments={comments} onReply={onReply} comment={item} />)
+            }
+
             </div>
         </div>
     )

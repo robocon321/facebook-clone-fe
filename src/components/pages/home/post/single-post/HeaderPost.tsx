@@ -1,7 +1,8 @@
 import moment from 'moment';
 import { NewsFeedContext } from 'providers/home/NewFeedsProvider';
 import { useContext } from 'react';
-import { NewsFeedContextType, PostResponse } from "types/pages/home/NewsFeedType"
+import { NewsFeedContextType } from "types/pages/home/NewsFeedType";
+import { PostResponse } from 'types/responses/PostResponse';
 
 type PostTypeProps = {
     post: PostResponse

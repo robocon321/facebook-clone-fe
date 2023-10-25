@@ -1,7 +1,7 @@
 import Editor from '@draft-js-plugins/editor';
 import createEmojiPlugin, { defaultTheme } from '@draft-js-plugins/emoji';
 import createMentionPlugin from '@draft-js-plugins/mention';
-import { EditorState, Modifier, convertToRaw, getDefaultKeyBinding } from 'draft-js';
+import { EditorState, convertToRaw, getDefaultKeyBinding } from 'draft-js';
 
 import { faFaceSmile, faImage, faPaperPlane, faXmark } from '@fortawesome/free-solid-svg-icons';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
@@ -20,6 +20,7 @@ import { CommentInputType, NewsFeedContextType } from 'types/pages/home/NewsFeed
 import { CommentPostRequest } from 'types/requests/CommentPostRequest';
 import { PageRequest } from 'types/requests/PageRequest';
 import { AccountResponse, CommentPostResponse, PostResponse } from 'types/responses/PostResponse';
+import createMentionEntities from 'utils/CreateMention';
 import { convertToBlobFile } from 'utils/FileUtils';
 
 type PostTypeProps = {
@@ -268,21 +269,12 @@ const FooterPost: React.FC<PostTypeProps> = (props) => {
             const contentState = editorState.getCurrentContent();
             const raw = convertToRaw(contentState);
             const convertToString = JSON.stringify(raw);
-            // const newComment: CommentInputType = {
-            //     ...commentInput,
-            //     commentId: comments.length + 1,
-            //     text: convertToString,
-            //     tags: [],
-            // }
-            // setComments([...comments, newComment]);
-            // setEditorState(EditorState.createEmpty());
-            // setCommentInput(defaultCommentInput);
             let mentionedAccounts = [];
             for (let key in raw.entityMap) {
-              const ent = raw.entityMap[key];
-              if (ent.type === "mention") {
-                mentionedAccounts.push(ent.data.mention.id);
-              }
+                const ent = raw.entityMap[key];
+                if (ent.type === "mention") {
+                    mentionedAccounts.push(ent.data.mention.id);
+                }
             }
 
             const request: CommentPostRequest = {
@@ -291,11 +283,14 @@ const FooterPost: React.FC<PostTypeProps> = (props) => {
                 file: commentInput.file,
                 parentId: commentInput.parentId,
                 mentionedAccounts: mentionedAccounts.toString()
-            }            
+            }
 
             createComment(request)
-            .then(response => console.log(response))
-            .catch(error => console.error(error));
+                .then(response => console.log(response))
+                .catch(error => console.error(error));
+
+            setEditorState(EditorState.createEmpty());
+            setCommentInput(defaultCommentInput);
 
             return 'handled'
         }
@@ -304,21 +299,21 @@ const FooterPost: React.FC<PostTypeProps> = (props) => {
     }
 
     const onReply = (comment: CommentPostResponse) => {
-        const stateWithEntity = editorState.getCurrentContent().createEntity(
-            'mention',
-            'IMMUTABLE',
+        if(comment.account.accountId == appState.data.user?.accountId) return ;
+        if(editorState.getCurrentContent().hasText()) return ;
+        const newContentEditor = createMentionEntities(editorState, 
             {
-                mention: {
-                    id: comment.account.accountId,
-                    name: comment.account.lastName + " " + comment.account.firstName,
-                    avatar: 'https://random.imagecdn.app/500/200'
-                },
-            },
-        );
-        const entityKey = stateWithEntity.getLastCreatedEntityKey()
-        const stateWithText = Modifier.insertText(stateWithEntity, editorState.getSelection(), entityKey);
-        const newEditorState = EditorState.push(editorState, stateWithText, 'insert-fragment');
+                id: comment.account.accountId,
+                name: comment.account.lastName + " " + comment.account.firstName,
+                avatar: 'https://random.imagecdn.app/500/200'
+            }
+        )
+        const newEditorState = EditorState.createWithContent(newContentEditor);
         setEditorState(newEditorState);
+        setCommentInput({
+            ...commentInput,
+            parentId: comment.commentId
+        });
     }
 
     return (
@@ -417,7 +412,8 @@ const FooterPost: React.FC<PostTypeProps> = (props) => {
             </div>
             <div>
                 {
-                    post.comments?.map((item, index) => <SingleComment key={item.commentId} onReply={onReply} comment={item} />)
+                    post.comments && post.comments.filter(item => item.parentId == null)
+                    .map((item) => <SingleComment key={item.commentId} comments={post.comments ? post.comments : []} onReply={onReply} comment={item} />)
                 }
                 {/* {
                     isFocus && (
@@ -436,7 +432,7 @@ const FooterPost: React.FC<PostTypeProps> = (props) => {
                         <img className="w-full h-full rounded-full" src={'https://random.imagecdn.app/500/200'} alt="Not found" />
                     </div>
                     <div className="ml-2 bg-gray-100 rounded-lg p-2 flex-grow">
-                    {/* <div onFocus={onFocusComment} onBlur={onBlurComment} className="ml-2 bg-gray-100 rounded-lg p-2 flex-grow"> */}
+                        {/* <div onFocus={onFocusComment} onBlur={onBlurComment} className="ml-2 bg-gray-100 rounded-lg p-2 flex-grow"> */}
                         <div className="relative flex flex-grow">
                             <div className="flex-grow w-full p-2 outline-none bg-gray-100">
                                 <Editor
