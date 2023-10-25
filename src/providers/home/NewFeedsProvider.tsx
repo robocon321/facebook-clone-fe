@@ -5,7 +5,8 @@ import { AppContext } from "providers/AppProvider";
 import { createContext, useContext, useEffect, useState } from "react";
 import { recommendPost } from "services/PostService";
 import { AppContextType } from "types/pages/AppType";
-import { ControlStateType, DataStateType, EmotionType, NewsFeedContextType, PostResponse } from "types/pages/home/NewsFeedType";
+import { ControlStateType, DataStateType, EmotionType, NewsFeedContextType } from "types/pages/home/NewsFeedType";
+import { PostResponse } from "types/responses/PostResponse";
 
 export const NewsFeedContext = createContext<NewsFeedContextType | null>(null);
 

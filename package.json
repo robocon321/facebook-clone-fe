@@ -9,6 +9,9 @@
     "lint": "next lint"
   },
   "dependencies": {
+    "@draft-js-plugins/editor": "^4.1.4",
+    "@draft-js-plugins/emoji": "^4.6.7",
+    "@draft-js-plugins/mention": "^5.2.2",
     "@fortawesome/fontawesome-svg-core": "^6.4.2",
     "@fortawesome/free-brands-svg-icons": "^6.4.2",
     "@fortawesome/free-regular-svg-icons": "^6.4.2",
@@ -21,6 +24,7 @@
     "@types/react": "18.2.21",
     "@types/react-dom": "18.2.7",
     "autoprefixer": "10.4.15",
+    "draft-js": "^0.11.7",
     "emoji-picker-react": "^4.5.2",
     "eslint": "8.48.0",
     "eslint-config-next": "13.4.19",
@@ -41,6 +45,7 @@
     "yup": "^1.2.0"
   },
   "devDependencies": {
+    "@types/draft-js": "^0.11.14",
     "bufferutil": "^4.0.7",
     "supports-color": "^8.1.1",
     "utf-8-validate": "^5.0.10"

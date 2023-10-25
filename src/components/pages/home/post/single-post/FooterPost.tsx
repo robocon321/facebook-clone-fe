@@ -1,23 +1,53 @@
+import Editor from '@draft-js-plugins/editor';
+import createEmojiPlugin, { defaultTheme } from '@draft-js-plugins/emoji';
+import createMentionPlugin from '@draft-js-plugins/mention';
+import { EditorState, Modifier, convertToRaw, getDefaultKeyBinding } from 'draft-js';
+
+import { faFaceSmile, faImage, faPaperPlane, faXmark } from '@fortawesome/free-solid-svg-icons';
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { Client } from '@stomp/stompjs';
+import React, { useCallback, useContext, useEffect, useMemo, useRef, useState } from 'react';
+
+import SingleComment from 'components/limb/comment/SingleComment';
+import Entry from 'components/limb/editor/custom/EntryComponent';
 import { EMOTION_LIST } from 'constants/HomeConstant';
 import { AppContext } from 'providers/AppProvider';
 import { NewsFeedContext } from 'providers/home/NewFeedsProvider';
-import React, { useContext, useEffect, useState } from 'react';
+import { getAccountFriendshipAndStatus } from 'services/AccountService';
+import { createComment } from 'services/CommentService';
 import { AppContextType } from 'types/pages/AppType';
-import { NewsFeedContextType, PostResponse } from 'types/pages/home/NewsFeedType';
+import { CommentInputType, NewsFeedContextType } from 'types/pages/home/NewsFeedType';
+import { CommentPostRequest } from 'types/requests/CommentPostRequest';
+import { PageRequest } from 'types/requests/PageRequest';
+import { AccountResponse, CommentPostResponse, PostResponse } from 'types/responses/PostResponse';
+import { convertToBlobFile } from 'utils/FileUtils';
 
 type PostTypeProps = {
     post: PostResponse
+}
+
+const defaultCommentInput = {
+    text: '',
+    tags: [],
 }
 
 const FooterPost: React.FC<PostTypeProps> = (props) => {
     const { setNewsFeedPost } = useContext(NewsFeedContext) as NewsFeedContextType;
     const { appState } = useContext(AppContext) as AppContextType;
     const { post } = props;
-    const [comments, setComments] = useState<string[]>([]);
-    const [client, setClient] = useState<Client | null>(null);
+    // const [comments, setComments] = useState<CommentResponse[]>([]);
+    const [commentInput, setCommentInput] = useState<CommentInputType>(defaultCommentInput);
     const [emotionCounts, setEmotionCounts] = useState([0, 0, 0, 0, 0, 0, 0]);
     const [accountEmotionId, setAccountEmotionId] = useState(-1);
+    const [isFocus, setIsFocus] = useState(false);
+    var [client, setClient] = useState<Client | null>(null);
+    var [subcriptionFocusId, setSubcriptionFocusId] = useState<string | null>(null);
+    const inputFileRef = useRef<HTMLInputElement | null>(null);
+    const [suggestions, setSuggestions] = useState<AccountResponse[]>([]);
+    const [openEditor, setOpenEditor] = useState(false);
+    const [editorState, setEditorState] = useState(() =>
+        EditorState.createEmpty()
+    );
 
     useEffect(() => {
         var newEmotionCounts = [0, 0, 0, 0, 0, 0, 0];
@@ -37,8 +67,19 @@ const FooterPost: React.FC<PostTypeProps> = (props) => {
         setEmotionCounts(newEmotionCounts);
     }, [post.emotions]);
 
+    const handleBeforeUnload = (e: BeforeUnloadEvent) => {
+        e.preventDefault();
+        e.returnValue = '';
+        if (subcriptionFocusId) client?.unsubscribe(subcriptionFocusId, {
+            destination: "/user/topic/comment-post/check-focus/" + post.postId
+        });
+        client?.deactivate();
+    };
+
+    window.addEventListener('beforeunload', handleBeforeUnload);
+
     useEffect(() => {
-        // config stomp
+
         const token = localStorage.getItem('token');
         if (token) {
             const stompClient = new Client({
@@ -47,15 +88,31 @@ const FooterPost: React.FC<PostTypeProps> = (props) => {
                     token: token
                 },
                 reconnectDelay: 2000,
+                debug: (msg) => console.log(msg)
             });
 
-            // Connect to the WebSocket server
             stompClient.activate();
 
             stompClient.onConnect = () => {
-                stompClient.subscribe("/topic/comment-post/" + post.postId, (message) => {
-                    setComments((previous) => [...previous, message.body]);
-                });
+                const currentSubcriptionFocusId = stompClient.subscribe("/user/topic/comment-post/check-focus/" + post.postId, (message) => {
+                    const countFocusing = Number.parseInt(message.body);
+                    setIsFocus(countFocusing > 0);
+                }, {
+                    token: token
+                }).id;
+
+                setSubcriptionFocusId(currentSubcriptionFocusId);
+
+                stompClient.subscribe("/topic/comment-post/create/" + post.postId, (message) => {
+                    const json = JSON.parse(message.body);
+                    setNewsFeedPost({
+                        ...post,
+                        comments: json
+                    });
+                }, {
+                    token: token
+                }).id;
+
                 stompClient.subscribe("/topic/emotion-post/" + post.postId, (message) => {
                     const emotions = JSON.parse(message.body);
                     post.emotions = emotions;
@@ -65,24 +122,38 @@ const FooterPost: React.FC<PostTypeProps> = (props) => {
             }
             return () => {
                 client?.deactivate();
+                if (subcriptionFocusId) client?.unsubscribe(subcriptionFocusId, {
+                    destination: "/user/topic/comment-post/check-focus/" + post.postId
+                });
+                window.removeEventListener('beforeunload', handleBeforeUnload);
             }
         }
 
     }, []);
 
-    const onSendComment = (e: React.KeyboardEvent<HTMLInputElement>) => {
-        if (e.key == 'Enter' && client) {
-            const message = e.currentTarget.value;
-            client.publish({
-                destination: "/app/comment-post/create/" + post.postId,
-                body: message
-            });
+    const onKeyEnterComment = (e: React.KeyboardEvent<HTMLInputElement>) => {
+        if (e.key == 'Enter' && client?.active) {
         }
     };
 
+
+    const onSearchMention = useCallback(({ value }: { value: string }) => {
+        const pageRequest: PageRequest = {
+            page: 0,
+            size: 5,
+            sortBy: [],
+            sortOrder: []
+        }
+        getAccountFriendshipAndStatus('ACCEPTED', value, [], pageRequest)
+            .then(response => {
+                setSuggestions(response.data);
+            })
+            .catch(error => console.log(error));
+    }, []);
+
     const onSendEmotion = (e: React.MouseEvent<HTMLDivElement>, type: string) => {
         e.stopPropagation();
-        if (client) {
+        if (client?.active) {
             client.publish({
                 destination: "/app/emotion-post/create/" + post.postId,
                 body: type
@@ -91,7 +162,7 @@ const FooterPost: React.FC<PostTypeProps> = (props) => {
     }
 
     const onClickLikeButton = () => {
-        if (client) {
+        if (client?.active) {
             if (post.emotions?.find(item => appState.data.user?.accountId == item.account.accountId)) {
                 client.publish({
                     destination: "/app/emotion-post/delete/" + post.postId
@@ -103,7 +174,151 @@ const FooterPost: React.FC<PostTypeProps> = (props) => {
                 });
             }
         }
+    }
 
+    const onFocusComment = () => {
+        if (client?.active) {
+            client.publish({
+                destination: "/app/comment-post/check-focus/" + post.postId,
+                body: 'true'
+            });
+        }
+    }
+
+    const onBlurComment = () => {
+        if (client?.active) {
+            client.publish({
+                destination: "/app/comment-post/check-focus/" + post.postId,
+                body: 'false'
+            });
+        }
+    }
+
+    const onChangeFile = (event: React.ChangeEvent<HTMLInputElement>) => {
+        if (event.target.files?.length == undefined) return;
+        upload(event.target.files);
+    }
+
+    const upload = (fileList: FileList) => {
+        const file = fileList[0];
+        const { blobUrl, type } = convertToBlobFile(file);
+        setCommentInput({
+            ...commentInput,
+            fileType: type,
+            file: file,
+            fileUrl: blobUrl
+        });
+    }
+
+    const onResetFileComment = () => {
+        setCommentInput({
+            ...commentInput,
+            fileType: undefined,
+            file: undefined,
+            fileUrl: undefined
+        })
+    }
+
+    const { MentionSuggestions, plugins, EmojiSelect } = useMemo(() => {
+        const mentionPlugin = createMentionPlugin({
+            mentionComponent(mentionProps) {
+                return (
+                    <span
+                        className={"font-bold"}
+                    >
+                        {mentionProps.children}
+                    </span>
+                );
+            },
+        });
+        const { MentionSuggestions } = mentionPlugin;
+
+        defaultTheme.emojiSelectButton = "";
+        defaultTheme.emojiSelectButtonPressed = "";
+
+        const emojiPlugin = createEmojiPlugin({
+            selectButtonContent: (
+                <div className="flex items-center justify-center cursor-pointer hover:bg-gray-200 rounded-full w-[30px] h-[30px]">
+                    <FontAwesomeIcon icon={faFaceSmile} />
+                </div>
+            ),
+            theme: defaultTheme
+        });
+
+        const { EmojiSelect } = emojiPlugin;
+
+        const plugins = [mentionPlugin, emojiPlugin];
+        return { plugins, MentionSuggestions, EmojiSelect };
+    }, []);
+
+    const onOpenChange = useCallback((_open: boolean) => {
+        setOpenEditor(_open);
+    }, []);
+
+    function keyBindingFn(e: any) {
+        if (e.key === 'Enter') {
+            return 'enter' // name this whatever you want
+        }
+
+        return getDefaultKeyBinding(e);
+    }
+
+    function handleKeyCommand(command: string) {
+        if (command === 'enter' && client?.active) {
+            const contentState = editorState.getCurrentContent();
+            const raw = convertToRaw(contentState);
+            const convertToString = JSON.stringify(raw);
+            // const newComment: CommentInputType = {
+            //     ...commentInput,
+            //     commentId: comments.length + 1,
+            //     text: convertToString,
+            //     tags: [],
+            // }
+            // setComments([...comments, newComment]);
+            // setEditorState(EditorState.createEmpty());
+            // setCommentInput(defaultCommentInput);
+            let mentionedAccounts = [];
+            for (let key in raw.entityMap) {
+              const ent = raw.entityMap[key];
+              if (ent.type === "mention") {
+                mentionedAccounts.push(ent.data.mention.id);
+              }
+            }
+
+            const request: CommentPostRequest = {
+                text: convertToString,
+                postId: post.postId,
+                file: commentInput.file,
+                parentId: commentInput.parentId,
+                mentionedAccounts: mentionedAccounts.toString()
+            }            
+
+            createComment(request)
+            .then(response => console.log(response))
+            .catch(error => console.error(error));
+
+            return 'handled'
+        }
+
+        return 'not-handled'
+    }
+
+    const onReply = (comment: CommentPostResponse) => {
+        const stateWithEntity = editorState.getCurrentContent().createEntity(
+            'mention',
+            'IMMUTABLE',
+            {
+                mention: {
+                    id: comment.account.accountId,
+                    name: comment.account.lastName + " " + comment.account.firstName,
+                    avatar: 'https://random.imagecdn.app/500/200'
+                },
+            },
+        );
+        const entityKey = stateWithEntity.getLastCreatedEntityKey()
+        const stateWithText = Modifier.insertText(stateWithEntity, editorState.getSelection(), entityKey);
+        const newEditorState = EditorState.push(editorState, stateWithText, 'insert-fragment');
+        setEditorState(newEditorState);
     }
 
     return (
@@ -202,28 +417,93 @@ const FooterPost: React.FC<PostTypeProps> = (props) => {
             </div>
             <div>
                 {
-                    comments.map((item, index) => (
-                        <div key={index} className="flex justify-between p-2">
-                            <div className="min-w-[2.5rem] min-h-[2.5rem] w-10 h-10 mt-2">
-                                <img className="w-full h-full rounded-full" src={'https://random.imagecdn.app/500/200'} alt="Not found" />
-                            </div>
-                            <div className="ml-2 bg-gray-100 rounded-lg p-2 flex-grow">
-                                <div><a href="#"><b>Nguyen Thanh Nhat</b></a></div>
-                                <p>{item}</p>
+                    post.comments?.map((item, index) => <SingleComment key={item.commentId} onReply={onReply} comment={item} />)
+                }
+                {/* {
+                    isFocus && (
+                        <div className="flex items-center p-4 w-full">
+                            <div className="mr-2">Someone is typing</div>
+                            <div className="w-[50px] flex justify-between">
+                                <div className="bg-gray-600 w-2 h-2 rounded-full animate-bounce blue-circle"></div>
+                                <div className="bg-gray-600 w-2 h-2 rounded-full animate-bounce green-circle"></div>
+                                <div className="bg-gray-600 w-2 h-2 rounded-full animate-bounce red-circle"></div>
                             </div>
                         </div>
-                    ))
-                }
+                    )
+                } */}
                 <div className="flex justify-between p-2">
                     <div className="min-w-[2.5rem] min-h-[2.5rem] w-10 h-10 mt-2">
                         <img className="w-full h-full rounded-full" src={'https://random.imagecdn.app/500/200'} alt="Not found" />
                     </div>
                     <div className="ml-2 bg-gray-100 rounded-lg p-2 flex-grow">
-                        <input type="text" onKeyUp={onSendComment} placeholder="Enter your comment" className="w-full p-2 outline-none bg-gray-100" />
+                    {/* <div onFocus={onFocusComment} onBlur={onBlurComment} className="ml-2 bg-gray-100 rounded-lg p-2 flex-grow"> */}
+                        <div className="relative flex flex-grow">
+                            <div className="flex-grow w-full p-2 outline-none bg-gray-100">
+                                <Editor
+                                    keyBindingFn={keyBindingFn}
+                                    handleKeyCommand={handleKeyCommand}
+                                    editorState={editorState}
+                                    onChange={setEditorState}
+                                    placeholder="Enter your comment"
+                                    plugins={plugins}
+                                />
+                                <MentionSuggestions
+                                    open={openEditor}
+                                    onOpenChange={onOpenChange}
+                                    suggestions={suggestions.map(item => ({
+                                        id: item.accountId,
+                                        name: `${item.firstName} ${item.lastName}`,
+                                        avatar: 'https://random.imagecdn.app/500/200'
+                                    }))}
+                                    onSearchChange={onSearchMention}
+                                    onAddMention={() => {
+                                        // get the mention object selected
+                                    }}
+                                    entryComponent={Entry}
+                                />
+                            </div>
+                            <div className='flex w-[120px] items-center justify-between mx-2'>
+                                <div className="relative">
+                                    <EmojiSelect />
+                                </div>
+                                <div onClick={() => inputFileRef.current?.click()} className="flex items-center justify-center hover:bg-gray-200 rounded-full w-[30px] h-[30px] cursor-pointer">
+                                    <FontAwesomeIcon icon={faImage} />
+                                    <input
+                                        type="file"
+                                        onChange={onChangeFile}
+                                        hidden
+                                        accept="image/*, video/*"
+                                        ref={inputFileRef}
+                                    />
+
+                                </div>
+                                <div className="flex items-center justify-center hover:bg-gray-200 rounded-full w-[30px] h-[30px] cursor-pointer">
+                                    <FontAwesomeIcon icon={faPaperPlane} />
+                                </div>
+                            </div>
+                        </div>
+                        {
+                            commentInput.fileUrl && (
+                                <div className="p-2 max-w-[250px] m-4 relative">
+                                    {
+                                        commentInput.fileType?.startsWith("video") ? (
+                                            <video controls>
+                                                <source src={`${commentInput.fileUrl}`} type={"video/mp4"} />
+                                            </video>
+                                        ) : (
+                                            <img className="w-full h-full" src={`${commentInput.fileUrl}`} alt="Not found" />
+                                        )
+                                    }
+                                    <div onClick={() => onResetFileComment()} className="absolute top-0 right-0 translate-x-1/2 translate-y-[-50%] flex items-center justify-center bg-gray-200 rounded-full w-[30px] h-[30px] cursor-pointer">
+                                        <FontAwesomeIcon icon={faXmark} />
+                                    </div>
+                                </div>
+                            )
+                        }
                     </div>
                 </div>
             </div>
-        </div>
+        </div >
     )
 }
 

@@ -24,7 +24,7 @@ export const getSummaryAccount = async () : Promise<AccountSummaryInfoResponse> 
     }
 }
 
-export const getAccountFriendshipAndStatus = async (friendshipStatus: string, search: string, excludeIds: number[], pageRequest?: PageRequest) => {
+export const getAccountFriendshipAndStatus = async (friendshipStatus: string, search: string, excludeIds?: number[], pageRequest?: PageRequest) => {
 
     let queryParams: any = {
         status: friendshipStatus,
