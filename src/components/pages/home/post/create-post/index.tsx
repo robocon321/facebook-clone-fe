@@ -1,10 +1,11 @@
 "use client"
+import { TAB_CODE } from 'constants/HomeConstant';
 import { ModalContext } from 'providers/home/ModalProvider';
 import React, { useContext } from 'react';
 import { ModalContextType } from 'types/pages/home/ModalType';
 
 const CreatePostBox: React.FC = () => {
-  const { controlModalState, setControlModalState } = useContext(ModalContext) as ModalContextType; 
+  const { controlModalState, setControlModalState, changeTabIndexModal } = useContext(ModalContext) as ModalContextType; 
   
   return (
     <div className="rounded-lg bg-white flex flex-col p-3 px-4 shadow">
@@ -37,7 +38,7 @@ const CreatePostBox: React.FC = () => {
             <i className="fas fa-images text-green-500"></i>
           </div>
           <div>
-            <p className="font-semibold">Photos/Video</p>
+            <p onClick={() => changeTabIndexModal(TAB_CODE.EDIT_FILE)} className="font-semibold">Photos/Video</p>
           </div>
         </button>
         <button className="flex-1 flex items-center h-8 focus:outline-none focus:bg-gray-200 justify-center space-x-2 hover:bg-gray-100 rounded-md">
@@ -45,7 +46,7 @@ const CreatePostBox: React.FC = () => {
             <i className="far fa-smile text-yellow-500"></i>
           </div>
           <div>
-            <p className="font-semibold">Feeling/Activity</p>
+            <p onClick={() => changeTabIndexModal(TAB_CODE.EMOTION)} className="font-semibold">Feeling/Activity</p>
           </div>
         </button>
       </div>

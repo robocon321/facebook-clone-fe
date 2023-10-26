@@ -59,6 +59,7 @@ const ModalProvider = (props: any) => {
     setControlState((previous) => {
       return {
         ...previous,
+        isShowModal: true,
         tabIndex,
         navTabDetailIndex: navTabDetailIndex ? navTabDetailIndex : 0
       }

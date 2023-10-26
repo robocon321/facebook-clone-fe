@@ -36,8 +36,8 @@ const Navbar: React.FC = () => {
               <div
                 className={`${
                   pathName === '' || undefined
-                    ? 'text-white'
-                    : 'text-gray-400'
+                    ? 'text-gray-400'
+                    : 'text-black'
                 }`}
               >
                 <i className="text-2xl fas fa-home"></i>
@@ -53,7 +53,7 @@ const Navbar: React.FC = () => {
               </div>
               <div
                 className={`${
-                  pathName === 'watch' ? 'text-primary' : 'text-gray-400'
+                  pathName === 'watch' ? 'text-primary' : 'text-black'
                 }`}
               >
                 <i className="text-2xl fas fa-tv"></i>
@@ -69,7 +69,7 @@ const Navbar: React.FC = () => {
               </div>
               <div
                 className={`${
-                  pathName === 'marketplace' ? 'text-white' : 'text-gray-400'
+                  pathName === 'marketplace' ? 'text-white' : 'text-black'
                 }`}
               >
                 <i className="text-2xl fas fa-store"></i>
@@ -85,7 +85,7 @@ const Navbar: React.FC = () => {
               </div>
               <div
                 className={`${
-                  pathName === 'groups' ? 'text-primary' : 'text-gray-400'
+                  pathName === 'groups' ? 'text-primary' : 'text-black'
                 }`}
               >
                 <i className="text-2xl fas fa-users"></i>
@@ -101,7 +101,7 @@ const Navbar: React.FC = () => {
               </div>
               <div
                 className={`${
-                  pathName === 'gaming' ? 'text-white' : 'text-gray-400'
+                  pathName === 'gaming' ? 'text-white' : 'text-black'
                 }`}
               >
                 <i className="text-2xl fas fa-gamepad"></i>

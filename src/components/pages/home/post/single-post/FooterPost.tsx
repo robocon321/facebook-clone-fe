@@ -27,6 +27,11 @@ type PostTypeProps = {
     post: PostResponse
 }
 
+type SubscriptionType = {
+    id: string,
+    destination: string
+}
+
 const defaultCommentInput = {
     text: '',
     tags: [],
@@ -41,7 +46,7 @@ const FooterPost: React.FC<PostTypeProps> = (props) => {
     const [accountEmotionId, setAccountEmotionId] = useState(-1);
     const [isFocus, setIsFocus] = useState(false);
     var [client, setClient] = useState<Client | null>(null);
-    var [subcriptionFocusId, setSubcriptionFocusId] = useState<string | null>(null);
+    var [subcriptions, setSubcriptions] = useState<SubscriptionType[]>([]);
     const inputFileRef = useRef<HTMLInputElement | null>(null);
     const [suggestions, setSuggestions] = useState<AccountResponse[]>([]);
     const [openEditor, setOpenEditor] = useState(false);
@@ -70,9 +75,11 @@ const FooterPost: React.FC<PostTypeProps> = (props) => {
     const handleBeforeUnload = (e: BeforeUnloadEvent) => {
         e.preventDefault();
         e.returnValue = '';
-        if (subcriptionFocusId) client?.unsubscribe(subcriptionFocusId, {
-            destination: "/user/topic/comment-post/check-focus/" + post.postId
-        });
+        subcriptions.forEach(item => {
+            client?.unsubscribe(item.id, {
+                destination: item.destination + post.postId
+            });    
+        })
         client?.deactivate();
     };
 
@@ -93,16 +100,19 @@ const FooterPost: React.FC<PostTypeProps> = (props) => {
             stompClient.activate();
 
             stompClient.onConnect = () => {
-                const currentSubcriptionFocusId = stompClient.subscribe("/user/topic/comment-post/check-focus/" + post.postId, (message) => {
+                const focusSubscriptionId = stompClient.subscribe("/user/topic/comment-post/check-focus/" + post.postId, (message) => {
                     const countFocusing = Number.parseInt(message.body);
                     setIsFocus(countFocusing > 0);
                 }, {
                     token: token
                 }).id;
 
-                setSubcriptionFocusId(currentSubcriptionFocusId);
+                subcriptions.push({
+                    id: focusSubscriptionId,
+                    destination: "/user/topic/comment-post/check-focus/"
+                });
 
-                stompClient.subscribe("/topic/comment-post/create/" + post.postId, (message) => {
+                const createCommentSubcriptionId = stompClient.subscribe("/topic/comment-post/create/" + post.postId, (message) => {
                     const json = JSON.parse(message.body);
                     setNewsFeedPost({
                         ...post,
@@ -112,15 +122,25 @@ const FooterPost: React.FC<PostTypeProps> = (props) => {
                     token: token
                 }).id;
 
-                stompClient.subscribe("/topic/emotion-post/" + post.postId, (message) => {
+                subcriptions.push({
+                    id: createCommentSubcriptionId,
+                    destination: "/topic/comment-post/create/"
+                });
+
+                const emotionPostSubcriptionId = stompClient.subscribe("/topic/emotion-post/" + post.postId, (message) => {
                     const emotions = JSON.parse(message.body);
                     post.emotions = emotions;
                     setNewsFeedPost(post);
                 }, {
                     token: token
+                }).id;
+
+                subcriptions.push({
+                    id: emotionPostSubcriptionId,
+                    destination: "/topic/emotion-post/"
                 });
 
-                stompClient.subscribe("/topic/emotion-comment/" + post.postId, (message) => {
+                const emotionCommentSubcriptionId = stompClient.subscribe("/topic/emotion-comment/" + post.postId, (message) => {
                     const body = JSON.parse(message.body);
                     const commentId: number = body.commentId;
                     const emotions: EmotionCommentResponse[] = body.data;
@@ -134,15 +154,24 @@ const FooterPost: React.FC<PostTypeProps> = (props) => {
                     setNewsFeedPost(post);
                 }, {
                     token: token
+                }).id;
+
+                subcriptions.push({
+                    id: emotionCommentSubcriptionId,
+                    destination: "/topic/emotion-comment/"
                 });
+
+                setSubcriptions(subcriptions);
 
                 setClient(stompClient);
             }
             return () => {
                 client?.deactivate();
-                if (subcriptionFocusId) client?.unsubscribe(subcriptionFocusId, {
-                    destination: "/user/topic/comment-post/check-focus/" + post.postId
-                });
+                subcriptions.forEach(item => {
+                    client?.unsubscribe(item.id, {
+                        destination: item.destination + post.postId
+                    });    
+                })
                 window.removeEventListener('beforeunload', handleBeforeUnload);
             }
         }
@@ -281,8 +310,8 @@ const FooterPost: React.FC<PostTypeProps> = (props) => {
         return getDefaultKeyBinding(e);
     }
 
-    function handleKeyCommand(command: string) {
-        if (command === 'enter' && client?.active) {
+    const saveComment = () => {
+        if(client?.active && isEnableComment()) {
             const contentState = editorState.getCurrentContent();
             const raw = convertToRaw(contentState);
             const convertToString = JSON.stringify(raw);
@@ -293,7 +322,7 @@ const FooterPost: React.FC<PostTypeProps> = (props) => {
                     mentionedAccounts.push(ent.data.mention.id);
                 }
             }
-
+    
             const request: CommentPostRequest = {
                 text: convertToString,
                 postId: post.postId,
@@ -301,14 +330,20 @@ const FooterPost: React.FC<PostTypeProps> = (props) => {
                 parentId: commentInput.parentId,
                 mentionedAccounts: mentionedAccounts.toString()
             }
-
+    
             createComment(request)
                 .then(response => console.log(response))
                 .catch(error => console.error(error));
-
+    
             setEditorState(EditorState.createEmpty());
             setCommentInput(defaultCommentInput);
+    
+        }
+    }
 
+    function handleKeyCommand(command: string) {
+        if (command === 'enter') {
+            saveComment();
             return 'handled'
         }
 
@@ -318,6 +353,7 @@ const FooterPost: React.FC<PostTypeProps> = (props) => {
     const onReply = (comment: CommentPostResponse) => {
         if(comment.account.accountId == appState.data.user?.accountId) return ;
         if(editorState.getCurrentContent().hasText()) return ;
+        console.log(1);
         const newContentEditor = createMentionEntities(editorState, 
             {
                 id: comment.account.accountId,
@@ -331,6 +367,10 @@ const FooterPost: React.FC<PostTypeProps> = (props) => {
             ...commentInput,
             parentId: comment.commentId
         });
+    }
+
+    const isEnableComment = () => {
+        return editorState.getCurrentContent().hasText() || commentInput.file
     }
 
     return (
@@ -364,7 +404,7 @@ const FooterPost: React.FC<PostTypeProps> = (props) => {
                     <div className="flex items-center space-x-2">
                         {/* <button>{post.comments} Comments</button>
             <button>{post.shares} Shares</button> */}
-                        <button>{0} Comments</button>
+                        <button>{post.comments? post.comments.length : 0} Comments</button>
                         <button>{0} Shares</button>
                     </div>
                 </div>
@@ -432,7 +472,7 @@ const FooterPost: React.FC<PostTypeProps> = (props) => {
                     post.comments && post.comments.filter(item => item.parentId == null)
                     .map((item) => <SingleComment key={item.commentId} client={client} postId={post.postId} comments={post.comments ? post.comments : []} onReply={onReply} comment={item} />)
                 }
-                {/* {
+                {
                     isFocus && (
                         <div className="flex items-center p-4 w-full">
                             <div className="mr-2">Someone is typing</div>
@@ -443,7 +483,7 @@ const FooterPost: React.FC<PostTypeProps> = (props) => {
                             </div>
                         </div>
                     )
-                } */}
+                }
                 <div className="flex justify-between p-2">
                     <div className="min-w-[2.5rem] min-h-[2.5rem] w-10 h-10 mt-2">
                         <img className="w-full h-full rounded-full" src={'https://random.imagecdn.app/500/200'} alt="Not found" />
@@ -490,7 +530,7 @@ const FooterPost: React.FC<PostTypeProps> = (props) => {
                                     />
 
                                 </div>
-                                <div className="flex items-center justify-center hover:bg-gray-200 rounded-full w-[30px] h-[30px] cursor-pointer">
+                                <div onClick={() => saveComment()} className={"flex items-center justify-center hover:bg-gray-200 rounded-full w-[30px] h-[30px] cursor-pointer" + (isEnableComment() ? " text-blue-700" : "")}>
                                     <FontAwesomeIcon icon={faPaperPlane} />
                                 </div>
                             </div>
