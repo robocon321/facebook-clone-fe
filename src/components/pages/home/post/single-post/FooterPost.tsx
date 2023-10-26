@@ -19,7 +19,7 @@ import { AppContextType } from 'types/pages/AppType';
 import { CommentInputType, NewsFeedContextType } from 'types/pages/home/NewsFeedType';
 import { CommentPostRequest } from 'types/requests/CommentPostRequest';
 import { PageRequest } from 'types/requests/PageRequest';
-import { AccountResponse, CommentPostResponse, PostResponse } from 'types/responses/PostResponse';
+import { AccountResponse, CommentPostResponse, EmotionCommentResponse, PostResponse } from 'types/responses/PostResponse';
 import createMentionEntities from 'utils/CreateMention';
 import { convertToBlobFile } from 'utils/FileUtils';
 
@@ -36,7 +36,6 @@ const FooterPost: React.FC<PostTypeProps> = (props) => {
     const { setNewsFeedPost } = useContext(NewsFeedContext) as NewsFeedContextType;
     const { appState } = useContext(AppContext) as AppContextType;
     const { post } = props;
-    // const [comments, setComments] = useState<CommentResponse[]>([]);
     const [commentInput, setCommentInput] = useState<CommentInputType>(defaultCommentInput);
     const [emotionCounts, setEmotionCounts] = useState([0, 0, 0, 0, 0, 0, 0]);
     const [accountEmotionId, setAccountEmotionId] = useState(-1);
@@ -89,7 +88,6 @@ const FooterPost: React.FC<PostTypeProps> = (props) => {
                     token: token
                 },
                 reconnectDelay: 2000,
-                debug: (msg) => console.log(msg)
             });
 
             stompClient.activate();
@@ -118,7 +116,26 @@ const FooterPost: React.FC<PostTypeProps> = (props) => {
                     const emotions = JSON.parse(message.body);
                     post.emotions = emotions;
                     setNewsFeedPost(post);
+                }, {
+                    token: token
                 });
+
+                stompClient.subscribe("/topic/emotion-comment/" + post.postId, (message) => {
+                    const body = JSON.parse(message.body);
+                    const commentId: number = body.commentId;
+                    const emotions: EmotionCommentResponse[] = body.data;
+                    const previousComments = post.comments;
+                    if(previousComments) {
+                        const currentComment = previousComments.find(item => item.commentId == commentId);
+                        if(currentComment) {
+                            currentComment.emotions = emotions;
+                        }
+                    }
+                    setNewsFeedPost(post);
+                }, {
+                    token: token
+                });
+
                 setClient(stompClient);
             }
             return () => {
@@ -413,7 +430,7 @@ const FooterPost: React.FC<PostTypeProps> = (props) => {
             <div>
                 {
                     post.comments && post.comments.filter(item => item.parentId == null)
-                    .map((item) => <SingleComment key={item.commentId} comments={post.comments ? post.comments : []} onReply={onReply} comment={item} />)
+                    .map((item) => <SingleComment key={item.commentId} client={client} postId={post.postId} comments={post.comments ? post.comments : []} onReply={onReply} comment={item} />)
                 }
                 {/* {
                     isFocus && (

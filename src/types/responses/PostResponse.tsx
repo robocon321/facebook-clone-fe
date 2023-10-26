@@ -89,5 +89,14 @@ export type CommentPostResponse = {
     parentId?: number,
     createTime: Date,
     modTime: Date,
-    status: string
+    status: string,
+    emotions: EmotionCommentResponse[]
+}
+
+export type EmotionCommentResponse = {
+    emotionId: number,
+    account: AccountResponse,
+    createTime: Date,
+    modTime: Date,
+    type: string
 }
