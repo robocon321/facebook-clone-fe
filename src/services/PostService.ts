@@ -1,4 +1,4 @@
-import { DataStateType, ImageModalType, VideoModalType } from "types/pages/home/ModalType";
+import { DataStateType, ImageModalType, VideoModalType } from "app/(main)/home/_type/ModalType";
 import { CreatePostRequest, ImageType, VideoType } from "types/requests/CreatePostRequest";
 import { PageRequest } from "types/requests/PageRequest";
 import { buildFormData } from "utils/FormDataUtils";

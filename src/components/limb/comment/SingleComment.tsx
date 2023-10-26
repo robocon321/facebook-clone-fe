@@ -3,13 +3,13 @@ import createMentionPlugin from '@draft-js-plugins/mention';
 import { faEllipsis } from '@fortawesome/free-solid-svg-icons';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { Client } from '@stomp/stompjs';
-import { EMOTION_LIST } from 'constants/HomeConstant';
+import { EMOTION_LIST } from 'app/(main)/home/_constant/HomeConstant';
 import { EditorState, convertFromRaw } from 'draft-js';
 import moment from 'moment';
-import { AppContext } from 'providers/AppProvider';
+import { AppContext } from 'app/_providers/AppProvider';
 
 import React, { useContext, useEffect, useMemo, useState } from 'react';
-import { AppContextType } from 'types/pages/AppType';
+import { AppContextType } from 'app/_type/AppType';
 
 import { CommentPostResponse } from 'types/responses/PostResponse';
 

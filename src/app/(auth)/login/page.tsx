@@ -6,9 +6,9 @@ import Button from "components/limb/buttons/Button";
 import { TextInput } from "components/limb/input/TextInput";
 import * as yup from "yup";
 import Link from "next/link";
-import { LoginContext } from "providers/LoginProvider";
+import { LoginContext } from "app/(auth)/login/_providers/LoginProvider";
 import Loading from "components/limb/loading/Loading";
-import { LoginContextType } from "types/pages/LoginType";
+import { LoginContextType } from "app/(auth)/login/_type/LoginType";
 
 const LoginPage: React.FC = () => {
 

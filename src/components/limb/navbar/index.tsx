@@ -2,8 +2,8 @@
 
 import React, { useContext } from 'react';
 import Link from 'next/link';
-import { AppContext } from 'providers/AppProvider';
-import { AppContextType } from 'types/pages/AppType';
+import { AppContext } from 'app/_providers/AppProvider';
+import { AppContextType } from 'app/_type/AppType';
 // import { usePathname } from 'next/navigation'
 
 const Navbar: React.FC = () => {
@@ -30,7 +30,7 @@ const Navbar: React.FC = () => {
         </div>
       </div>
       <div className="col-span-3 flex items-center justify-center space-x-2">
-        <Link href="/">
+        <Link href="/home">
           <div className="w-24 h-12 rounded-lg flex items-center justify-center cursor-pointer hover:bg-gray-100">
             <div className="w-14 h-auto relative flex items-center justify-center">
               <div

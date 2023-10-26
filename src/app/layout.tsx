@@ -4,7 +4,7 @@ import '@draft-js-plugins/emoji/lib/plugin.css';
 import '@draft-js-plugins/mention/lib/plugin.css';
 import type { Metadata } from 'next'
 import { Inter } from 'next/font/google'
-import AppProvider from 'providers/AppProvider'
+import AppProvider from 'app/_providers/AppProvider'
 
 const inter = Inter({ subsets: ['latin'] })
 

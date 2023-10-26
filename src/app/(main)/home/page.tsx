@@ -1,16 +1,16 @@
 "use client"
 
+import MainTab from 'app/(main)/home/_components/modals/main-tab';
+import SubTab from 'app/(main)/home/_components/modals/sub-tab';
 import Modal from 'components/limb/modal/Modal';
-import LeftSidebar from 'components/pages/home/layouts/LeftSidebar';
-import NewsFeedScreen from 'components/pages/home/layouts/NewsFeed';
-import RightSidebar from 'components/pages/home/layouts/RightSidebar';
-import MainTab from 'components/pages/home/modals/main-tab';
-import SubTab from 'components/pages/home/modals/sub-tab';
-import { TAB_CODE_GROUP } from 'constants/HomeConstant';
-import { ModalContext } from 'providers/home/ModalProvider';
-import NewsFeedProvider from 'providers/home/NewFeedsProvider';
-import React, { useContext, useEffect } from 'react';
-import { ModalContextType } from 'types/pages/home/ModalType';
+import { TAB_CODE_GROUP } from 'app/(main)/home/_constant/HomeConstant';
+import { ModalContext } from 'app/(main)/home/_providers/ModalProvider';
+import NewsFeedProvider from 'app/(main)/home/_providers/NewFeedsProvider';
+import React, { useContext } from 'react';
+import { ModalContextType } from 'app/(main)/home/_type/ModalType';
+import LeftSidebar from './_components/layouts/LeftSidebar';
+import RightSidebar from './_components/layouts/RightSidebar';
+import NewsFeed from './_components/layouts/NewsFeed';
 
 const HomePage: React.FC = () => {
   const { controlModalState, tabModalState, setControlModalState } = useContext(ModalContext) as ModalContextType;
@@ -56,7 +56,7 @@ const HomePage: React.FC = () => {
           </div>
         </Modal>
         <NewsFeedProvider>
-          <NewsFeedScreen />
+          <NewsFeed />
         </NewsFeedProvider>
       </div>
       <div className="col-span-2 flex justify-end pr-2">

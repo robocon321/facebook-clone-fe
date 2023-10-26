@@ -1,7 +1,7 @@
-import Post from 'components/pages/home/post/single-post';
-import { NewsFeedContext } from 'providers/home/NewFeedsProvider';
+import Post from 'app/(main)/home/_components/post/single-post';
+import { NewsFeedContext } from 'app/(main)/home/_providers/NewFeedsProvider';
 import React, { useContext } from 'react';
-import { NewsFeedContextType } from 'types/pages/home/NewsFeedType';
+import { NewsFeedContextType } from 'app/(main)/home/_type/NewsFeedType';
 
 type TPostView = 'gridView' | 'listView';
 

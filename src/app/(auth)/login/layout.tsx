@@ -1,6 +1,6 @@
 import type { Metadata } from 'next'
 import { Inter } from 'next/font/google'
-import LoginProvider from 'providers/LoginProvider';
+import LoginProvider from 'app/(auth)/login/_providers/LoginProvider';
 
 const inter = Inter({ subsets: ['latin'] })
 
