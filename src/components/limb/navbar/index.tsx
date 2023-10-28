@@ -13,7 +13,7 @@ const Navbar: React.FC = () => {
   const pathName: string = '';
   
   return (
-    <div className="w-full h-14 bg-white grid grid-cols-7 gap-4 fixed z-50">
+    <div className="w-full h-14 bg-white grid grid-cols-6 gap-4 fixed z-50 shadow-md">
       <div className="col-span-2 flex items-center">
         <div className="flex items-center ml-2">
           <div className="h-10 text-primary">
@@ -29,7 +29,7 @@ const Navbar: React.FC = () => {
           </div>
         </div>
       </div>
-      <div className="col-span-3 flex items-center justify-center space-x-2">
+      <div className="col-span-2 flex items-center justify-center space-x-2">
         <Link href="/home">
           <div className="w-24 h-12 rounded-lg flex items-center justify-center cursor-pointer hover:bg-gray-100">
             <div className="w-14 h-auto relative flex items-center justify-center">

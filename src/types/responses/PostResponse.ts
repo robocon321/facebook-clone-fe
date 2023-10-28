@@ -1,3 +1,5 @@
+import { AccountResponse } from "./AccountResponse"
+
 export type PostResponse = {
     postId: number,
     text?: string,
@@ -20,14 +22,6 @@ export type EmotionPostResponse = {
     createTime: Date,
     modTime: Date,
     type: string
-}
-
-export type AccountResponse = {
-    accountId: number,
-    firstName: string,
-    lastName: string,
-    profilePictureUrl: string,
-    website: string
 }
 
 export type CheckinResponse = {

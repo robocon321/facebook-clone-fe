@@ -1,7 +1,7 @@
 import React, { ForwardedRef, forwardRef, useContext, useImperativeHandle, useRef, useState } from 'react';
 import { ModalContext } from "app/(main)/home/_providers/ModalProvider";
 import { ImageModalType, ModalContextType, TagImageType } from "app/(main)/home/_type/ModalType";
-import { AccountSummaryInfoResponse } from 'types/responses/AccountSummaryInfoResponseType';
+import { AccountResponse } from 'types/responses/AccountResponse';
 import { generateRandomString } from 'utils/RandomUtils';
 import { getAccountFriendshipAndStatus } from 'services/AccountService';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
@@ -16,7 +16,7 @@ const Tag = forwardRef((props: TagEditPropsType, ref) => {
     const { changeFieldDataFileModal } = useContext(ModalContext) as ModalContextType;
     const { fileModal, imageRef } = props;
 
-    const [searchFriends, setSearchFriends] = useState<AccountSummaryInfoResponse[]>();
+    const [searchFriends, setSearchFriends] = useState<AccountResponse[]>();
 
     useImperativeHandle(ref, () => {
         return {
@@ -62,7 +62,7 @@ const Tag = forwardRef((props: TagEditPropsType, ref) => {
             })
     }
 
-    const onAddFriendTag = (account: AccountSummaryInfoResponse) => {
+    const onAddFriendTag = (account: AccountResponse) => {
         const lastTag = fileModal.tags[fileModal.tags.length - 1];
         lastTag.account = account;
         fileModal.tags[fileModal.tags.length - 1] = lastTag;

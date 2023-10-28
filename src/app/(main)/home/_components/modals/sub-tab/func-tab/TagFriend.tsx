@@ -6,7 +6,7 @@ import { ModalContext } from 'app/(main)/home/_providers/ModalProvider';
 import React, { useContext, useState } from 'react';
 import { getAccountFriendshipAndStatus } from 'services/AccountService';
 import { ModalContextType } from 'app/(main)/home/_type/ModalType';
-import { AccountSummaryInfoResponse } from 'types/responses/AccountSummaryInfoResponseType';
+import { AccountResponse } from 'types/responses/AccountResponse';
 
 export const LeftIconComponent: React.FC = () => {
     const { changeTabIndexModal } = useContext(ModalContext) as ModalContextType;
@@ -26,7 +26,7 @@ export const RightIconComponent: React.FC = () => {
 
 export const ChildrenIconComponent: React.FC = () => {
     const { dataModalState, setDataModalState } = useContext(ModalContext) as ModalContextType;
-    const [searchFriends, setSearchFriends] = useState<AccountSummaryInfoResponse[]>();
+    const [searchFriends, setSearchFriends] = useState<AccountResponse[]>();
 
     const onTextInputChange = (event: React.ChangeEvent<HTMLInputElement>) => {
         const content = event.currentTarget.value;
@@ -40,7 +40,7 @@ export const ChildrenIconComponent: React.FC = () => {
             })
     }
 
-    const onAddFriendTag = (account: AccountSummaryInfoResponse) => {
+    const onAddFriendTag = (account: AccountResponse) => {
         setDataModalState({
             ...dataModalState,
             tags: [...dataModalState.tags, account]

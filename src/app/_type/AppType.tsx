@@ -1,5 +1,5 @@
 import { Dispatch, SetStateAction } from "react";
-import { AccountSummaryInfoResponse } from "types/responses/AccountSummaryInfoResponseType";
+import { AccountResponse } from "types/responses/AccountResponse";
 
 export type AppContextType = {
     loadUser: () => Promise<void>,
@@ -10,7 +10,7 @@ export type AppContextType = {
 export type AppStateType = {
     isLoading: boolean,
     data: {
-        user: AccountSummaryInfoResponse | null,
+        user: AccountResponse | null,
         message: string | null,
         error: string | null,
     }

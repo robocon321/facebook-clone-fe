@@ -1,6 +1,6 @@
 import { Dispatch, SetStateAction } from "react"
-import { AccountSummaryInfoResponse } from "types/responses/AccountSummaryInfoResponseType"
-import { CheckinResponseType } from "types/responses/CheckinResponseType"
+import { AccountResponse } from "types/responses/AccountResponse"
+import { CheckinResponseType } from "types/responses/CheckinResponse"
 
 export type SubTabType = {
   title: string,
@@ -71,7 +71,7 @@ export type TabStateType = {
 export type DataStateType = {
   text?: string,
   files: (ImageModalType | VideoModalType)[],
-  tags: AccountSummaryInfoResponse[],
+  tags: AccountResponse[],
   emotion?: EmotionType,
   checkin?: CheckinResponseType,
   scope: string

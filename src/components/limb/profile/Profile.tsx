@@ -2,11 +2,18 @@
 
 import React, { useState } from 'react';
 import { TPostView } from 'types/post';
-import PostContainer from 'components/containers/PostContainer';
+import { ProfileResponse } from 'types/responses/ProfileResponse';
+// import PostContainer from 'components/containers/PostContainer';
 // import CreatePostBox from 'app/(main)/home/_components/post/create-post';
 
-const ProfilePage: React.FC = () => {
+type ProfileTypeProps = {
+  profile: ProfileResponse
+}
+
+const Profile: React.FC<ProfileTypeProps> = (props) => {
+  const { profile } = props;
   const [postsView, setPostsView] = useState<TPostView>('listView');
+  
   return (
     <div className="w-full h-full">
       <div className="w-full h-auto shadow bg-white rounded-md">
@@ -14,7 +21,7 @@ const ProfilePage: React.FC = () => {
           <div
             className="h-96 max-h-96 w-full rounded-lg relative"
             style={{
-              backgroundImage: `url('https://random.imagecdn.app/1920/1080')`,
+              backgroundImage: `url(${profile.coverPhotoUrl})`,
               backgroundRepeat: 'no-repeat',
               backgroundSize: 'cover',
               backgroundPosition: 'center',
@@ -27,7 +34,7 @@ const ProfilePage: React.FC = () => {
               <div className="w-44 h-44 rounded-full bg-gray-300 border-4 border-white">
                 <img
                   className="w-full h-full rounded-full"
-                  src="https://random.imagecdn.app/250/250"
+                  src={profile.profilePictureUrl}
                   alt="dp"
                 />
               </div>
@@ -40,7 +47,7 @@ const ProfilePage: React.FC = () => {
           </div>
           <div className="max-w-5xl h-full mx-auto">
             <div className="flex flex-col space-y-2 mt-3 items-center justify-center pb-3 border-b-2">
-              <p className="text-4xl font-bold">Saiful Islam Shihab</p>
+              <p className="text-4xl font-bold">{profile.lastName + " " + profile.firstName}</p>
               <p className="text-sm text-gray-500">Software Engineer</p>
             </div>
             <div className="mt-1 flex items-center justify-between">
@@ -245,4 +252,4 @@ const ProfilePage: React.FC = () => {
   );
 };
 
-export default ProfilePage;
+export default Profile;

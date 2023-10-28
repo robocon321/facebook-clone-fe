@@ -7,7 +7,7 @@ import React, { useContext, useEffect, useState } from 'react';
 import { ModalContextType } from 'app/(main)/home/_type/ModalType';
 import { PageRequest } from "types/requests/PageRequest";
 import { getCheckinLocation } from "services/CheckinService";
-import { CheckinResponseType } from 'types/responses/CheckinResponseType';
+import { CheckinResponseType } from 'types/responses/CheckinResponse';
 
 export const LeftIconComponent: React.FC = () => {
     const { changeTabIndexModal } = useContext(ModalContext) as ModalContextType;

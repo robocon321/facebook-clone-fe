@@ -1,18 +1,11 @@
-import { PageRequest } from "types/requests/PageRequest";
-import { CheckinResponseType } from "types/responses/CheckinResponse";
-
-export const getCheckinLocation = async (search: string, pageRequest?: PageRequest): Promise<CheckinResponseType[]> => {
+export const getProfile = async (profileId: number) => {
 
     let queryParams: any = {
-        search
+        profileId
     }
 
-    if(pageRequest) queryParams = {
-        ...queryParams,
-        ...pageRequest
-    }
-
-    const url = `${process.env.BACKEND_URL}/checkin`;
+    const token = localStorage.getItem('token');
+    const url = `${process.env.BACKEND_URL}/profile`;
 
     const queryString = Object.keys(queryParams)
       .map((key) => `${key}=${queryParams[key]}`)
@@ -23,13 +16,14 @@ export const getCheckinLocation = async (search: string, pageRequest?: PageReque
         const response = await fetch(requestUrl, {
             method: "GET",
             headers: {
-                "content-type": "application/json"
+                "content-type": "application/json",
+                'Authorization': `Bearer ${token}`           
             }
         });
         const status = response.status;        
         const data = await response.json();
-        if(status == 200) {            
-            return data.data;
+        if(status == 200) {
+            return data;
         } else {            
             throw new Error(data);
         }
