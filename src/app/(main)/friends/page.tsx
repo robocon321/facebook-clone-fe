@@ -1,18 +1,22 @@
 "use client"
 
+import AddFriendCardVertical from "components/limb/card/AddFriendCardVertical";
+import ConfirmFriendCardVertical from "components/limb/card/ConfirmFriendCardVertical";
 import Link from "next/link";
 import { useContext, useEffect } from "react";
 import { getRecommendAccountFriendship } from "services/AccountService";
 import LeftSidebar from "./_components/LeftSidebar";
 import { RelationshipContext } from "./_providers/RelationshipProvider";
 import { RelationshipContextType } from "./_type/RelationshipType";
-import FriendCardVertical from "components/limb/card/FriendCardVertical";
+import { FriendshipRequest } from "types/requests/FriendshipRequest";
+import { changeFriendship } from "services/FriendshipService";
 
 const FriendPage: React.FC = () => {
   const {
     isLoading,
     setIsLoading,
     receiveRequestFriendship,
+    setReceiveRequestFriendship,
     recommendRequestFriendship,
     setRecommendRequestFriendship
   } = useContext(RelationshipContext) as RelationshipContextType;
@@ -48,6 +52,62 @@ const FriendPage: React.FC = () => {
     return () => window.removeEventListener('scroll', handleScroll);
   }, [recommendRequestFriendship]);
 
+  const onConfirm = (e: React.MouseEvent<HTMLButtonElement>, id: number) => {
+    e.stopPropagation();
+    const request: FriendshipRequest = {
+      receiverId: id,
+      status: 'ACCEPTED'
+    };
+    changeFriendship(request)
+    .then(response => {
+      setReceiveRequestFriendship({
+        ...receiveRequestFriendship,
+        data: receiveRequestFriendship.data.filter(item => item.accountId != id)
+      });  
+    })
+    .catch(error => console.log(error));
+  };
+
+  const onAddFriend = (e: React.MouseEvent<HTMLButtonElement>, id: number) => {
+    e.stopPropagation();
+    const request: FriendshipRequest = {
+      receiverId: id,
+      status: 'PENDING'
+    };
+    changeFriendship(request)
+    .then(response => {
+      setRecommendRequestFriendship({
+        ...recommendRequestFriendship,
+        data: recommendRequestFriendship.data.filter(item => item.accountId != id)
+      });
+    })
+    .catch(error => console.log(error));
+  };
+
+  const onDelete = (e: React.MouseEvent<HTMLButtonElement>, id: number) => {
+    e.stopPropagation();
+    setRecommendRequestFriendship({
+      ...recommendRequestFriendship,
+      data: recommendRequestFriendship.data.filter(item => item.accountId != id)
+    })
+  };
+
+  const onReject = (e: React.MouseEvent<HTMLButtonElement>, id: number) => {
+    e.stopPropagation();
+    const request: FriendshipRequest = {
+      receiverId: id,
+      status: 'REJECTED'
+    };
+    changeFriendship(request)
+    .then(response => {
+      setReceiveRequestFriendship({
+        ...receiveRequestFriendship,
+        data: receiveRequestFriendship.data.filter(item => item.accountId != id)
+      });      
+    })
+    .catch(error => console.log(error));
+  };
+
   return (
     <>
       <div className="col-span-3 flex justify-start bg-white shadow-md">
@@ -62,7 +122,7 @@ const FriendPage: React.FC = () => {
             </div>
             <div className="py-4 grid grid-cols-6 gap-2">
               {
-                receiveRequestFriendship.data.map(item => <FriendCardVertical key={item.accountId} submitText="Confirm" cancelText="Delete" account={item} onSubmit={() => {}} onCancel={() => {}} />)
+                receiveRequestFriendship.data.map(item => <ConfirmFriendCardVertical key={item.accountId} account={item} onConfirm={onConfirm} onReject={onReject} />)
               }
             </div>
             <hr className="my-4 border-gray-400" />
@@ -72,7 +132,7 @@ const FriendPage: React.FC = () => {
             </div>
             <div className="py-4 grid grid-cols-6 gap-2">
               {
-                recommendRequestFriendship.data.map(item => <FriendCardVertical key={item.accountId}  submitText="Add New Friend" cancelText="Delete" account={item} onSubmit={() => {}} onCancel={() => {}} />)
+                recommendRequestFriendship.data.map(item => <AddFriendCardVertical key={item.accountId} account={item} onAddFriend={onAddFriend} onDelete={onDelete} />)
               }
             </div>
           </div>

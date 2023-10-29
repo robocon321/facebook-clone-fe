@@ -5,13 +5,14 @@ import { AccountWithManualFriendResponse } from 'types/responses/RecommendAccoun
 import Button from '../buttons/Button';
 import Link from 'next/link';
 
-type FriendCardTypeProps = {
+type ConfirmFriendCardTypeProps = {
     account: AccountWithManualFriendResponse,
-    onDelete: (e: React.MouseEvent<HTMLButtonElement>, id: number) => void
+    onConfirm: (e: React.MouseEvent<HTMLButtonElement>, id: number) => void,
+    onReject: (e: React.MouseEvent<HTMLButtonElement>, id: number) => void
 }
 
-const FriendCardHorizal: React.FC<FriendCardTypeProps> = (props) => {
-    const { account, onDelete } = props;
+const ConfirmFriendCardHorizal: React.FC<ConfirmFriendCardTypeProps> = (props) => {
+    const { account, onConfirm, onReject } = props;
 
     return (
         <li>
@@ -46,9 +47,22 @@ const FriendCardHorizal: React.FC<FriendCardTypeProps> = (props) => {
                         }
                     </div>
                     <div className="flex">
-                        <div className="px-2 mb-2 w-full">
+                        <div className="px-2 mb-2 w-1/2">
                             <Button
-                                onClick={(e) => onDelete(e, account.accountId)}
+                                onClick={(e) => onConfirm(e, account.accountId)}
+                                type="button"
+                                size="large"
+                                block="true"
+                                fontSize="text-md"
+                                fontWeight="font-medium"
+                                bg="bg-blue-600"
+                            >
+                                Confirm
+                            </Button>
+                        </div>
+                        <div className="px-2 mb-2 w-1/2">
+                            <Button
+                                onClick={(e) => onReject(e, account.accountId)}
                                 type="button"
                                 size="large"
                                 block="true"
@@ -68,4 +82,4 @@ const FriendCardHorizal: React.FC<FriendCardTypeProps> = (props) => {
 
 }
 
-export default FriendCardHorizal;
+export default ConfirmFriendCardHorizal;

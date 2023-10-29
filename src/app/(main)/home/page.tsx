@@ -16,7 +16,7 @@ const HomePage: React.FC = () => {
   const { controlModalState, tabModalState, setControlModalState } = useContext(ModalContext) as ModalContextType;
   return (
     <div className="w-full h-full grid grid-cols-7">
-      <div className="col-span-3 flex justify-start ml-2">
+      <div className="col-span-2 flex justify-start ml-2">
         <LeftSidebar />
       </div>
       <div className="col-span-3 h-full">
@@ -59,7 +59,7 @@ const HomePage: React.FC = () => {
           <NewsFeed />
         </NewsFeedProvider>
       </div>
-      <div className="col-span-3 flex justify-end pr-2">
+      <div className="col-span-2 flex justify-end pr-2">
         <RightSidebar />
       </div>
     </div>

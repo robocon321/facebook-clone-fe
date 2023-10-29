@@ -4,16 +4,14 @@ import React from 'react';
 import { AccountWithManualFriendResponse } from 'types/responses/RecommendAccountResponse';
 import Button from '../buttons/Button';
 
-type FriendCardTypeProps = {
+type AddFriendCardTypeProps = {
     account: AccountWithManualFriendResponse,
-    onSubmit: () => void,
-    submitText: string,
-    onCancel: () => void,
-    cancelText: string
+    onAddFriend: (e: React.MouseEvent<HTMLButtonElement>, id: number) => void,
+    onDelete: (e: React.MouseEvent<HTMLButtonElement>, id: number) => void
 }
 
-const FriendCardVertical: React.FC<FriendCardTypeProps> = (props) => {
-    const { account, onSubmit, onCancel } = props;
+const AddFriendCardVertical: React.FC<AddFriendCardTypeProps> = (props) => {
+    const { account, onAddFriend, onDelete } = props;
 
     return (
         <div className="bg-white mr-2 rounded overflow-hidden shadow-md">
@@ -42,45 +40,37 @@ const FriendCardVertical: React.FC<FriendCardTypeProps> = (props) => {
                     )
                 }
             </div>
-            {
-                props.submitText && (
-                    <div className="px-2 mb-2">
-                        <Button
-                            onClick={onSubmit}
-                            type="button"
-                            size="large"
-                            block="true"
-                            fontSize="text-md"
-                            fontWeight="font-medium"
-                            bg="bg-blue-600"
-                        >
-                            {props.submitText}
-                        </Button>
-                    </div>
-                )
-            }
-            {
-                props.cancelText && (
-                    <div className="px-2 mb-2">
-                        <Button
-                            onClick={onCancel}
-                            type="button"
-                            size="large"
-                            block="true"
-                            fontSize="text-md"
-                            fontWeight="font-medium"
-                            bg="bg-gray-300"
-                            color="text-black"
-                        >
-                            {props.cancelText}
-                        </Button>
-                    </div>
-                )
-            }
+            <div className="px-2 mb-2">
+                <Button
+                    onClick={(e) => onAddFriend(e, account.accountId)}
+                    type="button"
+                    size="large"
+                    block="true"
+                    fontSize="text-md"
+                    fontWeight="font-medium"
+                    bg="bg-blue-600"
+                >
+                    Add friend
+                </Button>
+            </div>
+            <div className="px-2 mb-2">
+                <Button
+                    onClick={(e) => onDelete(e, account.accountId)}
+                    type="button"
+                    size="large"
+                    block="true"
+                    fontSize="text-md"
+                    fontWeight="font-medium"
+                    bg="bg-gray-300"
+                    color="text-black"
+                >
+                    Delete
+                </Button>
+            </div>
         </div>
 
     )
 
 }
 
-export default FriendCardVertical;
+export default AddFriendCardVertical;

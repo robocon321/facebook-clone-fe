@@ -5,13 +5,14 @@ import { AccountWithManualFriendResponse } from 'types/responses/RecommendAccoun
 import Button from '../buttons/Button';
 import Link from 'next/link';
 
-type FriendCardTypeProps = {
+type AddFriendCardTypeProps = {
     account: AccountWithManualFriendResponse,
+    onAddFriend: (e: React.MouseEvent<HTMLButtonElement>, id: number) => void,
     onDelete: (e: React.MouseEvent<HTMLButtonElement>, id: number) => void
 }
 
-const FriendCardHorizal: React.FC<FriendCardTypeProps> = (props) => {
-    const { account, onDelete } = props;
+const AddFriendCardHorizal: React.FC<AddFriendCardTypeProps> = (props) => {
+    const { account, onAddFriend, onDelete } = props;
 
     return (
         <li>
@@ -46,7 +47,20 @@ const FriendCardHorizal: React.FC<FriendCardTypeProps> = (props) => {
                         }
                     </div>
                     <div className="flex">
-                        <div className="px-2 mb-2 w-full">
+                        <div className="px-2 mb-2 w-1/2">
+                            <Button
+                                onClick={(e) => onAddFriend(e, account.accountId)}
+                                type="button"
+                                size="large"
+                                block="true"
+                                fontSize="text-md"
+                                fontWeight="font-medium"
+                                bg="bg-blue-600"
+                            >
+                                Add friend
+                            </Button>
+                        </div>
+                        <div className="px-2 mb-2 w-1/2">
                             <Button
                                 onClick={(e) => onDelete(e, account.accountId)}
                                 type="button"
@@ -68,4 +82,4 @@ const FriendCardHorizal: React.FC<FriendCardTypeProps> = (props) => {
 
 }
 
-export default FriendCardHorizal;
+export default AddFriendCardHorizal;

@@ -6,10 +6,44 @@ import Link from 'next/link';
 import React, { useContext } from 'react';
 import { RelationshipContext } from '../../_providers/RelationshipProvider';
 import { RelationshipContextType } from '../../_type/RelationshipType';
-import FriendCardHorizal from 'components/limb/card/FriendCardHorizal';
+import ConfirmFriendCardHorizal from 'components/limb/card/ConfirmFriendCardHorizal';
+import { FriendshipRequest } from 'types/requests/FriendshipRequest';
+import { changeFriendship } from 'services/FriendshipService';
 
 const LeftSidebar: React.FC = () => {
-    const { receiveRequestFriendship } = useContext(RelationshipContext) as RelationshipContextType;
+    const { receiveRequestFriendship, setReceiveRequestFriendship } = useContext(RelationshipContext) as RelationshipContextType;
+    const onConfirm = (e: React.MouseEvent<HTMLButtonElement>, id: number) => {
+        e.stopPropagation();
+        const request: FriendshipRequest = {
+            receiverId: id,
+            status: 'ACCEPTED'
+        };
+        changeFriendship(request)
+            .then(response => {
+                setReceiveRequestFriendship({
+                    ...receiveRequestFriendship,
+                    data: receiveRequestFriendship.data.filter(item => item.accountId != id)
+                });
+            })
+            .catch(error => console.log(error));
+    };
+
+    const onReject = (e: React.MouseEvent<HTMLButtonElement>, id: number) => {
+        e.stopPropagation();
+        const request: FriendshipRequest = {
+            receiverId: id,
+            status: 'REJECTED'
+        };
+        changeFriendship(request)
+            .then(response => {
+                setReceiveRequestFriendship({
+                    ...receiveRequestFriendship,
+                    data: receiveRequestFriendship.data.filter(item => item.accountId != id)
+                });
+            })
+            .catch(error => console.log(error));
+    };
+
     return (
         <div className="p-2 w-full h-auto overflow-y-auto bg-white" style={{
             height: "calc(100% - 16rem)"
@@ -28,7 +62,7 @@ const LeftSidebar: React.FC = () => {
             <Link className="mb-4 text-blue-600 text-sm hover:underline" href="#">Show your request you sent</Link>
             <ul>
                 {
-                    receiveRequestFriendship.data.map(item => <FriendCardHorizal key={item.accountId} submitText='Confirm' cancelText='Delete' account={item} onSubmit={() => { }} onCancel={() => { }} />)
+                    receiveRequestFriendship.data.map(item => <ConfirmFriendCardHorizal key={item.accountId} onConfirm={onConfirm} onReject={onReject} account={item} />)
                 }
             </ul>
         </div>

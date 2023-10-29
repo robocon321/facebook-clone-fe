@@ -21,7 +21,7 @@ const RelationshipProvider = (props: any) => {
     const [recommendRequest, setRecommendRequest] = useState<PageResponse<AccountWithManualFriendResponse>>(defaultFriendshipRequest);
 
     useEffect(() => {
-        const receiverPromise = getReceiverAccountFriendshipAndStatus('ACCEPTED', '');    
+        const receiverPromise = getReceiverAccountFriendshipAndStatus('PENDING', '');    
         const senderPromise = getSenderAccountFriendshipAndStatus('ACCEPTED', '');
         const recommendPromise = getRecommendAccountFriendship('');
         Promise.all([receiverPromise, senderPromise, recommendPromise])
