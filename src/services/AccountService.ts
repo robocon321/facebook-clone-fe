@@ -1,25 +1,26 @@
+import { json } from "stream/consumers";
 import { PageRequest } from "types/requests/PageRequest";
 import { AccountResponse } from "types/responses/AccountResponse";
 
-export const getSummaryAccount = async () : Promise<AccountResponse> => {
+export const getSummaryAccount = async (): Promise<AccountResponse> => {
     const token = localStorage.getItem('token');
     try {
         const response = await fetch(`${process.env.BACKEND_URL}/account/summary-info`, {
             method: "GET",
             headers: {
                 "content-type": "application/json",
-                'Authorization': `Bearer ${token}`           
+                'Authorization': `Bearer ${token}`
             }
         });
-        const status = response.status;        
+        const status = response.status;
         const data = await response.json();
-        if(status == 200) {
+        if (status == 200) {
             return data;
-        } else {            
+        } else {
             throw new Error(data);
         }
 
-    } catch(error) {
+    } catch (error) {
         throw error;
     }
 }
@@ -31,8 +32,8 @@ export const getAccountFriendshipAndStatus = async (friendshipStatus: string, se
         search
     }
 
-    if(excludeIds) queryParams.excludeIds = excludeIds;
-    if(pageRequest) queryParams = {
+    if (excludeIds) queryParams.excludeIds = excludeIds;
+    if (pageRequest) queryParams = {
         ...queryParams,
         ...pageRequest
     }
@@ -41,8 +42,8 @@ export const getAccountFriendshipAndStatus = async (friendshipStatus: string, se
     const url = `${process.env.BACKEND_URL}/account/account-friendship`;
 
     const queryString = Object.keys(queryParams)
-      .map((key) => `${key}=${queryParams[key]}`)
-      .join('&');
+        .map((key) => `${key}=${queryParams[key]}`)
+        .join('&');
     const requestUrl = `${url}?${queryString}`;
 
     try {
@@ -50,18 +51,18 @@ export const getAccountFriendshipAndStatus = async (friendshipStatus: string, se
             method: "GET",
             headers: {
                 "content-type": "application/json",
-                'Authorization': `Bearer ${token}`           
+                'Authorization': `Bearer ${token}`
             }
         });
-        const status = response.status;        
+        const status = response.status;
         const data = await response.json();
-        if(status == 200) {
+        if (status == 200) {
             return data;
-        } else {            
+        } else {
             throw new Error(data);
         }
 
-    } catch(error) {
+    } catch (error) {
         throw error;
     }
 }
@@ -73,8 +74,8 @@ export const getReceiverAccountFriendshipAndStatus = async (friendshipStatus: st
         search
     }
 
-    if(excludeIds) queryParams.excludeIds = excludeIds;
-    if(pageRequest) queryParams = {
+    if (excludeIds) queryParams.excludeIds = excludeIds;
+    if (pageRequest) queryParams = {
         ...queryParams,
         ...pageRequest
     }
@@ -83,8 +84,8 @@ export const getReceiverAccountFriendshipAndStatus = async (friendshipStatus: st
     const url = `${process.env.BACKEND_URL}/account/receiver-account-friendship`;
 
     const queryString = Object.keys(queryParams)
-      .map((key) => `${key}=${queryParams[key]}`)
-      .join('&');
+        .map((key) => `${key}=${queryParams[key]}`)
+        .join('&');
     const requestUrl = `${url}?${queryString}`;
 
     try {
@@ -92,18 +93,18 @@ export const getReceiverAccountFriendshipAndStatus = async (friendshipStatus: st
             method: "GET",
             headers: {
                 "content-type": "application/json",
-                'Authorization': `Bearer ${token}`           
+                'Authorization': `Bearer ${token}`
             }
         });
-        const status = response.status;        
+        const status = response.status;
         const data = await response.json();
-        if(status == 200) {
+        if (status == 200) {
             return data;
-        } else {            
+        } else {
             throw new Error(data);
         }
 
-    } catch(error) {
+    } catch (error) {
         throw error;
     }
 }
@@ -115,8 +116,8 @@ export const getSenderAccountFriendshipAndStatus = async (friendshipStatus: stri
         search
     }
 
-    if(excludeIds) queryParams.excludeIds = excludeIds;
-    if(pageRequest) queryParams = {
+    if (excludeIds) queryParams.excludeIds = excludeIds;
+    if (pageRequest) queryParams = {
         ...queryParams,
         ...pageRequest
     }
@@ -125,8 +126,8 @@ export const getSenderAccountFriendshipAndStatus = async (friendshipStatus: stri
     const url = `${process.env.BACKEND_URL}/account/sender-account-friendship`;
 
     const queryString = Object.keys(queryParams)
-      .map((key) => `${key}=${queryParams[key]}`)
-      .join('&');
+        .map((key) => `${key}=${queryParams[key]}`)
+        .join('&');
     const requestUrl = `${url}?${queryString}`;
 
     try {
@@ -134,18 +135,18 @@ export const getSenderAccountFriendshipAndStatus = async (friendshipStatus: stri
             method: "GET",
             headers: {
                 "content-type": "application/json",
-                'Authorization': `Bearer ${token}`           
+                'Authorization': `Bearer ${token}`
             }
         });
-        const status = response.status;        
+        const status = response.status;
         const data = await response.json();
-        if(status == 200) {
+        if (status == 200) {
             return data;
-        } else {            
+        } else {
             throw new Error(data);
         }
 
-    } catch(error) {
+    } catch (error) {
         throw error;
     }
 }
@@ -156,8 +157,8 @@ export const getRecommendAccountFriendship = async (search: string, excludeIds?:
         search
     }
 
-    if(excludeIds) queryParams.excludeIds = excludeIds;
-    if(pageRequest) queryParams = {
+    if (excludeIds) queryParams.excludeIds = excludeIds;
+    if (pageRequest) queryParams = {
         ...queryParams,
         ...pageRequest
     }
@@ -166,8 +167,8 @@ export const getRecommendAccountFriendship = async (search: string, excludeIds?:
     const url = `${process.env.BACKEND_URL}/account/recommend-account-friendship`;
 
     const queryString = Object.keys(queryParams)
-      .map((key) => `${key}=${queryParams[key]}`)
-      .join('&');
+        .map((key) => `${key}=${queryParams[key]}`)
+        .join('&');
     const requestUrl = `${url}?${queryString}`;
 
     try {
@@ -175,18 +176,82 @@ export const getRecommendAccountFriendship = async (search: string, excludeIds?:
             method: "GET",
             headers: {
                 "content-type": "application/json",
-                'Authorization': `Bearer ${token}`           
+                'Authorization': `Bearer ${token}`
             }
         });
-        const status = response.status;        
+        const status = response.status;
         const data = await response.json();
-        if(status == 200) {
+        if (status == 200) {
             return data;
-        } else {            
+        } else {
             throw new Error(data);
         }
 
-    } catch(error) {
+    } catch (error) {
         throw error;
     }
+}
+
+export const getHistoryAccount = async (type?: string, pageRequest?: PageRequest) => {
+    let queryParams: any = {}
+    if (type) queryParams.type = type;
+
+    if (pageRequest) queryParams = {
+        ...queryParams,
+        ...pageRequest
+    }
+
+    const token = localStorage.getItem('token');
+    const url = `${process.env.BACKEND_URL}/account/friend-history`;
+
+    const queryString = Object.keys(queryParams)
+        .map((key) => `${key}=${queryParams[key]}`)
+        .join('&');
+    const requestUrl = `${url}?${queryString}`;
+
+    try {
+        const response = await fetch(requestUrl, {
+            method: "GET",
+            headers: {
+                "content-type": "application/json",
+                'Authorization': `Bearer ${token}`
+            }
+        });
+        const status = response.status;
+        const data = await response.json();
+        if (status == 200) {
+            return data;
+        } else {
+            throw new Error(data);
+        }
+
+    } catch (error) {
+        throw error;
+    }
+
+}
+
+export const updateHistoryAccount = async (type: string) => {
+    const token = localStorage.getItem('token');
+    try {
+        const response = await fetch(`${process.env.BACKEND_URL}/account/action-history`, {
+            method: "POST",
+            headers: {
+                "content-type": "application/json",
+                'Authorization': `Bearer ${token}`
+            },
+            body: JSON.stringify(type)
+        });
+        const status = response.status;
+        const data = await response.json();
+        if (status == 200) {
+            return data;
+        } else {
+            throw new Error(data);
+        }
+
+    } catch (error) {
+        throw error;
+    }
+
 }

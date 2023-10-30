@@ -1,6 +1,11 @@
-import React from 'react';
+import { AppContext } from 'app/_providers/AppProvider';
+import { AppContextType } from 'app/_type/AppType';
+import moment from 'moment';
+import React, { useContext } from 'react';
 
 const RightSidebar: React.FC = () => {
+  const { accountHistories } = useContext(AppContext) as AppContextType;
+
   return (
     <div className="w-9/12 h-auto py-3 pr-2">
       <div className="w-full text-gray-600 border-b-2 pb-2 mb-2 border-gray-300">
@@ -55,25 +60,36 @@ const RightSidebar: React.FC = () => {
         </div>
         <div className="-ml-2">
           <ul className="w-full text-gray-600">
-            {Array(6)
-              .fill(0)
-              .map((_, idx) => (
+            {
+              accountHistories.map(item => (
                 <li
-                  key={idx}
+                  key={item.account.accountId}
                   className="h-12 mb-2 flex items-center justify-content cursor-pointer space-x-2 p-2 rounded-md hover:bg-gray-200"
                 >
                   <div>
                     <img
                       className="w-8 h-8 rounded-full"
-                      src={`https://random.imagecdn.app/200/${200 + idx}`}
-                      alt="user"
+                      src={item.account.profilePictureUrl}
+                      alt="Not found"
                     />
                   </div>
-                  <div>
-                    <p className="text-sm font-semibold">Saiful Islam Shihab</p>
+                  <div className="flex justify-between items-center flex-grow">
+                    <p className="text-sm font-semibold">{item.account.lastName + " " + item.account.firstName}</p>
+                    {
+                      item.currentHistory && (
+                        item.currentHistory.status == 'ONLINE' ? (
+                          <div className="w-2 h-2 bg-green-500 rounded-full"></div>
+                        ) : (
+                          <div className="text-sm text-green-500 text-green-500 rounded-full">
+                            {moment(item.currentHistory.actionTime).fromNow()}
+                          </div>
+                        )
+                      )
+                    }                    
                   </div>
                 </li>
-              ))}
+              ))
+            }
           </ul>
         </div>
       </div>

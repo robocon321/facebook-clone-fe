@@ -2,7 +2,6 @@ import { FriendshipRequest } from "types/requests/FriendshipRequest";
 import { FriendshipResponse } from "types/responses/FriendshipResponse";
 
 export const changeFriendship = async (request: FriendshipRequest) : Promise<FriendshipResponse> => {
-    console.log(request);
     const token = localStorage.getItem('token');
     try {
         const response = await fetch(`${process.env.BACKEND_URL}/friendship/create`, {
