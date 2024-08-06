@@ -69,9 +69,9 @@ export type TagImagePostResponse = {
 }
 
 export type FileResponse = {
-   fileId: number,
-   name: string,
-   type: string
+    fileId: number,
+    name: string,
+    type: string
 }
 
 export type CommentPostResponse = {

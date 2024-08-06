@@ -12,7 +12,7 @@ export type VideoType = {
     file: File,
     note?: string,
     createTime: Date
-  }
+}
 
 export type ImageType = {
     file: File,
@@ -27,11 +27,11 @@ type TextImageType = {
     color: string,
     xPos: number,
     yPos: number,
-    size: number  
+    size: number
 }
 
 type TagImageType = {
     accountId: any,
     xPos: number,
-    yPos: number  
+    yPos: number
 }

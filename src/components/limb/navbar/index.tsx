@@ -1,17 +1,16 @@
 "use client";
 
-import React, { useContext } from 'react';
-import Link from 'next/link';
-import { AppContext } from 'app/_providers/AppProvider';
-import { AppContextType } from 'app/_type/AppType';
-// import { usePathname } from 'next/navigation'
+import React, { useContext } from "react";
+import Link from "next/link";
+import { AppContext } from "app/_providers/AppProvider";
+import { AppContextType } from "app/_type/AppType";
+import Image from "next/image";
 
 const Navbar: React.FC = () => {
-  // const pathName = usePathname().split('/')[1];
   const { appState } = useContext(AppContext) as AppContextType;
 
-  const pathName: string = '';
-  
+  const pathName: string = "";
+
   return (
     <div className="w-full h-14 bg-white grid grid-cols-6 gap-4 fixed z-50 shadow-md">
       <div className="col-span-2 flex items-center">
@@ -35,9 +34,9 @@ const Navbar: React.FC = () => {
             <div className="w-14 h-auto relative flex items-center justify-center">
               <div
                 className={`${
-                  pathName === '' || undefined
-                    ? 'text-gray-400'
-                    : 'text-black'
+                  pathName === "" || pathName == undefined
+                    ? "text-gray-400"
+                    : "text-black"
                 }`}
               >
                 <i className="text-2xl fas fa-home"></i>
@@ -53,7 +52,7 @@ const Navbar: React.FC = () => {
               </div>
               <div
                 className={`${
-                  pathName === 'watch' ? 'text-primary' : 'text-black'
+                  pathName === "watch" ? "text-primary" : "text-black"
                 }`}
               >
                 <i className="text-2xl fas fa-tv"></i>
@@ -69,7 +68,7 @@ const Navbar: React.FC = () => {
               </div>
               <div
                 className={`${
-                  pathName === 'marketplace' ? 'text-white' : 'text-black'
+                  pathName === "marketplace" ? "text-white" : "text-black"
                 }`}
               >
                 <i className="text-2xl fas fa-store"></i>
@@ -85,7 +84,7 @@ const Navbar: React.FC = () => {
               </div>
               <div
                 className={`${
-                  pathName === 'groups' ? 'text-primary' : 'text-black'
+                  pathName === "groups" ? "text-primary" : "text-black"
                 }`}
               >
                 <i className="text-2xl fas fa-users"></i>
@@ -101,7 +100,7 @@ const Navbar: React.FC = () => {
               </div>
               <div
                 className={`${
-                  pathName === 'gaming' ? 'text-white' : 'text-black'
+                  pathName === "gaming" ? "text-white" : "text-black"
                 }`}
               >
                 <i className="text-2xl fas fa-gamepad"></i>
@@ -115,14 +114,16 @@ const Navbar: React.FC = () => {
           <Link href="/profile">
             <button className="h-10 px-2 flex space-x-1 items-center justify-center focus:outline-none hover:bg-gray-300 rounded-full">
               <div className="h-8">
-                <img
+                <Image
                   src="https://random.imagecdn.app/200/200"
                   className="w-8 h-8 rounded-full"
                   alt="dp"
                 />
               </div>
               <div className="h-8 flex items-center justify-content">
-                <p className="font-semibold text-sm">{appState.data.user?.firstName}</p>
+                <p className="font-semibold text-sm">
+                  {appState.data.user?.firstName}
+                </p>
               </div>
             </button>
           </Link>

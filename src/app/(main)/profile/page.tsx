@@ -1,12 +1,11 @@
-"use client"
+"use client";
 
-import React, { useState } from 'react';
-import { TPostView } from 'types/post';
-import PostContainer from 'components/containers/PostContainer';
-// import CreatePostBox from 'app/(main)/home/_components/post/create-post';
+import React, { useState } from "react";
+import { TPostView } from "types/post";
+import Image from "next/image";
 
 const ProfilePage: React.FC = () => {
-  const [postsView, setPostsView] = useState<TPostView>('listView');
+  const [postsView, setPostsView] = useState<TPostView>("listView");
   return (
     <div className="w-full h-full">
       <div className="w-full h-auto shadow bg-white rounded-md">
@@ -15,17 +14,17 @@ const ProfilePage: React.FC = () => {
             className="h-96 max-h-96 w-full rounded-lg relative"
             style={{
               backgroundImage: `url('https://random.imagecdn.app/1920/1080')`,
-              backgroundRepeat: 'no-repeat',
-              backgroundSize: 'cover',
-              backgroundPosition: 'center',
+              backgroundRepeat: "no-repeat",
+              backgroundSize: "cover",
+              backgroundPosition: "center",
             }}
           >
             <div
               className="absolute  w-full flex items-center justify-center"
-              style={{ bottom: '-15px' }}
+              style={{ bottom: "-15px" }}
             >
               <div className="w-44 h-44 rounded-full bg-gray-300 border-4 border-white">
-                <img
+                <Image
                   className="w-full h-full rounded-full"
                   src="https://random.imagecdn.app/250/250"
                   alt="dp"
@@ -93,7 +92,7 @@ const ProfilePage: React.FC = () => {
                     <i className="fas fa-briefcase"></i>
                   </span>
                   <p>
-                    Full Stack Web Developer at{' '}
+                    Full Stack Web Developer at{" "}
                     <span className="font-semibold">Fiverr</span>
                   </p>
                 </div>
@@ -102,7 +101,7 @@ const ProfilePage: React.FC = () => {
                     <i className="fas fa-graduation-cap"></i>
                   </span>
                   <p>
-                    Studiend B.Sc in SWE at{' '}
+                    Studiend B.Sc in SWE at{" "}
                     <span className="font-semibold">
                       Daffodil International University
                     </span>
@@ -121,7 +120,7 @@ const ProfilePage: React.FC = () => {
                     <i className="fas fa-map-marker-alt"></i>
                   </span>
                   <p>
-                    From{' '}
+                    From{" "}
                     <span className="font-semibold">
                       Chandpur, Chittagong, Bangladesh
                     </span>
@@ -142,7 +141,7 @@ const ProfilePage: React.FC = () => {
                   <a
                     target="_blank"
                     rel="noopener noreferrer"
-                    href={'https://facebook.com/saifulshihab'}
+                    href={"https://facebook.com/saifulshihab"}
                   >
                     <p>saifulshihab</p>
                   </a>
@@ -154,7 +153,7 @@ const ProfilePage: React.FC = () => {
                   <a
                     target="_blank"
                     rel="noopener noreferrer"
-                    href={'https://instagram.com/_shiha6'}
+                    href={"https://instagram.com/_shiha6"}
                   >
                     <p>_shiha6</p>
                   </a>
@@ -166,7 +165,7 @@ const ProfilePage: React.FC = () => {
                   <a
                     target="_blank"
                     rel="noopener noreferrer"
-                    href={'https://twitter.com/ShihabSWE'}
+                    href={"https://twitter.com/ShihabSWE"}
                   >
                     <p>ShihabSWE</p>
                   </a>
@@ -178,7 +177,7 @@ const ProfilePage: React.FC = () => {
                   <a
                     target="_blank"
                     rel="noopener noreferrer"
-                    href={'https://github.com/saifulshihab'}
+                    href={"https://github.com/saifulshihab"}
                   >
                     <p>saifulshihab</p>
                   </a>
@@ -190,7 +189,7 @@ const ProfilePage: React.FC = () => {
                   <a
                     target="_blank"
                     rel="noopener noreferrer"
-                    href={'https://www.behance.net/saifulis1am'}
+                    href={"https://www.behance.net/saifulis1am"}
                   >
                     <p>saifulis1am</p>
                   </a>
@@ -219,17 +218,17 @@ const ProfilePage: React.FC = () => {
               <div className="flex space-x-3 text-gray-500 mt-1 -mb-1">
                 <button
                   className={`font-semibold flex-1 h-8 focus:outline-none justify-center space-x-2 hover:bg-gray-100 rounded-md ${
-                    postsView === 'listView' ? 'bg-gray-200' : undefined
+                    postsView === "listView" ? "bg-gray-200" : undefined
                   }`}
-                  onClick={() => setPostsView('listView')}
+                  onClick={() => setPostsView("listView")}
                 >
                   <i className="fas fa-bars mr-2"></i>List View
                 </button>
                 <button
                   className={`font-semibold flex-1 h-8 focus:outline-none justify-center space-x-2 hover:bg-gray-100 rounded-md  ${
-                    postsView === 'gridView' ? 'bg-gray-200' : undefined
+                    postsView === "gridView" ? "bg-gray-200" : undefined
                   }`}
-                  onClick={() => setPostsView('gridView')}
+                  onClick={() => setPostsView("gridView")}
                 >
                   <i className="fas fa-th-large mr-2"></i>Grid View
                 </button>

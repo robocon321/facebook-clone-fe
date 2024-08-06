@@ -1,4 +1,4 @@
-"use client"
+"use client";
 
 import AddFriendCardVertical from "components/limb/card/AddFriendCardVertical";
 import ConfirmFriendCardVertical from "components/limb/card/ConfirmFriendCardVertical";
@@ -13,14 +13,12 @@ import { changeFriendship } from "services/FriendshipService";
 
 const FriendPage: React.FC = () => {
   const {
-    isLoading,
     setIsLoading,
     receiveRequestFriendship,
     setReceiveRequestFriendship,
     recommendRequestFriendship,
-    setRecommendRequestFriendship
+    setRecommendRequestFriendship,
   } = useContext(RelationshipContext) as RelationshipContextType;
-
 
   useEffect(() => {
     const handleScroll = () => {
@@ -28,84 +26,93 @@ const FriendPage: React.FC = () => {
       const windowHeight = window.innerHeight;
       const documentHeight = document.documentElement.scrollHeight;
       if (windowHeight + scrollY == documentHeight) {
-        getRecommendAccountFriendship('', [], {
+        getRecommendAccountFriendship("", [], {
           page: recommendRequestFriendship.page + 1,
           size: recommendRequestFriendship.size,
           sortBy: [],
-          sortOrder: []
+          sortOrder: [],
         })
-          .then(response => {
+          .then((response) => {
             setRecommendRequestFriendship({
               size: 10,
               page: recommendRequestFriendship.page + 1,
-              data: [...recommendRequestFriendship.data,...response.data]
+              data: [...recommendRequestFriendship.data, ...response.data],
             });
             setIsLoading(false);
           })
-          .catch(error => {
+          .catch((error) => {
             console.log(error);
             setIsLoading(false);
-          })
+          });
       }
     };
-    window.addEventListener('scroll', handleScroll);
-    return () => window.removeEventListener('scroll', handleScroll);
+    window.addEventListener("scroll", handleScroll);
+    return () => window.removeEventListener("scroll", handleScroll);
+    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [recommendRequestFriendship]);
 
   const onConfirm = (e: React.MouseEvent<HTMLButtonElement>, id: number) => {
     e.stopPropagation();
     const request: FriendshipRequest = {
       receiverId: id,
-      status: 'ACCEPTED'
+      status: "ACCEPTED",
     };
     changeFriendship(request)
-    .then(response => {
-      setReceiveRequestFriendship({
-        ...receiveRequestFriendship,
-        data: receiveRequestFriendship.data.filter(item => item.accountId != id)
-      });  
-    })
-    .catch(error => console.log(error));
+      .then((response) => {
+        setReceiveRequestFriendship({
+          ...receiveRequestFriendship,
+          data: receiveRequestFriendship.data.filter(
+            (item) => item.accountId != id
+          ),
+        });
+      })
+      .catch((error) => console.log(error));
   };
 
   const onAddFriend = (e: React.MouseEvent<HTMLButtonElement>, id: number) => {
     e.stopPropagation();
     const request: FriendshipRequest = {
       receiverId: id,
-      status: 'PENDING'
+      status: "PENDING",
     };
     changeFriendship(request)
-    .then(response => {
-      setRecommendRequestFriendship({
-        ...recommendRequestFriendship,
-        data: recommendRequestFriendship.data.filter(item => item.accountId != id)
-      });
-    })
-    .catch(error => console.log(error));
+      .then((response) => {
+        setRecommendRequestFriendship({
+          ...recommendRequestFriendship,
+          data: recommendRequestFriendship.data.filter(
+            (item) => item.accountId != id
+          ),
+        });
+      })
+      .catch((error) => console.log(error));
   };
 
   const onDelete = (e: React.MouseEvent<HTMLButtonElement>, id: number) => {
     e.stopPropagation();
     setRecommendRequestFriendship({
       ...recommendRequestFriendship,
-      data: recommendRequestFriendship.data.filter(item => item.accountId != id)
-    })
+      data: recommendRequestFriendship.data.filter(
+        (item) => item.accountId != id
+      ),
+    });
   };
 
   const onReject = (e: React.MouseEvent<HTMLButtonElement>, id: number) => {
     e.stopPropagation();
     const request: FriendshipRequest = {
       receiverId: id,
-      status: 'REJECTED'
+      status: "REJECTED",
     };
     changeFriendship(request)
-    .then(response => {
-      setReceiveRequestFriendship({
-        ...receiveRequestFriendship,
-        data: receiveRequestFriendship.data.filter(item => item.accountId != id)
-      });      
-    })
-    .catch(error => console.log(error));
+      .then((response) => {
+        setReceiveRequestFriendship({
+          ...receiveRequestFriendship,
+          data: receiveRequestFriendship.data.filter(
+            (item) => item.accountId != id
+          ),
+        });
+      })
+      .catch((error) => console.log(error));
   };
 
   return (
@@ -118,22 +125,36 @@ const FriendPage: React.FC = () => {
           <div className="mb-2">
             <div className="mb-2 flex justify-between items-center">
               <h3 className="font-bold text-xl">Request to make friends</h3>
-              <Link className="text-blue-600" href="/friends/requests">Show all</Link>
+              <Link className="text-blue-600" href="/friends/requests">
+                Show all
+              </Link>
             </div>
             <div className="py-4 grid grid-cols-6 gap-2">
-              {
-                receiveRequestFriendship.data.map(item => <ConfirmFriendCardVertical key={item.accountId} account={item} onConfirm={onConfirm} onReject={onReject} />)
-              }
+              {receiveRequestFriendship.data.map((item) => (
+                <ConfirmFriendCardVertical
+                  key={item.accountId}
+                  account={item}
+                  onConfirm={onConfirm}
+                  onReject={onReject}
+                />
+              ))}
             </div>
             <hr className="my-4 border-gray-400" />
             <div className="mb-2 flex justify-between items-center">
               <h3 className="font-bold text-xl">Maybe you know them</h3>
-              <Link className="text-blue-600" href="/friends/suggests">Show all</Link>
+              <Link className="text-blue-600" href="/friends/suggests">
+                Show all
+              </Link>
             </div>
             <div className="py-4 grid grid-cols-6 gap-2">
-              {
-                recommendRequestFriendship.data.map(item => <AddFriendCardVertical key={item.accountId} account={item} onAddFriend={onAddFriend} onDelete={onDelete} />)
-              }
+              {recommendRequestFriendship.data.map((item) => (
+                <AddFriendCardVertical
+                  key={item.accountId}
+                  account={item}
+                  onAddFriend={onAddFriend}
+                  onDelete={onDelete}
+                />
+              ))}
             </div>
           </div>
         </div>

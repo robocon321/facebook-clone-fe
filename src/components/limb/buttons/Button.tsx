@@ -1,10 +1,15 @@
-import React, { ButtonHTMLAttributes } from 'react';
+import React, { ButtonHTMLAttributes } from "react";
 
-type IColor = 'text-white' | 'text-gray-600' | 'text-black' | 'text-blue-600';
-type IBackground = 'bg-white' | 'bg-green-600' | "bg-blue-600" | "bg-gray-300" | 'bg-blue-100';
-type IButtonSize = 'small' | 'medium' | 'large';
-type IFontSize = 'text-xs' | 'text-md' | 'text-xl' | 'text-2xl';
-type IFontWeight = 'font-bold' | 'font-extrabold' | 'font-thin' | 'font-medium';
+type IColor = "text-white" | "text-gray-600" | "text-black" | "text-blue-600";
+type IBackground =
+  | "bg-white"
+  | "bg-green-600"
+  | "bg-blue-600"
+  | "bg-gray-300"
+  | "bg-blue-100";
+type IButtonSize = "small" | "medium" | "large";
+type IFontSize = "text-xs" | "text-md" | "text-xl" | "text-2xl";
+type IFontWeight = "font-bold" | "font-extrabold" | "font-thin" | "font-medium";
 
 type IProps = ButtonHTMLAttributes<HTMLButtonElement> & {
   size?: IButtonSize;
@@ -12,8 +17,8 @@ type IProps = ButtonHTMLAttributes<HTMLButtonElement> & {
   color?: IColor;
   fontWeight?: IFontWeight;
   fontSize?: IFontSize;
-  isdisabled?: string;
-  isloading?: string;
+  isDisabled?: string;
+  isLoading?: string;
   block?: string;
 };
 
@@ -24,8 +29,8 @@ const Button: React.FC<IProps> = (props) => {
     size,
     fontSize,
     fontWeight,
-    isdisabled,
-    isloading,
+    isDisabled,
+    isLoading,
     children,
     block,
   } = props;
@@ -33,16 +38,16 @@ const Button: React.FC<IProps> = (props) => {
     <button
       {...props}
       className={`cursor-pointer ${
-        block ? 'w-full' : 'inline-block'
+        block ? "w-full" : "inline-block"
       } px-4 items-center justify-center rounded-md shadow-md font ${
-        size === 'small' ? 'h-7' : size === 'large' ? 'h-11' : 'h-8'
-      } ${color ? color : 'text-white'} ${bg ? bg : 'bg-primary'}
-      ${fontWeight ? fontWeight : 'font-semibold'}
-      ${fontSize ? fontSize : 'text-sm'}
+        size === "small" ? "h-7" : size === "large" ? "h-11" : "h-8"
+      } ${color ?? "text-white"} ${bg ?? "bg-primary"}
+      ${fontWeight ?? "font-semibold"}
+      ${fontSize ?? "text-sm"}
        ${props.className}`}
-      disabled={isdisabled == 'true' || isloading == 'true' ? true : false}
+      disabled={!!(isDisabled == "true" || isLoading == "true")}
     >
-      {isloading == 'true' ? '...' : children}
+      {isLoading == "true" ? "..." : children}
     </button>
   );
 };

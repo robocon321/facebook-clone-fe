@@ -5,54 +5,69 @@ import { AppContext } from "app/_providers/AppProvider";
 import { createContext, useContext, useEffect, useState } from "react";
 import { recommendPost } from "services/PostService";
 import { AppContextType } from "app/_type/AppType";
-import { ControlStateType, DataStateType, EmotionType, NewsFeedContextType } from "app/(main)/home/_type/NewsFeedType";
+import {
+  ControlStateType,
+  DataStateType,
+  EmotionType,
+  NewsFeedContextType,
+} from "app/(main)/home/_type/NewsFeedType";
 import { PostResponse } from "types/responses/PostResponse";
 
 export const NewsFeedContext = createContext<NewsFeedContextType | null>(null);
 
 const defaultControlState: ControlStateType = {
-  page: 0
-}
+  page: 0,
+};
 
 const defaultDataState: DataStateType = {
-  posts: []
-}
+  posts: [],
+};
 
 const NewsFeedProvider = (props: any) => {
   const { appState } = useContext(AppContext) as AppContextType;
   const [dataState, setDataState] = useState<DataStateType>(defaultDataState);
-  const [controlState, setControlState] = useState<ControlStateType>(defaultControlState);
+  const [controlState, setControlState] =
+    useState<ControlStateType>(defaultControlState);
   const [emotions, setEmotions] = useState<EmotionType[]>([]);
 
   useEffect(() => {
-    recommendPost().then(response => {
-      setDataState({
-        ...dataState,
-        posts: response.data
+    recommendPost()
+      .then((response) => {
+        setDataState({
+          ...dataState,
+          posts: response.data,
+        });
+      })
+      .catch((error) => {
+        console.log(error);
       });
-    }).catch((error) => {
-      console.log(error);
-    })
 
-    fetch('/data.json')
-      .then(response => response.json())
-      .then(data => {
+    fetch("/data.json")
+      .then((response) => response.json())
+      .then((data) => {
         setEmotions(data);
       })
-      .catch(error => {
-        console.error('Error fetching data:', error);
+      .catch((error) => {
+        console.error("Error fetching data:", error);
       });
+    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
 
   const setPost = (newPost: PostResponse) => {
-    const index = dataState.posts.findIndex(item => item.postId == newPost.postId);
-    if(index >= 0) {
+    const index = dataState.posts.findIndex(
+      (item) => item.postId == newPost.postId
+    );
+    if (index >= 0) {
       setDataState({
         ...dataState,
-        posts: [...dataState.posts.slice(0, index), newPost, ...dataState.posts.slice(index + 1)]
-      })
+        posts: [
+          ...dataState.posts.slice(0, index),
+          newPost,
+          ...dataState.posts.slice(index + 1),
+        ],
+      });
     }
-  }
+  };
 
   const value = {
     newsFeedData: dataState,
@@ -60,16 +75,18 @@ const NewsFeedProvider = (props: any) => {
     newsFeedControl: controlState,
     setNewsFeedControl: setControlState,
     newsFeedEmotions: emotions,
-    setNewsFeedPost: setPost
-  }
+    setNewsFeedPost: setPost,
+  };
 
   if (appState.isLoading || appState.data.user == null) {
-    return <Loading />
+    return <Loading />;
   } else {
     return (
-      <NewsFeedContext.Provider value={value}>{props.children}</NewsFeedContext.Provider>
-    )
+      <NewsFeedContext.Provider value={value}>
+        {props.children}
+      </NewsFeedContext.Provider>
+    );
   }
-}
+};
 
 export default NewsFeedProvider;

@@ -5,7 +5,7 @@ export type ProfileResponse = {
     firstName: string,
     lastName: string,
     birthdate: Date,
-    gender: string,    
+    gender: string,
     profilePictureUrl?: string,
     coverPhotoUrl?: string,
     bio?: string,

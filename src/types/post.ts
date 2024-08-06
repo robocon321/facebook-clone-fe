@@ -1,6 +1,7 @@
 export type TPostView = 'gridView' | 'listView';
 
-export interface IPost {
+export interface IPost
+{
   _id: string;
   user: {
     _id: string;

@@ -1,8 +1,8 @@
-import React from 'react';
-import CreatePostBox from 'app/(main)/home/_components/post/create-post';
-import PostContainer from 'components/containers/PostContainer';
-import Story from 'components/limb/story';
-import { storiesData } from 'database';
+import React from "react";
+import CreatePostBox from "app/(main)/home/_components/post/create-post";
+import PostContainer from "components/containers/PostContainer";
+import Story from "components/limb/story";
+import { storiesData } from "database";
 
 const NewsFeed: React.FC = () => {
   return (
@@ -17,7 +17,7 @@ const NewsFeed: React.FC = () => {
         >
           <div
             className="w-full absolute flex justify-center"
-            style={{ bottom: '13%' }}
+            style={{ bottom: "13%" }}
           >
             <button className="focus:outline-none z-40 w-10 h-10 bg-primary rounded-full border-4 border-white">
               <i className="text-white fas fa-plus"></i>
@@ -28,7 +28,7 @@ const NewsFeed: React.FC = () => {
           </div>
         </div>
         {storiesData.length
-          ? storiesData.map((story, idx) => <Story key={idx} story={story} />)
+          ? storiesData.map((story) => <Story key={story._id} story={story} />)
           : null}
       </div>
       {/* Create Post       */}

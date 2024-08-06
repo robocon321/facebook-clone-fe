@@ -1,9 +1,10 @@
-"use client"
+"use client";
 
-import Link from 'next/link';
-import { AppContext } from 'app/_providers/AppProvider';
-import React, { useContext } from 'react';
-import { AppContextType } from 'app/_type/AppType';
+import Link from "next/link";
+import { AppContext } from "app/_providers/AppProvider";
+import React, { useContext } from "react";
+import { AppContextType } from "app/_type/AppType";
+import Image from "next/image";
 
 const LeftSidebar: React.FC = () => {
   const { appState } = useContext(AppContext) as AppContextType;
@@ -13,19 +14,21 @@ const LeftSidebar: React.FC = () => {
       <ul className="w-full text-gray-600">
         <li className="h-12 mb-2 flex items-center justify-content cursor-pointer space-x-2 p-2 rounded-md hover:bg-gray-200">
           <div>
-            <img
+            <Image
               className="w-8 h-8 rounded-full"
               src="https://random.imagecdn.app/200/200"
               alt="user"
             />
           </div>
           <div>
-            <p className="text-sm font-semibold">{appState.data.user?.lastName} {appState.data.user?.firstName}</p>
+            <p className="text-sm font-semibold">
+              {appState.data.user?.lastName} {appState.data.user?.firstName}
+            </p>
           </div>
         </li>
         <li className="h-12 mb-2 flex items-center justify-content cursor-pointer space-x-2 p-2 rounded-md hover:bg-gray-200">
           <div>
-            <img
+            <Image
               className="w-8 h-8 rounded-full"
               src="https://static.xx.fbcdn.net/rsrc.php/v3/yR/r/tInzwsw2pVX.png"
               alt="info"
@@ -36,38 +39,43 @@ const LeftSidebar: React.FC = () => {
           </div>
         </li>
         <li className="h-12 mb-2 cursor-pointer flex items-center space-x-2 p-2 rounded-md hover:bg-gray-200">
-          <Link href={"/friends"} className="flex items-center justify-content w-full h-full">
+          <Link
+            href={"/friends"}
+            className="flex items-center justify-content w-full h-full"
+          >
             <div>
-              <i data-visualcompletion="css-img" style={{
-                backgroundImage: "url('/navbar-icon.png')",
-                backgroundPosition: "0 -296px",
-                backgroundSize: "auto",
-                width: "36px",
-                height: "36px",
-                backgroundRepeat: "no-repeat",
-                display: "inline-block"
-              }}
+              <i
+                data-visualcompletion="css-Image"
+                style={{
+                  backgroundImage: "url('/navbar-icon.png')",
+                  backgroundPosition: "0 -296px",
+                  backgroundSize: "auto",
+                  width: "36px",
+                  height: "36px",
+                  backgroundRepeat: "no-repeat",
+                  display: "inline-block",
+                }}
               ></i>
             </div>
             <div>
               <p className="text-sm font-semibold ml-2">Friends</p>
             </div>
-
           </Link>
         </li>
         <li className="h-12 mb-2 flex items-center justify-content cursor-pointer space-x-2 p-2 rounded-md hover:bg-gray-200">
           <div>
-            <i data-visualcompletion="css-img" style={{
-              backgroundImage: "url('/navbar-icon.png')",
-              backgroundPosition: "0 -444px",
-              backgroundSize: "auto",
-              width: "36px",
-              height: "36px",
-              backgroundRepeat: "no-repeat",
-              display: "inline-block"
-            }}
+            <i
+              data-visualcompletion="css-Image"
+              style={{
+                backgroundImage: "url('/navbar-icon.png')",
+                backgroundPosition: "0 -444px",
+                backgroundSize: "auto",
+                width: "36px",
+                height: "36px",
+                backgroundRepeat: "no-repeat",
+                display: "inline-block",
+              }}
             ></i>
-
           </div>
           <div>
             <p className="text-sm font-semibold">Memories</p>
@@ -75,15 +83,17 @@ const LeftSidebar: React.FC = () => {
         </li>
         <li className="h-12 mb-2 flex items-center justify-content cursor-pointer space-x-2 p-2 rounded-md hover:bg-gray-200">
           <div>
-            <i data-visualcompletion="css-img" style={{
-              backgroundImage: "url('/navbar-icon.png')",
-              backgroundPosition: "0 -111px",
-              backgroundSize: "auto",
-              width: "36px",
-              height: "36px",
-              backgroundRepeat: "no-repeat",
-              display: "inline-block"
-            }}
+            <i
+              data-visualcompletion="css-Image"
+              style={{
+                backgroundImage: "url('/navbar-icon.png')",
+                backgroundPosition: "0 -111px",
+                backgroundSize: "auto",
+                width: "36px",
+                height: "36px",
+                backgroundRepeat: "no-repeat",
+                display: "inline-block",
+              }}
             ></i>
           </div>
           <div>
@@ -92,15 +102,17 @@ const LeftSidebar: React.FC = () => {
         </li>
         <li className="h-12 mb-2 flex items-center justify-content cursor-pointer space-x-2 p-2 rounded-md hover:bg-gray-200">
           <div>
-            <i data-visualcompletion="css-img" style={{
-              backgroundImage: "url('/navbar-icon.png')",
-              backgroundPosition: "0 -37px",
-              backgroundSize: "auto",
-              width: "36px",
-              height: "36px",
-              backgroundRepeat: "no-repeat",
-              display: "inline-block"
-            }}
+            <i
+              data-visualcompletion="css-Image"
+              style={{
+                backgroundImage: "url('/navbar-icon.png')",
+                backgroundPosition: "0 -37px",
+                backgroundSize: "auto",
+                width: "36px",
+                height: "36px",
+                backgroundRepeat: "no-repeat",
+                display: "inline-block",
+              }}
             ></i>
           </div>
           <div>

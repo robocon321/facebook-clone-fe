@@ -1,4 +1,5 @@
-export interface IUser {
+export interface IUser
+{
   fullname: string;
   username: string;
   email: string;
@@ -10,16 +11,10 @@ export interface IUser {
   currentCity: string;
   relationship: string;
   phone?: string;
-  //   work: [IWork];
-  //   education: [IEducation];
-  //   website: [IWebsite];
-  //   social: [ISocial];
-  //   gender: IGender;
-  //   interest: IInterest;
-  //   religion: IReligion;
 }
 
-export interface IStory {
+export interface IStory
+{
   _id: string;
   image: string;
   user: {

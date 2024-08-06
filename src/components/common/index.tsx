@@ -1,6 +1,6 @@
-"use client"
+"use client";
 
-import React from 'react';
+import React from "react";
 
 interface IProps {
   children?: React.ReactNode;
@@ -11,7 +11,7 @@ const MainContentContainer: React.FC<IProps> = (props) => {
   return (
     <div
       className=""
-      style={{ marginTop: '3.5rem', minHeight: 'calc(100% - 4rem)' }}
+      style={{ marginTop: "3.5rem", minHeight: "calc(100% - 4rem)" }}
     >
       {children}
     </div>

@@ -1,19 +1,17 @@
-"use client"
+"use client";
 
-import React, { useState } from 'react';
-import { TPostView } from 'types/post';
-import { ProfileResponse } from 'types/responses/ProfileResponse';
-// import PostContainer from 'components/containers/PostContainer';
-// import CreatePostBox from 'app/(main)/home/_components/post/create-post';
+import React, { useState } from "react";
+import { TPostView } from "types/post";
+import { ProfileResponse } from "types/responses/ProfileResponse";
 
 type ProfileTypeProps = {
-  profile: ProfileResponse
-}
+  profile: ProfileResponse;
+};
 
 const Profile: React.FC<ProfileTypeProps> = (props) => {
   const { profile } = props;
-  const [postsView, setPostsView] = useState<TPostView>('listView');
-  
+  const [postsView, setPostsView] = useState<TPostView>("listView");
+
   return (
     <div className="w-full h-full">
       <div className="w-full h-auto shadow bg-white rounded-md">
@@ -22,14 +20,14 @@ const Profile: React.FC<ProfileTypeProps> = (props) => {
             className="h-96 max-h-96 w-full rounded-lg relative"
             style={{
               backgroundImage: `url(${profile.coverPhotoUrl})`,
-              backgroundRepeat: 'no-repeat',
-              backgroundSize: 'cover',
-              backgroundPosition: 'center',
+              backgroundRepeat: "no-repeat",
+              backgroundSize: "cover",
+              backgroundPosition: "center",
             }}
           >
             <div
               className="absolute  w-full flex items-center justify-center"
-              style={{ bottom: '-15px' }}
+              style={{ bottom: "-15px" }}
             >
               <div className="w-44 h-44 rounded-full bg-gray-300 border-4 border-white">
                 <img
@@ -47,7 +45,9 @@ const Profile: React.FC<ProfileTypeProps> = (props) => {
           </div>
           <div className="max-w-5xl h-full mx-auto">
             <div className="flex flex-col space-y-2 mt-3 items-center justify-center pb-3 border-b-2">
-              <p className="text-4xl font-bold">{profile.lastName + " " + profile.firstName}</p>
+              <p className="text-4xl font-bold">
+                {profile.lastName + " " + profile.firstName}
+              </p>
               <p className="text-sm text-gray-500">Software Engineer</p>
             </div>
             <div className="mt-1 flex items-center justify-between">
@@ -100,7 +100,7 @@ const Profile: React.FC<ProfileTypeProps> = (props) => {
                     <i className="fas fa-briefcase"></i>
                   </span>
                   <p>
-                    Full Stack Web Developer at{' '}
+                    Full Stack Web Developer at{" "}
                     <span className="font-semibold">Fiverr</span>
                   </p>
                 </div>
@@ -109,7 +109,7 @@ const Profile: React.FC<ProfileTypeProps> = (props) => {
                     <i className="fas fa-graduation-cap"></i>
                   </span>
                   <p>
-                    Studiend B.Sc in SWE at{' '}
+                    Studiend B.Sc in SWE at{" "}
                     <span className="font-semibold">
                       Daffodil International University
                     </span>
@@ -128,7 +128,7 @@ const Profile: React.FC<ProfileTypeProps> = (props) => {
                     <i className="fas fa-map-marker-alt"></i>
                   </span>
                   <p>
-                    From{' '}
+                    From{" "}
                     <span className="font-semibold">
                       Chandpur, Chittagong, Bangladesh
                     </span>
@@ -149,7 +149,7 @@ const Profile: React.FC<ProfileTypeProps> = (props) => {
                   <a
                     target="_blank"
                     rel="noopener noreferrer"
-                    href={'https://facebook.com/saifulshihab'}
+                    href={"https://facebook.com/saifulshihab"}
                   >
                     <p>saifulshihab</p>
                   </a>
@@ -161,7 +161,7 @@ const Profile: React.FC<ProfileTypeProps> = (props) => {
                   <a
                     target="_blank"
                     rel="noopener noreferrer"
-                    href={'https://instagram.com/_shiha6'}
+                    href={"https://instagram.com/_shiha6"}
                   >
                     <p>_shiha6</p>
                   </a>
@@ -173,7 +173,7 @@ const Profile: React.FC<ProfileTypeProps> = (props) => {
                   <a
                     target="_blank"
                     rel="noopener noreferrer"
-                    href={'https://twitter.com/ShihabSWE'}
+                    href={"https://twitter.com/ShihabSWE"}
                   >
                     <p>ShihabSWE</p>
                   </a>
@@ -185,7 +185,7 @@ const Profile: React.FC<ProfileTypeProps> = (props) => {
                   <a
                     target="_blank"
                     rel="noopener noreferrer"
-                    href={'https://github.com/saifulshihab'}
+                    href={"https://github.com/saifulshihab"}
                   >
                     <p>saifulshihab</p>
                   </a>
@@ -197,7 +197,7 @@ const Profile: React.FC<ProfileTypeProps> = (props) => {
                   <a
                     target="_blank"
                     rel="noopener noreferrer"
-                    href={'https://www.behance.net/saifulis1am'}
+                    href={"https://www.behance.net/saifulis1am"}
                   >
                     <p>saifulis1am</p>
                   </a>
@@ -226,17 +226,17 @@ const Profile: React.FC<ProfileTypeProps> = (props) => {
               <div className="flex space-x-3 text-gray-500 mt-1 -mb-1">
                 <button
                   className={`font-semibold flex-1 h-8 focus:outline-none justify-center space-x-2 hover:bg-gray-100 rounded-md ${
-                    postsView === 'listView' ? 'bg-gray-200' : undefined
+                    postsView === "listView" ? "bg-gray-200" : undefined
                   }`}
-                  onClick={() => setPostsView('listView')}
+                  onClick={() => setPostsView("listView")}
                 >
                   <i className="fas fa-bars mr-2"></i>List View
                 </button>
                 <button
                   className={`font-semibold flex-1 h-8 focus:outline-none justify-center space-x-2 hover:bg-gray-100 rounded-md  ${
-                    postsView === 'gridView' ? 'bg-gray-200' : undefined
+                    postsView === "gridView" ? "bg-gray-200" : undefined
                   }`}
-                  onClick={() => setPostsView('gridView')}
+                  onClick={() => setPostsView("gridView")}
                 >
                   <i className="fas fa-th-large mr-2"></i>Grid View
                 </button>

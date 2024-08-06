@@ -1,6 +1,6 @@
 export type UserResponseType = {
     id: string,
-    firstname: string, 
+    firstname: string,
     lastname: string,
     username: string
 }

@@ -14,33 +14,37 @@ import { RegisterContextType } from "app/(auth)/signup/_type/RegisterType";
 const genderData = [
   {
     id: 1,
-    text: 'Male',
-    value: 'MALE'
+    text: "Male",
+    value: "MALE",
   },
   {
     id: 2,
-    text: 'Female',
-    value: 'FEMALE'
+    text: "Female",
+    value: "FEMALE",
   },
   {
     id: 3,
-    text: 'Other',
-    value: 'OTHER'
-  }
-]
+    text: "Other",
+    value: "OTHER",
+  },
+];
 
 const RegisterPage: React.FC = () => {
-
-  const { register, registerState } = useContext(RegisterContext) as RegisterContextType;
+  const { register, registerState } = useContext(
+    RegisterContext
+  ) as RegisterContextType;
 
   const fieldValidationSchema = yup.object({
     email: yup.string().email("Invalid email").required("Email required"),
     phone: yup.string().required("Phone required"),
     firstName: yup.string().required("First name required"),
     lastName: yup.string().required("Last name required"),
-    password: yup.string().min(5, "Password must be >= 5 letters").required("Password required"),
+    password: yup
+      .string()
+      .min(5, "Password must be >= 5 letters")
+      .required("Password required"),
     birthdate: yup.string().required("Birthdate require"),
-    gender: yup.string().required("Gender required")
+    gender: yup.string().required("Gender required"),
   });
 
   return (
@@ -69,7 +73,7 @@ const RegisterPage: React.FC = () => {
                     <div className="flex-1 mr-1.5">
                       <TextInput
                         className="my-0"
-                        inputsize="large"
+                        inputSize="large"
                         type="text"
                         placeholder="First name"
                         name="firstName"
@@ -78,7 +82,7 @@ const RegisterPage: React.FC = () => {
                     <div className="flex-1 ml-1.5">
                       <TextInput
                         className="my-0"
-                        inputsize="large"
+                        inputSize="large"
                         type="text"
                         placeholder="Last name"
                         name="lastName"
@@ -86,31 +90,31 @@ const RegisterPage: React.FC = () => {
                     </div>
                   </div>
                   <TextInput
-                    inputsize="large"
+                    inputSize="large"
                     type="text"
                     placeholder="Email"
                     name="email"
                   />
                   <TextInput
-                    inputsize="large"
+                    inputSize="large"
                     type="text"
                     placeholder="Phone"
                     name="phone"
                   />
                   <TextInput
-                    inputsize="large"
+                    inputSize="large"
                     name="password"
                     type="password"
                     placeholder="Password"
                   />
                   <label htmlFor="birthdate">Date of birth</label>
                   <TextInput
-                    inputsize="large"
+                    inputSize="large"
                     type="date"
                     placeholder="Birthdate"
                     name="birthdate"
                   />
-                  <label>Gender</label>
+                  <label htmlFor="gender">Gender</label>
                   <SelectOptionInput data={genderData} name="gender" />
                   <Button
                     type="submit"
@@ -122,7 +126,9 @@ const RegisterPage: React.FC = () => {
                   >
                     Register
                   </Button>
-                  <div className="text-sm w-full text-red-500">{registerState.error}</div>
+                  <div className="text-sm w-full text-red-500">
+                    {registerState.error}
+                  </div>
                 </form>
               )}
             </Formik>
@@ -133,7 +139,7 @@ const RegisterPage: React.FC = () => {
                   size="large"
                   bg="bg-green-600"
                   fontSize="text-xl"
-                  block='true'
+                  block="true"
                 >
                   Log into account
                 </Button>

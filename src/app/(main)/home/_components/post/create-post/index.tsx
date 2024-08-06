@@ -1,26 +1,33 @@
-"use client"
-import { TAB_CODE } from 'app/(main)/home/_constant/HomeConstant';
-import { ModalContext } from 'app/(main)/home/_providers/ModalProvider';
-import React, { useContext } from 'react';
-import { ModalContextType } from 'app/(main)/home/_type/ModalType';
+"use client";
+import { TAB_CODE } from "app/(main)/home/_constant/HomeConstant";
+import { ModalContext } from "app/(main)/home/_providers/ModalProvider";
+import React, { useContext } from "react";
+import { ModalContextType } from "app/(main)/home/_type/ModalType";
+import Image from "next/image";
 
 const CreatePostBox: React.FC = () => {
-  const { controlModalState, setControlModalState, changeTabIndexModal } = useContext(ModalContext) as ModalContextType; 
-  
+  const { controlModalState, setControlModalState, changeTabIndexModal } =
+    useContext(ModalContext) as ModalContextType;
+
   return (
     <div className="rounded-lg bg-white flex flex-col p-3 px-4 shadow">
       <div className="flex items-center space-x-2 border-b pb-3 mb-2">
         <div className="w-10 h-10">
-          <img
+          <Image
             src="https://random.imagecdn.app/200/200"
             className="w-full h-full rounded-full"
             alt="dp"
           />
         </div>
-        <button onClick={() => setControlModalState({
-          ...controlModalState,
-          isShowModal: true
-        })} className="hover:bg-gray-200 focus:bg-gray-300 focus:outline-none flex-grow bg-gray-100 text-gray-500 text-left rounded-full h-10 pl-5">
+        <button
+          onClick={() =>
+            setControlModalState({
+              ...controlModalState,
+              isShowModal: true,
+            })
+          }
+          className="hover:bg-gray-200 focus:bg-gray-300 focus:outline-none flex-grow bg-gray-100 text-gray-500 text-left rounded-full h-10 pl-5"
+        >
           What&apos;s on your mind, Shihab?
         </button>
       </div>
@@ -38,7 +45,12 @@ const CreatePostBox: React.FC = () => {
             <i className="fas fa-images text-green-500"></i>
           </div>
           <div>
-            <p onClick={() => changeTabIndexModal(TAB_CODE.EDIT_FILE)} className="font-semibold">Photos/Video</p>
+            <p
+              onClick={() => changeTabIndexModal(TAB_CODE.EDIT_FILE)}
+              className="font-semibold"
+            >
+              Photos/Video
+            </p>
           </div>
         </button>
         <button className="flex-1 flex items-center h-8 focus:outline-none focus:bg-gray-200 justify-center space-x-2 hover:bg-gray-100 rounded-md">
@@ -46,7 +58,12 @@ const CreatePostBox: React.FC = () => {
             <i className="far fa-smile text-yellow-500"></i>
           </div>
           <div>
-            <p onClick={() => changeTabIndexModal(TAB_CODE.EMOTION)} className="font-semibold">Feeling/Activity</p>
+            <p
+              onClick={() => changeTabIndexModal(TAB_CODE.EMOTION)}
+              className="font-semibold"
+            >
+              Feeling/Activity
+            </p>
           </div>
         </button>
       </div>

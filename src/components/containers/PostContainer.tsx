@@ -1,9 +1,9 @@
-import Post from 'app/(main)/home/_components/post/single-post';
-import { NewsFeedContext } from 'app/(main)/home/_providers/NewFeedsProvider';
-import React, { useContext } from 'react';
-import { NewsFeedContextType } from 'app/(main)/home/_type/NewsFeedType';
+import Post from "app/(main)/home/_components/post/single-post";
+import { NewsFeedContext } from "app/(main)/home/_providers/NewFeedsProvider";
+import React, { useContext } from "react";
+import { NewsFeedContextType } from "app/(main)/home/_type/NewsFeedType";
 
-type TPostView = 'gridView' | 'listView';
+type TPostView = "gridView" | "listView";
 
 interface IProps {
   postsView?: TPostView;
@@ -16,11 +16,13 @@ const PostContainer: React.FC<IProps> = (props) => {
     <div className="mt-4 w-full h-full">
       <div
         className={`grid ${
-          postsView === 'gridView' ? 'grid-cols-2' : 'grid-cols-1'
+          postsView === "gridView" ? "grid-cols-2" : "grid-cols-1"
         } gap-2`}
       >
         {newsFeedData.posts.length ? (
-          newsFeedData.posts.map((post, idx) => <Post key={post.postId} post={post} />)
+          newsFeedData.posts.map((post, idx) => (
+            <Post key={post.postId} post={post} />
+          ))
         ) : (
           <p>No posts yet!</p>
         )}

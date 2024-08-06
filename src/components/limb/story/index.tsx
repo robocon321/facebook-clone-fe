@@ -1,5 +1,6 @@
-import React from 'react';
-import { IStory } from '../../../types/user';
+import React from "react";
+import { IStory } from "../../../types/user";
+import Image from "next/image";
 
 interface IProps {
   story: IStory;
@@ -14,13 +15,13 @@ const Story: React.FC<IProps> = (props) => {
       style={{ backgroundImage: `url(${story.image})` }}
     >
       <div className="absolute">
-        <img
-          src={user.dp}
+        <Image
+          src={user.dp ?? ""}
           className="w-10 h-10 rounded-full border-4 border-white"
           alt="story"
         />
       </div>
-      <div className="absolute text-center" style={{ bottom: '5%' }}>
+      <div className="absolute text-center" style={{ bottom: "5%" }}>
         <p className="text-white font-semibold">{user.fullname}</p>
       </div>
     </div>

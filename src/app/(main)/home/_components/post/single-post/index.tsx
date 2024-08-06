@@ -1,12 +1,12 @@
-import React from 'react';
-import { PostResponse } from 'app/(main)/home/_type/NewsFeedType';
-import BodyPost from './BodyPost';
-import FooterPost from './FooterPost';
-import HeaderPost from './HeaderPost';
+import React from "react";
+import BodyPost from "./BodyPost";
+import FooterPost from "./FooterPost";
+import HeaderPost from "./HeaderPost";
+import { PostResponse } from "types/responses/PostResponse";
 
 type PostTypeProps = {
-  post: PostResponse
-}
+  post: PostResponse;
+};
 
 const Post: React.FC<PostTypeProps> = (props) => {
   const { post } = props;

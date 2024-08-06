@@ -11,7 +11,6 @@ import Loading from "components/limb/loading/Loading";
 import { LoginContextType } from "app/(auth)/login/_type/LoginType";
 
 const LoginPage: React.FC = () => {
-
   const { login, loginState } = useContext(LoginContext) as LoginContextType;
 
   const fieldValidationSchema = yup.object({
@@ -37,13 +36,13 @@ const LoginPage: React.FC = () => {
               {({ handleSubmit }) => (
                 <form onSubmit={handleSubmit}>
                   <TextInput
-                    inputsize="large"
+                    inputSize="large"
                     type="text"
                     placeholder="Email address or phone number"
                     name="username"
                   />
                   <TextInput
-                    inputsize="large"
+                    inputSize="large"
                     name="password"
                     type="password"
                     placeholder="Password"
@@ -58,7 +57,9 @@ const LoginPage: React.FC = () => {
                   >
                     Login
                   </Button>
-                  <div className="text-sm w-full text-red-500">{loginState.error}</div>
+                  <div className="text-sm w-full text-red-500">
+                    {loginState.error}
+                  </div>
                   <div className="mt-2 text-center pb-3 border-b border-gray-300">
                     <p className="text-white cursor-pointer underline">
                       Forgot password?

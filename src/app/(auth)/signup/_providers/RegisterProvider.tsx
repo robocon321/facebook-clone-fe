@@ -1,56 +1,65 @@
 "use client";
 
-import { createContext, useState, useContext, useEffect } from "react";
+import { createContext, useMemo, useState } from "react";
 import { RegisterRequest } from "types/requests/RegisterRequest";
 import * as RegisterService from "services/AuthService";
-import { useRouter } from 'next/navigation'
-import { RegisterContextType, RegisterStateType } from "app/(auth)/signup/_type/RegisterType";
+import { useRouter } from "next/navigation";
+import {
+  RegisterContextType,
+  RegisterStateType,
+} from "app/(auth)/signup/_type/RegisterType";
 
 export const RegisterContext = createContext<RegisterContextType | null>(null);
 
 const registerStateType: RegisterStateType = {
   isLoading: false,
   message: null,
-  error: null
-}
+  error: null,
+};
 
 const RegisterProvider = (props: any) => {
   const router = useRouter();
 
-  const [registerState, setRegisterstate] = useState(registerStateType);
+  const [registerState, setRegisterState] = useState(registerStateType);
 
   const register = async (request: RegisterRequest) => {
-    setRegisterstate((prevState) => ({
+    setRegisterState({
       isLoading: true,
       message: null,
-      error: null
-    }));
-      await RegisterService.register(request)
+      error: null,
+    });
+    await RegisterService.register(request)
       .then((data) => {
-        setRegisterstate((prevState) => ({
+        setRegisterState({
           isLoading: false,
           message: data,
-          error: null
-        }));
-        router.push('/login');
+          error: null,
+        });
+        router.push("/login");
       })
       .catch((error: Error) => {
-        setRegisterstate((prevState) => ({
+        setRegisterState({
           isLoading: false,
           message: null,
-          error: error.message
-        }));
+          error: error.message,
+        });
       });
-  }
+  };
 
-  const value = {
-    registerState,
-    register
-  }
+  const value = useMemo(
+    () => ({
+      registerState,
+      register,
+    }),
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+    [registerState]
+  );
 
   return (
-    <RegisterContext.Provider value={value}>{props.children}</RegisterContext.Provider>
-  )
-}
+    <RegisterContext.Provider value={value}>
+      {props.children}
+    </RegisterContext.Provider>
+  );
+};
 
 export default RegisterProvider;
