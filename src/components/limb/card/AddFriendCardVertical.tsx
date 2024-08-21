@@ -17,6 +17,7 @@ const AddFriendCardVertical: React.FC<AddFriendCardTypeProps> = (props) => {
     <div className="bg-white mr-2 rounded overflow-hidden shadow-md">
       <div className="mb-2 h-[200px]">
         <Image
+          layout="fill"
           className="w-full h-full"
           src={account.profilePictureUrl}
           alt="Not found"
@@ -34,6 +35,7 @@ const AddFriendCardVertical: React.FC<AddFriendCardTypeProps> = (props) => {
                 className={"w-5 h-5" + (index > 0 ? " ml-[-10px]" : "")}
               >
                 <Image
+                  layout="fill"
                   className="w-full h-full rounded-full border-white border"
                   src={item.profilePictureUrl}
                   alt="Not found"

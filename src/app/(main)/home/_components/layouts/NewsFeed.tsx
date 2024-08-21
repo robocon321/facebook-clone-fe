@@ -1,6 +1,6 @@
 import React from "react";
-import CreatePostBox from "app/(main)/home/_components/post/create-post";
-import PostContainer from "components/containers/PostContainer";
+import CreateArticleBox from "app/(main)/home/_components/article/create-article";
+import ArticleContainer from "components/containers/ArticleContainer";
 import Story from "components/limb/story";
 import { storiesData } from "database";
 
@@ -31,10 +31,10 @@ const NewsFeed: React.FC = () => {
           ? storiesData.map((story) => <Story key={story._id} story={story} />)
           : null}
       </div>
-      {/* Create Post       */}
-      <CreatePostBox />
-      {/* All posts */}
-      <PostContainer />
+      {/* Create Article       */}
+      <CreateArticleBox />
+      {/* All articles */}
+      <ArticleContainer />
     </div>
   );
 };

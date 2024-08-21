@@ -3,11 +3,11 @@
 import Loading from "components/limb/loading/Loading";
 import * as DetailImage from "app/(main)/home/_components/modals/sub-tab/detail-tab/detail-image";
 import * as DetailVideo from "app/(main)/home/_components/modals/sub-tab/detail-tab/detail-video/DetailVideo";
-import * as AddToPost from "app/(main)/home/_components/modals/sub-tab/func-tab/AddToPost";
+import * as AddToArticle from "app/(main)/home/_components/modals/sub-tab/func-tab/AddToArticle";
 import * as Checkin from "app/(main)/home/_components/modals/sub-tab/func-tab/CheckinLocation";
 import * as EditFile from "app/(main)/home/_components/modals/sub-tab/func-tab/EditFile";
 import * as Emotion from "app/(main)/home/_components/modals/sub-tab/func-tab/Emotion";
-import * as PostScope from "app/(main)/home/_components/modals/sub-tab/func-tab/PostScope";
+import * as ArticleScope from "app/(main)/home/_components/modals/sub-tab/func-tab/ArticleScope";
 import * as TagFriend from "app/(main)/home/_components/modals/sub-tab/func-tab/TagFriend";
 import { TAB_CODE } from "app/(main)/home/_constant/HomeConstant";
 import { AppContext } from "app/_providers/AppProvider";
@@ -80,10 +80,10 @@ const ModalProvider = (props: any) => {
       setTabState({
         ...tabState,
         funcTab: {
-          title: AddToPost.title,
-          leftIcon: <AddToPost.LeftIconComponent />,
-          rightIcon: <AddToPost.RightIconComponent />,
-          children: <AddToPost.ChildrenIconComponent />,
+          title: AddToArticle.title,
+          leftIcon: <AddToArticle.LeftIconComponent />,
+          rightIcon: <AddToArticle.RightIconComponent />,
+          children: <AddToArticle.ChildrenIconComponent />,
         },
         detailFuncTab: defaultTabState.detailFuncTab,
       });
@@ -172,10 +172,10 @@ const ModalProvider = (props: any) => {
       setTabState({
         ...tabState,
         funcTab: {
-          title: PostScope.title,
-          leftIcon: <PostScope.LeftIconComponent />,
-          rightIcon: <PostScope.RightIconComponent />,
-          children: <PostScope.ChildrenIconComponent />,
+          title: ArticleScope.title,
+          leftIcon: <ArticleScope.LeftIconComponent />,
+          rightIcon: <ArticleScope.RightIconComponent />,
+          children: <ArticleScope.ChildrenIconComponent />,
         },
         detailFuncTab: defaultTabState.detailFuncTab,
       });

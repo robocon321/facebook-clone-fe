@@ -26,6 +26,7 @@ function Entry(props: Readonly<EntryComponentProps>): ReactElement {
     >
       <span className="mr-2 w-[20px] h-[20px]">
         <Image
+          layout="fill"
           className="w-full h-full rounded-full"
           src="https://random.imagecdn.app/500/400"
           alt="Not found"

@@ -4,6 +4,6 @@ export type RegisterRequest = {
     password: string,
     firstName: string,
     lastName: string,
-    birthdate: string,
+    birthday: string,
     gender: string
 }

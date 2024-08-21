@@ -30,44 +30,69 @@ export const ChildrenIconComponent: React.FC = () => {
         onClick={() => changeTabIndexModal(TAB_CODE.EDIT_FILE)}
         className="flex items-center hover:bg-gray-100 p-4 rounded cursor-pointer"
       >
-        <Image className="mr-2" src="/image.png" alt="Not found" />
+        <Image
+          layout="fill"
+          className="mr-2"
+          src="/image.png"
+          alt="Not found"
+        />
         <div>Picture/video</div>
       </div>
       <div
         onClick={() => changeTabIndexModal(TAB_CODE.TAG_FRIEND)}
         className="flex items-center hover:bg-gray-100 p-4 rounded cursor-pointer"
       >
-        <Image className="mr-2" src="/tag.png" alt="Not found" />
+        <Image layout="fill" className="mr-2" src="/tag.png" alt="Not found" />
         <div>Tag other people</div>
       </div>
       <div
         onClick={() => changeTabIndexModal(TAB_CODE.EMOTION)}
         className="flex items-center hover:bg-gray-100 p-4 rounded cursor-pointer"
       >
-        <Image className="mr-2" src="/emoji-yellow.png" alt="Not found" />
+        <Image
+          layout="fill"
+          className="mr-2"
+          src="/emoji-yellow.png"
+          alt="Not found"
+        />
         <div>Motion/Activity</div>
       </div>
       <div
         onClick={() => changeTabIndexModal(TAB_CODE.CHECKIN)}
         className="flex items-center hover:bg-gray-100 p-4 rounded cursor-pointer"
       >
-        <Image className="mr-2" src="/locate.png" alt="Not found" />
+        <Image
+          layout="fill"
+          className="mr-2"
+          src="/locate.png"
+          alt="Not found"
+        />
         <div>Check in</div>
       </div>
       <div className="flex items-center hover:bg-gray-100 p-4 rounded cursor-pointer">
-        <Image className="mr-2" src="/gif.png" alt="Not found" />
+        <Image layout="fill" className="mr-2" src="/gif.png" alt="Not found" />
         <div>File GIF</div>
       </div>
       <div className="flex items-center hover:bg-gray-100 p-4 rounded cursor-pointer">
-        <Image className="mr-2" src="/livestream.png" alt="Not found" />
+        <Image
+          layout="fill"
+          className="mr-2"
+          src="/livestream.png"
+          alt="Not found"
+        />
         <div>Livestream</div>
       </div>
       <div className="flex items-center hover:bg-gray-100 p-4 rounded cursor-pointer">
-        <Image className="mr-2" src="/event.png" alt="Not found" />
+        <Image
+          layout="fill"
+          className="mr-2"
+          src="/event.png"
+          alt="Not found"
+        />
         <div>Event</div>
       </div>
     </div>
   );
 };
 
-export const title = "Add to your post";
+export const title = "Add to your article";

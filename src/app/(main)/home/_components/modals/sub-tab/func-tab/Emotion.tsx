@@ -89,6 +89,7 @@ export const ChildrenIconComponent: React.FC = () => {
             >
               <span className="mr-2 w-[50px] h-[50px]">
                 <Image
+                  layout="fill"
                   className="w-full h-full rounded-full"
                   src={item.imageUrl}
                   alt="Not found"

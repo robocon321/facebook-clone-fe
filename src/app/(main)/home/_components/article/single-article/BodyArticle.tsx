@@ -1,25 +1,25 @@
 import Image from "next/image";
 import { useEffect, useState } from "react";
 import {
-  ImagePostResponse,
-  PostResponse,
-  VideoPostResponse,
-} from "types/responses/PostResponse";
+  ImageArticleResponse,
+  ArticleResponse,
+  VideoArticleResponse,
+} from "types/responses/ArticleResponse";
 
-type PostTypeProps = {
-  post: PostResponse;
+type ArticleTypeProps = {
+  article: ArticleResponse;
 };
 
-const BodyPost: React.FC<PostTypeProps> = (props) => {
-  const [files, setFiles] = useState<(ImagePostResponse | VideoPostResponse)[]>(
-    []
-  );
-  const { post } = props;
+const BodyArticle: React.FC<ArticleTypeProps> = (props) => {
+  const [files, setFiles] = useState<
+    (ImageArticleResponse | VideoArticleResponse)[]
+  >([]);
+  const { article } = props;
 
   useEffect(() => {
-    let arr: (ImagePostResponse | VideoPostResponse)[] = [];
-    if (post.images) arr.push(...post.images);
-    if (post.videos) arr.push(...post.videos);
+    let arr: (ImageArticleResponse | VideoArticleResponse)[] = [];
+    if (article.images) arr.push(...article.images);
+    if (article.videos) arr.push(...article.videos);
     arr = arr.sort((a, b) => (a.modTime > b.modTime ? 1 : -1));
     setFiles(arr);
     // eslint-disable-next-line react-hooks/exhaustive-deps
@@ -41,15 +41,16 @@ const BodyPost: React.FC<PostTypeProps> = (props) => {
     <div className="flex flex-wrap">
       {files.length <= 3 ? (
         files.map((item, index) =>
-          "imagePostId" in item ? (
+          "imageArticleId" in item ? (
             <div
-              key={item.imagePostId}
+              key={item.imageArticleId}
               className={
                 "cursor-pointer h-76 max-h-100 p-4 " +
                 loadWidth(files.length, index)
               }
             >
               <Image
+                layout="fill"
                 src={
                   process.env.BACKEND_URL + "/file-management/" + item.fileUrl
                 }
@@ -79,15 +80,16 @@ const BodyPost: React.FC<PostTypeProps> = (props) => {
       ) : (
         <>
           {files.slice(0, 2).map((item, index) =>
-            "imagePostId" in item ? (
+            "imageArticleId" in item ? (
               <div
-                key={item.imagePostId}
+                key={item.imageArticleId}
                 className={
                   "cursor-pointer h-76 max-h-100 p-4 " +
                   loadWidth(files.length, index)
                 }
               >
                 <Image
+                  layout="fill"
                   src={
                     process.env.BACKEND_URL + "/file-management/" + item.fileUrl
                   }
@@ -125,4 +127,4 @@ const BodyPost: React.FC<PostTypeProps> = (props) => {
   );
 };
 
-export default BodyPost;
+export default BodyArticle;

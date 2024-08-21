@@ -74,7 +74,7 @@ const DragDropFiles = () => {
     });
   };
 
-  const resetImageVideoPost = (event: React.MouseEvent) => {
+  const resetImageVideoArticle = (event: React.MouseEvent) => {
     event.stopPropagation();
     setControlModalState({
       ...controlModalState,
@@ -116,6 +116,7 @@ const DragDropFiles = () => {
               return (
                 <div key={item.id} className="max-w-[250px] m-4">
                   <Image
+                    layout="fill"
                     className="w-full h-full"
                     src={`${blobUrl}`}
                     alt="Not found"
@@ -146,7 +147,7 @@ const DragDropFiles = () => {
           </button>
         </div>
         <div className="absolute flex top-[10px] right-[10px]">
-          <IconButton click={resetImageVideoPost} icon={faXmark} />
+          <IconButton click={resetImageVideoArticle} icon={faXmark} />
         </div>
       </div>
     );
@@ -170,7 +171,7 @@ const DragDropFiles = () => {
         <div className="font-bold">Add picture/video</div>
         <span>or drag and drop</span>
         <div className="absolute flex top-[10px] right-[10px]">
-          <IconButton click={resetImageVideoPost} icon={faXmark} />
+          <IconButton click={resetImageVideoArticle} icon={faXmark} />
         </div>
       </button>
     );

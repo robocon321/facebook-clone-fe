@@ -15,6 +15,7 @@ const LeftSidebar: React.FC = () => {
         <li className="h-12 mb-2 flex items-center justify-content cursor-pointer space-x-2 p-2 rounded-md hover:bg-gray-200">
           <div>
             <Image
+              layout="fill"
               className="w-8 h-8 rounded-full"
               src="https://random.imagecdn.app/200/200"
               alt="user"
@@ -29,6 +30,7 @@ const LeftSidebar: React.FC = () => {
         <li className="h-12 mb-2 flex items-center justify-content cursor-pointer space-x-2 p-2 rounded-md hover:bg-gray-200">
           <div>
             <Image
+              layout="fill"
               className="w-8 h-8 rounded-full"
               src="https://static.xx.fbcdn.net/rsrc.php/v3/yR/r/tInzwsw2pVX.png"
               alt="info"

@@ -106,6 +106,7 @@ export const ChildrenIconComponent: React.FC = () => {
           >
             <div className="mr-3 w-[50px] h-[50px] bg-gray-600 rounded overflow-hidden">
               <Image
+                layout="fill"
                 className="w-full h-full rounded-full"
                 src="/location.png"
                 alt="Not found"

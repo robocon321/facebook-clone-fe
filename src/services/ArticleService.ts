@@ -1,11 +1,11 @@
 import { DataStateType } from "app/(main)/home/_type/ModalType";
-import { CreatePostRequest, ImageType, VideoType } from "types/requests/CreatePostRequest";
+import { CreateArticleRequest, ImageType, VideoType } from "types/requests/CreateArticleRequest";
 import { PageRequest } from "types/requests/PageRequest";
 import { buildFormData } from "utils/FormDataUtils";
 
-export const createNewPost = async ( dataModal: DataStateType ): Promise<any> =>
+export const createNewArticle = async ( dataModal: DataStateType ): Promise<any> =>
 {
-    const request: CreatePostRequest = {
+    const request: CreateArticleRequest = {
         scope: dataModal.scope,
     }
     if ( dataModal.checkin )
@@ -88,7 +88,7 @@ export const createNewPost = async ( dataModal: DataStateType ): Promise<any> =>
     buildFormData( formData, request );
 
     const token = localStorage.getItem( 'token' );
-    const response = await fetch( `${ process.env.BACKEND_URL }/post`, {
+    const response = await fetch( `${ process.env.BACKEND_URL }/article`, {
         method: "POST",
         headers: {
             'Authorization': `Bearer ${ token }`
@@ -106,7 +106,7 @@ export const createNewPost = async ( dataModal: DataStateType ): Promise<any> =>
     }
 }
 
-export const recommendPost = async ( pageRequest?: PageRequest ): Promise<any> =>
+export const recommendArticle = async ( pageRequest?: PageRequest ): Promise<any> =>
 {
     const token = localStorage.getItem( 'token' );
     let queryParams: any = {
@@ -120,7 +120,7 @@ export const recommendPost = async ( pageRequest?: PageRequest ): Promise<any> =
         .map( ( key ) => `${ key }=${ queryParams[ key ] }` )
         .join( '&' );
 
-    const requestUrl = `${ process.env.BACKEND_URL }/post/recommend?${ queryString }`;
+    const requestUrl = `${ process.env.BACKEND_URL }/article/recommend?${ queryString }`;
 
     const response = await fetch( requestUrl, {
         method: "GET",

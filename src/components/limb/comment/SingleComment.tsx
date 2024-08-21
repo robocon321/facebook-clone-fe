@@ -11,16 +11,16 @@ import { AppContext } from "app/_providers/AppProvider";
 import React, { useContext, useEffect, useMemo, useState } from "react";
 import { AppContextType } from "app/_type/AppType";
 
-import { CommentPostResponse } from "types/responses/PostResponse";
+import { CommentArticleResponse } from "types/responses/ArticleResponse";
 import Image from "next/image";
 import { SubMentionComponentProps } from "@draft-js-plugins/mention/lib/Mention";
 
 type CommentTypeProps = {
-  comment: CommentPostResponse;
-  comments: CommentPostResponse[];
-  onReply: (comment: CommentPostResponse) => void;
+  comment: CommentArticleResponse;
+  comments: CommentArticleResponse[];
+  onReply: (comment: CommentArticleResponse) => void;
   client: Client | null;
-  postId: number;
+  articleId: number;
 };
 
 const MentionComponent = (mentionProps: SubMentionComponentProps) => {
@@ -33,7 +33,7 @@ const MentionComponent = (mentionProps: SubMentionComponentProps) => {
 
 const SingleComment: React.FC<CommentTypeProps> = (props) => {
   const { appState } = useContext(AppContext) as AppContextType;
-  const { comment, comments, onReply, client, postId } = props;
+  const { comment, comments, onReply, client, articleId } = props;
   const [editorState, setEditorState] = useState(() =>
     EditorState.createWithContent(convertFromRaw(JSON.parse(comment.text)))
   );
@@ -79,7 +79,7 @@ const SingleComment: React.FC<CommentTypeProps> = (props) => {
         )
       ) {
         client.publish({
-          destination: "/comment-app/emotion/delete/" + postId,
+          destination: "/comment-app/emotion/delete/" + articleId,
           body: comment.commentId + "",
         });
       } else {
@@ -88,7 +88,7 @@ const SingleComment: React.FC<CommentTypeProps> = (props) => {
           type: "LIKE",
         };
         client.publish({
-          destination: "/comment-app/emotion/create/" + postId,
+          destination: "/comment-app/emotion/create/" + articleId,
           body: JSON.stringify(message),
         });
       }
@@ -103,7 +103,7 @@ const SingleComment: React.FC<CommentTypeProps> = (props) => {
         type,
       };
       client.publish({
-        destination: "/comment-app/emotion/create/" + postId,
+        destination: "/comment-app/emotion/create/" + articleId,
         body: JSON.stringify(message),
       });
     }
@@ -114,6 +114,7 @@ const SingleComment: React.FC<CommentTypeProps> = (props) => {
       <div className="flex p-2">
         <div className="min-w-[2.5rem] min-h-[2.5rem] w-10 h-10 mt-2">
           <Image
+            layout="fill"
             className="w-full h-full rounded-full"
             src={"https://random.imagecdn.app/500/200"}
             alt="Not found"
@@ -149,6 +150,7 @@ const SingleComment: React.FC<CommentTypeProps> = (props) => {
                     </video>
                   ) : (
                     <Image
+                      layout="fill"
                       className="w-full h-full"
                       src={`http://localhost:9090/file-management/${comment.file.name}`}
                       alt="Not found"
@@ -170,6 +172,7 @@ const SingleComment: React.FC<CommentTypeProps> = (props) => {
                       }
                     >
                       <Image
+                        layout="fill"
                         className="w-full h-full rounded-full"
                         src={item.png}
                         alt="Not found"
@@ -203,6 +206,7 @@ const SingleComment: React.FC<CommentTypeProps> = (props) => {
                       className="w-10 h-10 p-1 relative"
                     >
                       <Image
+                        layout="fill"
                         className="w-full h-full rounded-full"
                         src={item.gif}
                         alt="Not found"
@@ -235,7 +239,7 @@ const SingleComment: React.FC<CommentTypeProps> = (props) => {
           <SingleComment
             key={item.commentId}
             client={client}
-            postId={postId}
+            articleId={articleId}
             comments={comments}
             onReply={onReply}
             comment={item}

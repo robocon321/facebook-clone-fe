@@ -40,6 +40,7 @@ const EditImageComponent: React.FC<EditImageType> = (props) => {
       )}
       <div className="relative">
         <Image
+          layout="fill"
           ref={imageRef}
           onClick={(e) => editImageRef.current?.handleClick(e)}
           className="max-w-full cursor-pointer"

@@ -193,7 +193,7 @@ const AppProvider = (props: any) => {
       appState,
       accountHistories,
     }),
-    []
+    [appState, accountHistories]
   );
 
   return (

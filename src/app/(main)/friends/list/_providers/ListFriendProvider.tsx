@@ -17,7 +17,7 @@ const defaultProfile: ProfileResponse = {
   accountId: -1,
   email: "",
   phone: "",
-  birthdate: new Date(),
+  birthday: new Date(),
   gender: "MALE",
   firstName: "",
   lastName: "",

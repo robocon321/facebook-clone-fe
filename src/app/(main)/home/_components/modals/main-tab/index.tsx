@@ -15,7 +15,7 @@ import IconButton from "components/limb/buttons/IconButton";
 import DragDropFiles from "app/(main)/home/_components/modals/main-tab/DragDropFiles";
 import { TAB_CODE } from "app/(main)/home/_constant/HomeConstant";
 import { ModalContext } from "app/(main)/home/_providers/ModalProvider";
-import { createNewPost } from "services/PostService";
+import { createNewArticle } from "services/ArticleService";
 import { AppContextType } from "app/_type/AppType";
 import { ModalContextType } from "app/(main)/home/_type/ModalType";
 import Image from "next/image";
@@ -87,7 +87,7 @@ const MainTab: React.FC = () => {
         ...previous,
         isLoading: true,
       }));
-      await createNewPost(dataModalState)
+      await createNewArticle(dataModalState)
         .then((response) => {
           setControlModalState((previous) => ({
             ...previous,
@@ -107,7 +107,7 @@ const MainTab: React.FC = () => {
 
   return (
     <ModalTemplate
-      title="Create new post"
+      title="Create new article"
       leftIcon={<LeftIconComponent />}
       rightIcon={<RightIconComponent />}
     >
@@ -120,6 +120,7 @@ const MainTab: React.FC = () => {
         <div className="flex items-center">
           <div className="rounded-full min-w-[50px] min-h-[50px] w-[50px] h-[50px] mr-2 overflow-hidden">
             <Image
+              layout="fill"
               src={"https://random.imagecdn.app/200/200"}
               alt="Not found"
             />
@@ -140,6 +141,7 @@ const MainTab: React.FC = () => {
                   <span className="mx-1">is feeling</span>
                   <span className="mx-1">{dataModalState.emotion.text}</span>
                   <Image
+                    layout="fill"
                     className="mx-1 w-[25px] h-[25px]"
                     src={dataModalState.emotion.imageUrl}
                     alt="Not found"
@@ -223,6 +225,7 @@ const MainTab: React.FC = () => {
           <div className="py-4 flex justify-between items-center">
             <div className="w-10 h-10 cursor-pointer">
               <Image
+                layout="fill"
                 className="w-full h-full"
                 src="/choose-bg.png"
                 alt="Not found"
@@ -244,6 +247,7 @@ const MainTab: React.FC = () => {
                 </button>
               )}
               <Image
+                layout="fill"
                 onClick={(e: React.MouseEvent<HTMLImageElement>) => {
                   e.stopPropagation();
                   setControlModalState({
@@ -277,7 +281,7 @@ const MainTab: React.FC = () => {
               (dataModalState.files.length > 0 ? " bg-gray-200" : " ")
             }
           >
-            <Image src="/image.png" alt="Not found" />
+            <Image layout="fill" src="/image.png" alt="Not found" />
           </div>
           <div
             onClick={() => changeTabIndexModal(TAB_CODE.TAG_FRIEND)}
@@ -286,7 +290,7 @@ const MainTab: React.FC = () => {
               (dataModalState.tags.length > 0 ? " bg-gray-200" : " ")
             }
           >
-            <Image src="/tag.png" alt="Not found" />
+            <Image layout="fill" src="/tag.png" alt="Not found" />
           </div>
           <div
             onClick={() => changeTabIndexModal(TAB_CODE.EMOTION)}
@@ -295,7 +299,7 @@ const MainTab: React.FC = () => {
               (dataModalState.emotion ? " bg-gray-200" : " ")
             }
           >
-            <Image src="/emoji-yellow.png" alt="Not found" />
+            <Image layout="fill" src="/emoji-yellow.png" alt="Not found" />
           </div>
           <div
             onClick={() => changeTabIndexModal(TAB_CODE.CHECKIN)}
@@ -304,10 +308,10 @@ const MainTab: React.FC = () => {
               (dataModalState.checkin ? " bg-gray-200" : " ")
             }
           >
-            <Image src="/locate.png" alt="Not found" />
+            <Image layout="fill" src="/locate.png" alt="Not found" />
           </div>
           <div className="px-2 cursor-pointer hover:bg-gray-200 rounded-full w-10 h-10 flex justify-center items-center">
-            <Image src="/gif.png" alt="Not found" />
+            <Image layout="fill" src="/gif.png" alt="Not found" />
           </div>
           <div className="px-2 cursor-pointer hover:bg-gray-200 rounded-full w-10 h-10 flex justify-center items-center">
             <FontAwesomeIcon icon={faEllipsis} />
@@ -326,7 +330,7 @@ const MainTab: React.FC = () => {
             isDisabled={!isEnableToSubmit() + ""}
             isLoading={controlModalState.isLoading + ""}
           >
-            Post
+            Article
           </Button>
         </div>
       </div>

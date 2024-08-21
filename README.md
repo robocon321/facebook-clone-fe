@@ -53,19 +53,19 @@ Check out our [Next.js deployment documentation](https://nextjs.org/docs/deploym
     <img src="documents/image/register.png" alt="Not found" />
 </div>
 
-<h3>Create post</h3>
+<h3>Create article</h3>
 <div>
-    <img src="documents/image/create-post.png" alt="Not found" />
+    <img src="documents/image/create-article.png" alt="Not found" />
 </div>
 
-<h3>New post</h3>
+<h3>New article</h3>
 <div>
-    <img src="documents/image/create-post.png" alt="Not found" />
+    <img src="documents/image/create-article.png" alt="Not found" />
 </div>
 
-<h3>Show post</h3>
+<h3>Show article</h3>
 <div>
-    <img src="documents/image/show-post.png" alt="Not found" />
+    <img src="documents/image/show-article.png" alt="Not found" />
 </div>
 
 <h3>Comment</h3>

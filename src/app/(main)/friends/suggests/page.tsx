@@ -73,6 +73,7 @@ const SuggestsPage: React.FC = () => {
           <div>
             <div className="flex justify-center w-full">
               <Image
+                layout="fill"
                 className="w-32"
                 src="/detail-friend.svg"
                 alt="Not found"

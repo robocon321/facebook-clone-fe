@@ -14,6 +14,7 @@ const RightSidebar: React.FC = () => {
         <li className="h-12 mb-2 flex items-center -ml-3 justify-content cursor-pointer space-x-2 p-2 rounded-md hover:bg-gray-200">
           <div>
             <Image
+              layout="fill"
               className="w-8 h-8 rounded-full"
               src="https://static.xx.fbcdn.net/rsrc.php/v3/yR/r/tInzwsw2pVX.png"
               alt="user"
@@ -68,6 +69,7 @@ const RightSidebar: React.FC = () => {
               >
                 <div>
                   <Image
+                    layout="fill"
                     className="w-8 h-8 rounded-full"
                     src={item.account.profilePictureUrl}
                     alt="Not found"

@@ -5,7 +5,7 @@ import React, { useContext } from "react";
 import { ModalContextType } from "app/(main)/home/_type/ModalType";
 import Image from "next/image";
 
-const CreatePostBox: React.FC = () => {
+const CreateArticleBox: React.FC = () => {
   const { controlModalState, setControlModalState, changeTabIndexModal } =
     useContext(ModalContext) as ModalContextType;
 
@@ -14,6 +14,7 @@ const CreatePostBox: React.FC = () => {
       <div className="flex items-center space-x-2 border-b pb-3 mb-2">
         <div className="w-10 h-10">
           <Image
+            layout="fill"
             src="https://random.imagecdn.app/200/200"
             className="w-full h-full rounded-full"
             alt="dp"
@@ -71,4 +72,4 @@ const CreatePostBox: React.FC = () => {
   );
 };
 
-export default CreatePostBox;
+export default CreateArticleBox;

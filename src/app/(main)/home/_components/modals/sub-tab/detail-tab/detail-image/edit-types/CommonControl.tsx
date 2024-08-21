@@ -20,7 +20,12 @@ const CommonControl: React.FC<EditImageType> = (props) => {
         Click any position on image to tag your friends
       </div>
       <div className="relative">
-        <Image className="max-w-full" src={blobUrl} alt="Not found" />
+        <Image
+          layout="fill"
+          className="max-w-full"
+          src={blobUrl}
+          alt="Not found"
+        />
       </div>
     </div>
   );

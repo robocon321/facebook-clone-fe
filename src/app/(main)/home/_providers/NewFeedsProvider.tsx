@@ -3,7 +3,7 @@
 import Loading from "components/limb/loading/Loading";
 import { AppContext } from "app/_providers/AppProvider";
 import { createContext, useContext, useEffect, useState } from "react";
-import { recommendPost } from "services/PostService";
+import { recommendArticle } from "services/ArticleService";
 import { AppContextType } from "app/_type/AppType";
 import {
   ControlStateType,
@@ -11,7 +11,7 @@ import {
   EmotionType,
   NewsFeedContextType,
 } from "app/(main)/home/_type/NewsFeedType";
-import { PostResponse } from "types/responses/PostResponse";
+import { ArticleResponse } from "types/responses/ArticleResponse";
 
 export const NewsFeedContext = createContext<NewsFeedContextType | null>(null);
 
@@ -20,7 +20,7 @@ const defaultControlState: ControlStateType = {
 };
 
 const defaultDataState: DataStateType = {
-  posts: [],
+  articles: [],
 };
 
 const NewsFeedProvider = (props: any) => {
@@ -31,11 +31,11 @@ const NewsFeedProvider = (props: any) => {
   const [emotions, setEmotions] = useState<EmotionType[]>([]);
 
   useEffect(() => {
-    recommendPost()
+    recommendArticle()
       .then((response) => {
         setDataState({
           ...dataState,
-          posts: response.data,
+          articles: response.data,
         });
       })
       .catch((error) => {
@@ -53,17 +53,17 @@ const NewsFeedProvider = (props: any) => {
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
 
-  const setPost = (newPost: PostResponse) => {
-    const index = dataState.posts.findIndex(
-      (item) => item.postId == newPost.postId
+  const setArticle = (newArticle: ArticleResponse) => {
+    const index = dataState.articles.findIndex(
+      (item) => item.articleId == newArticle.articleId
     );
     if (index >= 0) {
       setDataState({
         ...dataState,
-        posts: [
-          ...dataState.posts.slice(0, index),
-          newPost,
-          ...dataState.posts.slice(index + 1),
+        articles: [
+          ...dataState.articles.slice(0, index),
+          newArticle,
+          ...dataState.articles.slice(index + 1),
         ],
       });
     }
@@ -75,7 +75,7 @@ const NewsFeedProvider = (props: any) => {
     newsFeedControl: controlState,
     setNewsFeedControl: setControlState,
     newsFeedEmotions: emotions,
-    setNewsFeedPost: setPost,
+    setNewsFeedArticle: setArticle,
   };
 
   if (appState.isLoading || appState.data.user == null) {

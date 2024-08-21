@@ -1,6 +1,6 @@
 import { Dispatch, SetStateAction } from "react";
 import { AccountResponse } from "types/responses/AccountResponse";
-import { PostResponse } from "types/responses/PostResponse";
+import { ArticleResponse } from "types/responses/ArticleResponse";
 
 export type NewsFeedContextType = {
   newsFeedData: DataStateType;
@@ -8,11 +8,11 @@ export type NewsFeedContextType = {
   newsFeedControl: ControlStateType;
   setNewsFeedControl: Dispatch<SetStateAction<ControlStateType>>;
   newsFeedEmotions: EmotionType[];
-  setNewsFeedPost: (post: PostResponse) => void;
+  setNewsFeedArticle: (article: ArticleResponse) => void;
 };
 
 export type DataStateType = {
-  posts: PostResponse[];
+  articles: ArticleResponse[];
 };
 
 export type ControlStateType = {

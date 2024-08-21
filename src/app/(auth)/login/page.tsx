@@ -36,13 +36,13 @@ const LoginPage: React.FC = () => {
               {({ handleSubmit }) => (
                 <form onSubmit={handleSubmit}>
                   <TextInput
-                    inputSize="large"
+                    inputsize="large"
                     type="text"
                     placeholder="Email address or phone number"
                     name="username"
                   />
                   <TextInput
-                    inputSize="large"
+                    inputsize="large"
                     name="password"
                     type="password"
                     placeholder="Password"

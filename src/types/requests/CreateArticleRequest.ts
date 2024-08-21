@@ -1,4 +1,4 @@
-export type CreatePostRequest = {
+export type CreateArticleRequest = {
     text?: string,
     images?: ImageType[],
     videos?: VideoType[],

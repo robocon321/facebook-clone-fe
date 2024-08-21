@@ -4,7 +4,7 @@ export type ProfileResponse = {
     phone: string,
     firstName: string,
     lastName: string,
-    birthdate: Date,
+    birthday: Date,
     gender: string,
     profilePictureUrl?: string,
     coverPhotoUrl?: string,

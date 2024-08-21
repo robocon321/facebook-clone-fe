@@ -1,14 +1,14 @@
-import { CommentPostRequest } from "types/requests/CommentPostRequest";
+import { CommentArticleRequest } from "types/requests/CommentArticleRequest";
 import { buildFormData } from "utils/FormDataUtils";
 
-export const createComment = async ( request: CommentPostRequest ): Promise<any> =>
+export const createComment = async ( request: CommentArticleRequest ): Promise<any> =>
 {
     const token = localStorage.getItem( 'token' );
 
     const formData = new FormData();
     buildFormData( formData, request );
 
-    const response = await fetch( `${ process.env.BACKEND_URL }/comment-post/create`, {
+    const response = await fetch( `${ process.env.BACKEND_URL }/comment-article/create`, {
         method: "POST",
         headers: {
             'Authorization': `Bearer ${ token }`

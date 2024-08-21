@@ -42,14 +42,15 @@ export const ChildrenIconComponent: React.FC = () => {
     <div className="p-1 max-h-[400px] overflow-auto">
       <div className="my-2">
         <div>
-          <b>Who can see your post?</b>
+          <b>Who can see your article?</b>
         </div>
         <p className="my-2 text-gray-500">
-          Your post will appear in your feed, personal page and search results.
+          Your article will appear in your feed, personal page and search
+          results.
         </p>
         <p className="text-gray-500">
           Although the default audience is <b>Public</b>, you can change the
-          audience for this particular post.
+          audience for this particular article.
         </p>
       </div>
       <div className="my-2">
@@ -132,4 +133,4 @@ export const ChildrenIconComponent: React.FC = () => {
   );
 };
 
-export const title = "Post scope";
+export const title = "Article scope";

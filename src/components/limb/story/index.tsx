@@ -16,6 +16,7 @@ const Story: React.FC<IProps> = (props) => {
     >
       <div className="absolute">
         <Image
+          layout="fill"
           src={user.dp ?? ""}
           className="w-10 h-10 rounded-full border-4 border-white"
           alt="story"

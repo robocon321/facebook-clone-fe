@@ -21,6 +21,7 @@ const FriendCardHorizal: React.FC<FriendCardTypeProps> = (props) => {
       >
         <div className="w-12 h-12 my-2">
           <Image
+            layout="fill"
             className="w-full h-full rounded-full"
             src={account.profilePictureUrl}
             alt="Not found"
@@ -42,6 +43,7 @@ const FriendCardHorizal: React.FC<FriendCardTypeProps> = (props) => {
                     className={"w-5 h-5" + (index > 0 ? " ml-[-10px]" : "")}
                   >
                     <Image
+                      layout="fill"
                       className="w-full h-full rounded-full border-white border"
                       src={item.profilePictureUrl}
                       alt="Not found"

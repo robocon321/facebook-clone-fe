@@ -1,7 +1,7 @@
 import { AccountResponse } from "./AccountResponse"
 
-export type PostResponse = {
-    postId: number,
+export type ArticleResponse = {
+    articleId: number,
     text?: string,
     emotionId?: number,
     createTime: Date,
@@ -10,13 +10,13 @@ export type PostResponse = {
     account: AccountResponse,
     checkin?: CheckinResponse,
     tags?: AccountResponse[],
-    images?: ImagePostResponse[],
-    videos?: VideoPostResponse[],
-    emotions?: EmotionPostResponse[],
-    comments?: CommentPostResponse[]
+    images?: ImageArticleResponse[],
+    videos?: VideoArticleResponse[],
+    emotions?: EmotionArticleResponse[],
+    comments?: CommentArticleResponse[]
 }
 
-export type EmotionPostResponse = {
+export type EmotionArticleResponse = {
     emotionId: number,
     account: AccountResponse,
     createTime: Date,
@@ -33,7 +33,7 @@ export type CheckinResponse = {
     address: string
 }
 
-export type VideoPostResponse = {
+export type VideoArticleResponse = {
     videoId: number,
     text?: string,
     createTime: Date,
@@ -42,17 +42,17 @@ export type VideoPostResponse = {
 }
 
 
-export type ImagePostResponse = {
-    imagePostId: number,
+export type ImageArticleResponse = {
+    imageArticleId: number,
     text?: string,
     createTime: Date,
     modTime: Date,
     fileUrl: string,
-    textImagePosts?: TextImagePostResponse[]
-    tagImagePosts?: TagImagePostResponse[]
+    textImageArticles?: TextImageArticleResponse[]
+    tagImageArticles?: TagImageArticleResponse[]
 }
 
-export type TextImagePostResponse = {
+export type TextImageArticleResponse = {
     textId: number,
     text: string,
     color: string,
@@ -61,7 +61,7 @@ export type TextImagePostResponse = {
     ypos: number
 }
 
-export type TagImagePostResponse = {
+export type TagImageArticleResponse = {
     tagId: number,
     account: AccountResponse,
     xpos: number,
@@ -74,7 +74,7 @@ export type FileResponse = {
     type: string
 }
 
-export type CommentPostResponse = {
+export type CommentArticleResponse = {
     commentId: number,
     account: AccountResponse,
     text: string,

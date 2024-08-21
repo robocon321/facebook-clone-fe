@@ -43,7 +43,7 @@ const RegisterPage: React.FC = () => {
       .string()
       .min(5, "Password must be >= 5 letters")
       .required("Password required"),
-    birthdate: yup.string().required("Birthdate require"),
+    birthday: yup.string().required("Birthdate require"),
     gender: yup.string().required("Gender required"),
   });
 
@@ -59,7 +59,7 @@ const RegisterPage: React.FC = () => {
                 firstName: "",
                 lastName: "",
                 password: "",
-                birthdate: "",
+                birthday: "",
                 gender: "",
               }}
               onSubmit={(values, { resetForm }) => {
@@ -73,7 +73,7 @@ const RegisterPage: React.FC = () => {
                     <div className="flex-1 mr-1.5">
                       <TextInput
                         className="my-0"
-                        inputSize="large"
+                        inputsize="large"
                         type="text"
                         placeholder="First name"
                         name="firstName"
@@ -82,7 +82,7 @@ const RegisterPage: React.FC = () => {
                     <div className="flex-1 ml-1.5">
                       <TextInput
                         className="my-0"
-                        inputSize="large"
+                        inputsize="large"
                         type="text"
                         placeholder="Last name"
                         name="lastName"
@@ -90,29 +90,29 @@ const RegisterPage: React.FC = () => {
                     </div>
                   </div>
                   <TextInput
-                    inputSize="large"
+                    inputsize="large"
                     type="text"
                     placeholder="Email"
                     name="email"
                   />
                   <TextInput
-                    inputSize="large"
+                    inputsize="large"
                     type="text"
                     placeholder="Phone"
                     name="phone"
                   />
                   <TextInput
-                    inputSize="large"
+                    inputsize="large"
                     name="password"
                     type="password"
                     placeholder="Password"
                   />
-                  <label htmlFor="birthdate">Date of birth</label>
+                  <label htmlFor="birthday">Date of birth</label>
                   <TextInput
-                    inputSize="large"
+                    inputsize="large"
                     type="date"
                     placeholder="Birthdate"
-                    name="birthdate"
+                    name="birthday"
                   />
                   <label htmlFor="gender">Gender</label>
                   <SelectOptionInput data={genderData} name="gender" />

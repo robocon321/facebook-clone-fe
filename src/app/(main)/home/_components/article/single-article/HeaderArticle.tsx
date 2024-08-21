@@ -2,20 +2,20 @@ import moment from "moment";
 import { NewsFeedContext } from "app/(main)/home/_providers/NewFeedsProvider";
 import { useContext } from "react";
 import { NewsFeedContextType } from "app/(main)/home/_type/NewsFeedType";
-import { PostResponse } from "types/responses/PostResponse";
+import { ArticleResponse } from "types/responses/ArticleResponse";
 import Image from "next/image";
 
-type PostTypeProps = {
-  post: PostResponse;
+type ArticleTypeProps = {
+  article: ArticleResponse;
 };
 
-const HeaderPost: React.FC<PostTypeProps> = (props) => {
+const HeaderArticle: React.FC<ArticleTypeProps> = (props) => {
   const { newsFeedEmotions } = useContext(
     NewsFeedContext
   ) as NewsFeedContextType;
-  const { post } = props;
+  const { article } = props;
   const emotion = newsFeedEmotions.find(
-    (item) => item.emotion_id == post.emotionId
+    (item) => item.emotion_id == article.emotionId
   );
 
   return (
@@ -23,9 +23,10 @@ const HeaderPost: React.FC<PostTypeProps> = (props) => {
       <div className="flex items-center space-x-2 p-2.5 px-4">
         <div className="min-w-[2.5rem] min-h-[2.5rem] w-10 h-10">
           <Image
+            layout="fill"
             src={
-              post.account.profilePictureUrl
-                ? post.account.profilePictureUrl
+              article.account.profilePictureUrl
+                ? article.account.profilePictureUrl
                 : "https://random.imagecdn.app/500/200"
             }
             className="w-full h-full rounded-full"
@@ -35,39 +36,42 @@ const HeaderPost: React.FC<PostTypeProps> = (props) => {
         <div className="flex-grow flex flex-col">
           <div className="flex flex-wrap">
             <a className="hover:underline" href="#">
-              <b>{post.account.lastName + " " + post.account.firstName}</b>
+              <b>
+                {article.account.lastName + " " + article.account.firstName}
+              </b>
             </a>
             {emotion && (
               <div className="flex">
                 <span className="mx-1">is feeling</span>
                 <span className="mx-1">{emotion.text}</span>
                 <Image
+                  layout="fill"
                   className="mx-1 w-[25px] h-[25px]"
                   src={emotion.imageUrl}
                   alt="Not found"
                 />
               </div>
             )}
-            {post.checkin && (
+            {article.checkin && (
               <div className="flex">
                 <span className="mx-1">is living</span>
                 <span className="mx-1 hover:underline">
                   <a href="#">
                     <b>
-                      {post.checkin.address +
+                      {article.checkin.address +
                         ", " +
-                        post.checkin.city +
+                        article.checkin.city +
                         ", " +
-                        post.checkin.country}
+                        article.checkin.country}
                     </b>
                   </a>
                 </span>
               </div>
             )}
-            {post.tags && (
+            {article.tags && (
               <>
-                {post.tags.length > 0 && <span className="mx-1">with</span>}
-                {post.tags.slice(0, 3).map((item, index) => {
+                {article.tags.length > 0 && <span className="mx-1">with</span>}
+                {article.tags.slice(0, 3).map((item, index) => {
                   return (
                     <div key={item.accountId}>
                       <a className="hover:underline" href="#">
@@ -76,8 +80,8 @@ const HeaderPost: React.FC<PostTypeProps> = (props) => {
                             " " +
                             item.firstName +
                             (index < 2 &&
-                            post.tags &&
-                            post.tags.length - 1 != index
+                            article.tags &&
+                            article.tags.length - 1 != index
                               ? ", "
                               : " ")}
                         </b>
@@ -85,11 +89,11 @@ const HeaderPost: React.FC<PostTypeProps> = (props) => {
                     </div>
                   );
                 })}
-                {post.tags.length > 3 && (
+                {article.tags.length > 3 && (
                   <li>
                     <span className="mx-1">and</span>
                     <a className="hover:underline" href="#">
-                      <b> {post.tags.length - 3} other people</b>
+                      <b> {article.tags.length - 3} other people</b>
                     </a>
                   </li>
                 )}
@@ -97,7 +101,7 @@ const HeaderPost: React.FC<PostTypeProps> = (props) => {
             )}
           </div>
           <span className="text-xs font-thin text-gray-400">
-            {moment(post.modTime).fromNow()}
+            {moment(article.modTime).fromNow()}
           </span>
         </div>
         <div className="w-8 h-8">
@@ -106,10 +110,10 @@ const HeaderPost: React.FC<PostTypeProps> = (props) => {
           </button>
         </div>
       </div>
-      {post.text ? (
+      {article.text ? (
         <div className="mb-1">
           <p className="text-gray-700 max-h-10 truncate px-3 text-sm">
-            {post.text}
+            {article.text}
           </p>
         </div>
       ) : null}
@@ -117,4 +121,4 @@ const HeaderPost: React.FC<PostTypeProps> = (props) => {
   );
 };
 
-export default HeaderPost;
+export default HeaderArticle;

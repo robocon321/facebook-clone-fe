@@ -1,11 +1,11 @@
 "use client";
 
 import React, { useState } from "react";
-import { TPostView } from "types/post";
+import { TArticleView } from "types/article";
 import Image from "next/image";
 
 const ProfilePage: React.FC = () => {
-  const [postsView, setPostsView] = useState<TPostView>("listView");
+  const [articlesView, setArticlesView] = useState<TArticleView>("listView");
   return (
     <div className="w-full h-full">
       <div className="w-full h-auto shadow bg-white rounded-md">
@@ -25,6 +25,7 @@ const ProfilePage: React.FC = () => {
             >
               <div className="w-44 h-44 rounded-full bg-gray-300 border-4 border-white">
                 <Image
+                  layout="fill"
                   className="w-full h-full rounded-full"
                   src="https://random.imagecdn.app/250/250"
                   alt="dp"
@@ -45,7 +46,7 @@ const ProfilePage: React.FC = () => {
             <div className="mt-1 flex items-center justify-between">
               <div className="flex mb-2 items-center space-x-2">
                 <button className="py-3 px-2 hover:bg-gray-100 rounded-md font-semibold focus:outline-none">
-                  Posts
+                  Articles
                 </button>
                 <button className="py-3 px-2 hover:bg-gray-100 rounded-md font-semibold focus:outline-none">
                   About
@@ -198,45 +199,45 @@ const ProfilePage: React.FC = () => {
             </div>
           </div>
           <div className="col-span-3">
-            {/* Create post */}
-            {/* <CreatePostBox /> */}
-            {/* post filter box */}
+            {/* Create article */}
+            {/* <CreateArticleBox /> */}
+            {/* article filter box */}
             <div className="bg-white rounded-md shadow p-2 mt-4 px-3 text-sm">
               <div className="flex items-center justify-between pb-2 border-b">
                 <div>
-                  <p className="text-xl text-gray-700 font-bold">Posts</p>
+                  <p className="text-xl text-gray-700 font-bold">Articles</p>
                 </div>
                 <div className="flex items-center space-x-2">
                   <button className="px-3 py-1.5 bg-gray-200 hover:bg-gray-300 rounded-md font-semibold focus:outline-none">
                     <i className="fas fa-sliders-h mr-2"></i>Filters
                   </button>
                   <button className="px-3 py-1.5 bg-gray-200 hover:bg-gray-300 rounded-md font-semibold focus:outline-none">
-                    <i className="fas fa-cog mr-2"></i>Manage Posts
+                    <i className="fas fa-cog mr-2"></i>Manage Articles
                   </button>
                 </div>
               </div>
               <div className="flex space-x-3 text-gray-500 mt-1 -mb-1">
                 <button
                   className={`font-semibold flex-1 h-8 focus:outline-none justify-center space-x-2 hover:bg-gray-100 rounded-md ${
-                    postsView === "listView" ? "bg-gray-200" : undefined
+                    articlesView === "listView" ? "bg-gray-200" : undefined
                   }`}
-                  onClick={() => setPostsView("listView")}
+                  onClick={() => setArticlesView("listView")}
                 >
                   <i className="fas fa-bars mr-2"></i>List View
                 </button>
                 <button
                   className={`font-semibold flex-1 h-8 focus:outline-none justify-center space-x-2 hover:bg-gray-100 rounded-md  ${
-                    postsView === "gridView" ? "bg-gray-200" : undefined
+                    articlesView === "gridView" ? "bg-gray-200" : undefined
                   }`}
-                  onClick={() => setPostsView("gridView")}
+                  onClick={() => setArticlesView("gridView")}
                 >
                   <i className="fas fa-th-large mr-2"></i>Grid View
                 </button>
               </div>
             </div>
 
-            {/* user posts */}
-            {/* <PostContainer postsView={postsView} /> */}
+            {/* user articles */}
+            {/* <ArticleContainer articlesView={articlesView} /> */}
           </div>
         </div>
       </div>

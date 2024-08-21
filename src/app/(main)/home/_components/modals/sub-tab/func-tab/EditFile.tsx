@@ -61,7 +61,12 @@ const FileComponent: React.FC<FilePropsType> = (props) => {
             <source src={`${blobUrl}`} type={"video/mp4"} />
           </video>
         ) : (
-          <Image className="w-full h-full" src={`${blobUrl}`} alt="Not found" />
+          <Image
+            layout="fill"
+            className="w-full h-full"
+            src={`${blobUrl}`}
+            alt="Not found"
+          />
         )}
         <div className="tooltip invisible absolute flex top-[20px] right-[10px]">
           <IconButton

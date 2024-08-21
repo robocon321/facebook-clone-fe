@@ -6,11 +6,11 @@ import { useField } from "formik";
 type ITextInputSize = "small" | "medium" | "large";
 
 type IProps = InputHTMLAttributes<HTMLInputElement> & {
-  inputSize?: ITextInputSize;
+  inputsize?: ITextInputSize;
 };
 
 const TextInput: React.FC<IProps> = (props) => {
-  const { inputSize } = props;
+  const { inputsize } = props;
   const inputRef = useRef<HTMLInputElement | null>(null);
   const [field, { error, touched }] = useField(props as string);
   return (
@@ -20,7 +20,7 @@ const TextInput: React.FC<IProps> = (props) => {
         {...field}
         {...props}
         className={`w-full px-2 border border-gray-300 rounded-md focus:border-primary outline-none ${
-          inputSize === "small" ? "h-7" : inputSize === "large" ? "h-12" : "h-8"
+          inputsize === "small" ? "h-7" : inputsize === "large" ? "h-12" : "h-8"
         }`}
       />
       {touched && error ? (

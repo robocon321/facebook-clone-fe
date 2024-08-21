@@ -34,19 +34,19 @@ import Entry from "components/limb/editor/custom/EntryComponent";
 import Image from "next/image";
 import { getAccountFriendshipAndStatus } from "services/AccountService";
 import { createComment } from "services/CommentService";
-import { CommentPostRequest } from "types/requests/CommentPostRequest";
+import { CommentArticleRequest } from "types/requests/CommentArticleRequest";
 import { PageRequest } from "types/requests/PageRequest";
 import { AccountResponse } from "types/responses/AccountResponse";
 import {
-  CommentPostResponse,
+  CommentArticleResponse,
   EmotionCommentResponse,
-  PostResponse,
-} from "types/responses/PostResponse";
+  ArticleResponse,
+} from "types/responses/ArticleResponse";
 import createMentionEntities from "utils/CreateMention";
 import { convertToBlobFile } from "utils/FileUtils";
 
-type PostTypeProps = {
-  post: PostResponse;
+type ArticleTypeProps = {
+  article: ArticleResponse;
 };
 
 type SubscriptionType = {
@@ -63,12 +63,12 @@ const MentionComponent = (mentionProps: SubMentionComponentProps) => {
   return <span className={"font-bold"}>{mentionProps.children}</span>;
 };
 
-const FooterPost: React.FC<PostTypeProps> = (props) => {
-  const { setNewsFeedPost } = useContext(
+const FooterArticle: React.FC<ArticleTypeProps> = (props) => {
+  const { setNewsFeedArticle } = useContext(
     NewsFeedContext
   ) as NewsFeedContextType;
   const { appState } = useContext(AppContext) as AppContextType;
-  const { post } = props;
+  const { article } = props;
   const [commentInput, setCommentInput] =
     useState<CommentInputType>(defaultCommentInput);
   const [emotionCounts, setEmotionCounts] = useState([0, 0, 0, 0, 0, 0, 0]);
@@ -86,8 +86,8 @@ const FooterPost: React.FC<PostTypeProps> = (props) => {
   useEffect(() => {
     let newEmotionCounts = [0, 0, 0, 0, 0, 0, 0];
     let newAccountEmotionId = -1;
-    if (post.emotions) {
-      post.emotions.forEach((item) => {
+    if (article.emotions) {
+      article.emotions.forEach((item) => {
         const emotionIndex = EMOTION_LIST.find((e) => e.type == item.type)?.id;
         if (emotionIndex != null) {
           newEmotionCounts[emotionIndex]++;
@@ -100,12 +100,12 @@ const FooterPost: React.FC<PostTypeProps> = (props) => {
     setAccountEmotionId(newAccountEmotionId);
     setEmotionCounts(newEmotionCounts);
     // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, [post.emotions]);
+  }, [article.emotions]);
 
   const handleBeforeUnload = (e: BeforeUnloadEvent) => {
     subcriptions.forEach((item) => {
       client?.unsubscribe(item.id, {
-        destination: item.destination + post.postId,
+        destination: item.destination + article.articleId,
       });
     });
     client?.deactivate();
@@ -128,7 +128,7 @@ const FooterPost: React.FC<PostTypeProps> = (props) => {
 
       stompClient.onConnect = () => {
         const focusSubscriptionId = stompClient.subscribe(
-          "/user/comment-topic/article/check-focus/" + post.postId,
+          "/user/comment-topic/article/check-focus/" + article.articleId,
           (message) => {
             const countFocusing = Number.parseInt(message.body);
             setIsFocus(countFocusing > 0);
@@ -144,11 +144,11 @@ const FooterPost: React.FC<PostTypeProps> = (props) => {
         });
 
         const createCommentSubcriptionId = stompClient.subscribe(
-          "/comment-topic/article/create/" + post.postId,
+          "/comment-topic/article/create/" + article.articleId,
           (message) => {
             const json = JSON.parse(message.body);
-            setNewsFeedPost({
-              ...post,
+            setNewsFeedArticle({
+              ...article,
               comments: json,
             });
           },
@@ -162,12 +162,12 @@ const FooterPost: React.FC<PostTypeProps> = (props) => {
           destination: "/comment-topic/article/create/",
         });
 
-        const emotionPostSubcriptionId = stompClient.subscribe(
-          "/article-topic/emotion/" + post.postId,
+        const emotionArticleSubcriptionId = stompClient.subscribe(
+          "/article-topic/emotion/" + article.articleId,
           (message) => {
             const emotions = JSON.parse(message.body);
-            post.emotions = emotions;
-            setNewsFeedPost(post);
+            article.emotions = emotions;
+            setNewsFeedArticle(article);
           },
           {
             token: token,
@@ -175,17 +175,17 @@ const FooterPost: React.FC<PostTypeProps> = (props) => {
         ).id;
 
         subcriptions.push({
-          id: emotionPostSubcriptionId,
+          id: emotionArticleSubcriptionId,
           destination: "/comment-topic/emotion/",
         });
 
         const emotionCommentSubcriptionId = stompClient.subscribe(
-          "/comment-topic/emotion/" + post.postId,
+          "/comment-topic/emotion/" + article.articleId,
           (message) => {
             const body = JSON.parse(message.body);
             const commentId: number = body.commentId;
             const emotions: EmotionCommentResponse[] = body.data;
-            const previousComments = post.comments;
+            const previousComments = article.comments;
             if (previousComments) {
               const currentComment = previousComments.find(
                 (item) => item.commentId == commentId
@@ -194,7 +194,7 @@ const FooterPost: React.FC<PostTypeProps> = (props) => {
                 currentComment.emotions = emotions;
               }
             }
-            setNewsFeedPost(post);
+            setNewsFeedArticle(article);
           },
           {
             token: token,
@@ -215,7 +215,7 @@ const FooterPost: React.FC<PostTypeProps> = (props) => {
         client?.deactivate();
         subcriptions.forEach((item) => {
           client?.unsubscribe(item.id, {
-            destination: item.destination + post.postId,
+            destination: item.destination + article.articleId,
           });
         });
         window.removeEventListener("beforeunload", handleBeforeUnload);
@@ -242,7 +242,7 @@ const FooterPost: React.FC<PostTypeProps> = (props) => {
     e.stopPropagation();
     if (client?.active) {
       client.publish({
-        destination: "/article-app/emotion/create/" + post.postId,
+        destination: "/article-app/emotion/create/" + article.articleId,
         body: type,
       });
     }
@@ -251,16 +251,16 @@ const FooterPost: React.FC<PostTypeProps> = (props) => {
   const onClickLikeButton = () => {
     if (client?.active) {
       if (
-        post.emotions?.find(
+        article.emotions?.find(
           (item) => appState.data.user?.accountId == item.account.accountId
         )
       ) {
         client.publish({
-          destination: "/article-app/emotion/delete/" + post.postId,
+          destination: "/article-app/emotion/delete/" + article.articleId,
         });
       } else {
         client.publish({
-          destination: "/article-app/emotion/create/" + post.postId,
+          destination: "/article-app/emotion/create/" + article.articleId,
           body: "LIKE",
         });
       }
@@ -270,7 +270,7 @@ const FooterPost: React.FC<PostTypeProps> = (props) => {
   const onFocusComment = () => {
     if (client?.active) {
       client.publish({
-        destination: "/article-app/comment/check-focus/" + post.postId,
+        destination: "/article-app/comment/check-focus/" + article.articleId,
         body: "true",
       });
     }
@@ -279,7 +279,7 @@ const FooterPost: React.FC<PostTypeProps> = (props) => {
   const onBlurComment = () => {
     if (client?.active) {
       client.publish({
-        destination: "/article-app/comment/check-focus/" + post.postId,
+        destination: "/article-app/comment/check-focus/" + article.articleId,
         body: "false",
       });
     }
@@ -359,9 +359,9 @@ const FooterPost: React.FC<PostTypeProps> = (props) => {
         }
       }
 
-      const request: CommentPostRequest = {
+      const request: CommentArticleRequest = {
         text: convertToString,
-        postId: post.postId,
+        articleId: article.articleId,
         file: commentInput.file,
         parentId: commentInput.parentId,
         mentionedAccounts: mentionedAccounts.toString(),
@@ -385,7 +385,7 @@ const FooterPost: React.FC<PostTypeProps> = (props) => {
     return "not-handled";
   }
 
-  const onReply = (comment: CommentPostResponse) => {
+  const onReply = (comment: CommentArticleResponse) => {
     if (comment.account.accountId == appState.data.user?.accountId) return;
     if (editorState.getCurrentContent().hasText()) return;
     const newContentEditor = createMentionEntities(editorState, {
@@ -425,6 +425,7 @@ const FooterPost: React.FC<PostTypeProps> = (props) => {
                       }
                     >
                       <Image
+                        layout="fill"
                         className="w-full h-full rounded-full"
                         src={item.png}
                         alt="Not found"
@@ -434,24 +435,26 @@ const FooterPost: React.FC<PostTypeProps> = (props) => {
                     <div key={item.id}></div>
                   );
                 })}
-                {post.emotions &&
-                  post.emotions.length > 0 &&
-                  (post.emotions.length == 1 ? (
+                {article.emotions &&
+                  article.emotions.length > 0 &&
+                  (article.emotions.length == 1 ? (
                     <div className="ml-1">
-                      {post.emotions[0].account.lastName +
+                      {article.emotions[0].account.lastName +
                         " " +
-                        post.emotions[0].account.firstName}
+                        article.emotions[0].account.firstName}
                     </div>
                   ) : (
-                    <div> {"\u00A0" + post.emotions?.length}</div>
+                    <div> {"\u00A0" + article.emotions?.length}</div>
                   ))}
               </div>
             </div>
           </div>
           <div className="flex items-center space-x-2">
-            {/* <button>{post.comments} Comments</button>
-            <button>{post.shares} Shares</button> */}
-            <button>{post.comments ? post.comments.length : 0} Comments</button>
+            {/* <button>{article.comments} Comments</button>
+            <button>{article.shares} Shares</button> */}
+            <button>
+              {article.comments ? article.comments.length : 0} Comments
+            </button>
             <button>{0} Shares</button>
           </div>
         </div>
@@ -466,6 +469,7 @@ const FooterPost: React.FC<PostTypeProps> = (props) => {
             {accountEmotionId >= 0 ? (
               <div className="w-5 h-5 ">
                 <Image
+                  layout="fill"
                   className="w-full h-full rounded-full"
                   src={EMOTION_LIST[accountEmotionId].png}
                   alt="Not found"
@@ -501,6 +505,7 @@ const FooterPost: React.FC<PostTypeProps> = (props) => {
                   className="w-10 h-10 p-1 relative"
                 >
                   <Image
+                    layout="fill"
                     className="w-full h-full rounded-full"
                     src={item.gif}
                     alt="Not found"
@@ -528,15 +533,15 @@ const FooterPost: React.FC<PostTypeProps> = (props) => {
         </div>
       </div>
       <div>
-        {post.comments &&
-          post.comments
+        {article.comments &&
+          article.comments
             .filter((item) => item.parentId == null)
             .map((item) => (
               <SingleComment
                 key={item.commentId}
                 client={client}
-                postId={post.postId}
-                comments={post.comments ? post.comments : []}
+                articleId={article.articleId}
+                comments={article.comments ? article.comments : []}
                 onReply={onReply}
                 comment={item}
               />
@@ -554,6 +559,7 @@ const FooterPost: React.FC<PostTypeProps> = (props) => {
         <div className="flex justify-between p-2">
           <div className="min-w-[2.5rem] min-h-[2.5rem] w-10 h-10 mt-2">
             <Image
+              layout="fill"
               className="w-full h-full rounded-full"
               src={"https://random.imagecdn.app/500/200"}
               alt="Not found"
@@ -628,6 +634,7 @@ const FooterPost: React.FC<PostTypeProps> = (props) => {
                   </video>
                 ) : (
                   <Image
+                    layout="fill"
                     className="w-full h-full"
                     src={`${commentInput.fileUrl}`}
                     alt="Not found"
@@ -648,4 +655,4 @@ const FooterPost: React.FC<PostTypeProps> = (props) => {
   );
 };
 
-export default FooterPost;
+export default FooterArticle;

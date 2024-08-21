@@ -1,7 +1,7 @@
-import { IPost } from '../types/post';
+import { IArticle } from '../types/article';
 import { IStory } from '../types/user';
 
-export const postsData: IPost[] = [
+export const articlesData: IArticle[] = [
   {
     _id: '1',
     user: {
@@ -10,7 +10,7 @@ export const postsData: IPost[] = [
       fullname: 'Saiful Islam Shihab',
       dp: 'https://random.imagecdn.app/500/200',
     },
-    caption: 'This is post caption',
+    caption: 'This is article caption',
     image: 'https://random.imagecdn.app/1920/1080',
     likes: 129,
     comments: 5,
@@ -26,7 +26,7 @@ export const postsData: IPost[] = [
       username: 'shihab',
       dp: 'https://random.imagecdn.app/500/200',
     },
-    caption: 'This is post caption',
+    caption: 'This is article caption',
     image: 'https://random.imagecdn.app/1920/1070',
     likes: 798,
     comments: 52,
@@ -42,7 +42,7 @@ export const postsData: IPost[] = [
       username: 'shihab',
       dp: 'https://random.imagecdn.app/500/200',
     },
-    caption: 'This is post caption',
+    caption: 'This is article caption',
     image: 'https://random.imagecdn.app/1920/1060',
     likes: 456,
     comments: 15,
@@ -58,7 +58,7 @@ export const postsData: IPost[] = [
       username: 'shihab',
       dp: 'https://random.imagecdn.app/500/200',
     },
-    caption: 'This is post caption',
+    caption: 'This is article caption',
     image: 'https://random.imagecdn.app/1920/1050',
     likes: 29,
     comments: 1,
