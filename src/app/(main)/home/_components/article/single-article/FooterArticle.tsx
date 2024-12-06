@@ -10,7 +10,6 @@ import {
   faXmark,
 } from "@fortawesome/free-solid-svg-icons";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
-import { Client } from "@stomp/stompjs";
 import React, {
   useCallback,
   useContext,
@@ -31,27 +30,20 @@ import { AppContext } from "app/_providers/AppProvider";
 import { AppContextType } from "app/_type/AppType";
 import SingleComment from "components/limb/comment/SingleComment";
 import Entry from "components/limb/editor/custom/EntryComponent";
-import Image from "next/image";
 import { getAccountFriendshipAndStatus } from "services/AccountService";
 import { createComment } from "services/CommentService";
 import { CommentArticleRequest } from "types/requests/CommentArticleRequest";
 import { PageRequest } from "types/requests/PageRequest";
 import { AccountResponse } from "types/responses/AccountResponse";
 import {
-  CommentArticleResponse,
-  EmotionCommentResponse,
   ArticleResponse,
+  CommentArticleResponse,
 } from "types/responses/ArticleResponse";
 import createMentionEntities from "utils/CreateMention";
 import { convertToBlobFile } from "utils/FileUtils";
 
 type ArticleTypeProps = {
   article: ArticleResponse;
-};
-
-type SubscriptionType = {
-  id: string;
-  destination: string;
 };
 
 const defaultCommentInput = {
@@ -64,7 +56,7 @@ const MentionComponent = (mentionProps: SubMentionComponentProps) => {
 };
 
 const FooterArticle: React.FC<ArticleTypeProps> = (props) => {
-  const { setNewsFeedArticle } = useContext(
+  const { commentClient, articleClient } = useContext(
     NewsFeedContext
   ) as NewsFeedContextType;
   const { appState } = useContext(AppContext) as AppContextType;
@@ -73,9 +65,6 @@ const FooterArticle: React.FC<ArticleTypeProps> = (props) => {
     useState<CommentInputType>(defaultCommentInput);
   const [emotionCounts, setEmotionCounts] = useState([0, 0, 0, 0, 0, 0, 0]);
   const [accountEmotionId, setAccountEmotionId] = useState(-1);
-  const [isFocus, setIsFocus] = useState(false);
-  const [client, setClient] = useState<Client | null>(null);
-  const [subcriptions, setSubcriptions] = useState<SubscriptionType[]>([]);
   const inputFileRef = useRef<HTMLInputElement | null>(null);
   const [suggestions, setSuggestions] = useState<AccountResponse[]>([]);
   const [openEditor, setOpenEditor] = useState(false);
@@ -102,128 +91,6 @@ const FooterArticle: React.FC<ArticleTypeProps> = (props) => {
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [article.emotions]);
 
-  const handleBeforeUnload = (e: BeforeUnloadEvent) => {
-    subcriptions.forEach((item) => {
-      client?.unsubscribe(item.id, {
-        destination: item.destination + article.articleId,
-      });
-    });
-    client?.deactivate();
-  };
-
-  window.addEventListener("beforeunload", handleBeforeUnload);
-
-  useEffect(() => {
-    const token = localStorage.getItem("token");
-    if (token) {
-      const stompClient = new Client({
-        brokerURL: "ws://localhost:9006/realtime",
-        connectHeaders: {
-          token: token,
-        },
-        reconnectDelay: 2000,
-      });
-
-      stompClient.activate();
-
-      stompClient.onConnect = () => {
-        const focusSubscriptionId = stompClient.subscribe(
-          "/user/comment-topic/article/check-focus/" + article.articleId,
-          (message) => {
-            const countFocusing = Number.parseInt(message.body);
-            setIsFocus(countFocusing > 0);
-          },
-          {
-            token: token,
-          }
-        ).id;
-
-        subcriptions.push({
-          id: focusSubscriptionId,
-          destination: "/user/comment-topic/article/check-focus/",
-        });
-
-        const createCommentSubcriptionId = stompClient.subscribe(
-          "/comment-topic/article/create/" + article.articleId,
-          (message) => {
-            const json = JSON.parse(message.body);
-            setNewsFeedArticle({
-              ...article,
-              comments: json,
-            });
-          },
-          {
-            token: token,
-          }
-        ).id;
-
-        subcriptions.push({
-          id: createCommentSubcriptionId,
-          destination: "/comment-topic/article/create/",
-        });
-
-        const emotionArticleSubcriptionId = stompClient.subscribe(
-          "/article-topic/emotion/" + article.articleId,
-          (message) => {
-            const emotions = JSON.parse(message.body);
-            article.emotions = emotions;
-            setNewsFeedArticle(article);
-          },
-          {
-            token: token,
-          }
-        ).id;
-
-        subcriptions.push({
-          id: emotionArticleSubcriptionId,
-          destination: "/comment-topic/emotion/",
-        });
-
-        const emotionCommentSubcriptionId = stompClient.subscribe(
-          "/comment-topic/emotion/" + article.articleId,
-          (message) => {
-            const body = JSON.parse(message.body);
-            const commentId: number = body.commentId;
-            const emotions: EmotionCommentResponse[] = body.data;
-            const previousComments = article.comments;
-            if (previousComments) {
-              const currentComment = previousComments.find(
-                (item) => item.commentId == commentId
-              );
-              if (currentComment) {
-                currentComment.emotions = emotions;
-              }
-            }
-            setNewsFeedArticle(article);
-          },
-          {
-            token: token,
-          }
-        ).id;
-
-        setSubcriptions([
-          ...subcriptions,
-          {
-            id: emotionCommentSubcriptionId,
-            destination: "/comment-topic/emotion/",
-          },
-        ]);
-
-        setClient(stompClient);
-      };
-      return () => {
-        client?.deactivate();
-        subcriptions.forEach((item) => {
-          client?.unsubscribe(item.id, {
-            destination: item.destination + article.articleId,
-          });
-        });
-        window.removeEventListener("beforeunload", handleBeforeUnload);
-      };
-    }
-    // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, []);
-
   const onSearchMention = useCallback(({ value }: { value: string }) => {
     const pageRequest: PageRequest = {
       page: 0,
@@ -238,48 +105,41 @@ const FooterArticle: React.FC<ArticleTypeProps> = (props) => {
       .catch((error) => console.log(error));
   }, []);
 
-  const onSendEmotion = (e: React.MouseEvent<HTMLDivElement>, type: string) => {
+  const onSendEmotion = (e: React.MouseEvent, type: string) => {
     e.stopPropagation();
-    if (client?.active) {
-      client.publish({
-        destination: "/article-app/emotion/create/" + article.articleId,
-        body: type,
-      });
-    }
-  };
-
-  const onClickLikeButton = () => {
-    if (client?.active) {
+    if (articleClient?.active) {
       if (
         article.emotions?.find(
-          (item) => appState.data.user?.accountId == item.account.accountId
+          (item) =>
+            appState.data.user?.accountId == item.account.accountId &&
+            item.type == type
         )
       ) {
-        client.publish({
+        articleClient.publish({
           destination: "/article-app/emotion/delete/" + article.articleId,
         });
       } else {
-        client.publish({
+        articleClient.publish({
           destination: "/article-app/emotion/create/" + article.articleId,
-          body: "LIKE",
+          body: type,
         });
       }
     }
   };
 
   const onFocusComment = () => {
-    if (client?.active) {
-      client.publish({
-        destination: "/article-app/comment/check-focus/" + article.articleId,
+    if (commentClient?.active) {
+      commentClient.publish({
+        destination: "/comment-app/check-focus/" + article.articleId,
         body: "true",
       });
     }
   };
 
   const onBlurComment = () => {
-    if (client?.active) {
-      client.publish({
-        destination: "/article-app/comment/check-focus/" + article.articleId,
+    if (commentClient?.active) {
+      commentClient.publish({
+        destination: "/comment-app/check-focus/" + article.articleId,
         body: "false",
       });
     }
@@ -347,7 +207,7 @@ const FooterArticle: React.FC<ArticleTypeProps> = (props) => {
   }
 
   const saveComment = () => {
-    if (client?.active && isEnableComment()) {
+    if (commentClient?.active && isEnableComment()) {
       const contentState = editorState.getCurrentContent();
       const raw = convertToRaw(contentState);
       const convertToString = JSON.stringify(raw);
@@ -424,8 +284,7 @@ const FooterArticle: React.FC<ArticleTypeProps> = (props) => {
                           : "")
                       }
                     >
-                      <Image
-                        layout="fill"
+                      <img
                         className="w-full h-full rounded-full"
                         src={item.png}
                         alt="Not found"
@@ -460,7 +319,7 @@ const FooterArticle: React.FC<ArticleTypeProps> = (props) => {
         </div>
         <div className="flex space-x-3 text-gray-500 text-sm font-thin border-b pb-2">
           <button
-            onClick={() => onClickLikeButton()}
+            onClick={(e) => onSendEmotion(e, "LIKE")}
             className={
               "has-tooltip relative flex-1 flex items-center h-8 focus:outline-none focus:bg-gray-200 justify-center space-x-2 hover:bg-gray-100 rounded-md " +
               (accountEmotionId >= 0 ? EMOTION_LIST[accountEmotionId].bg : "")
@@ -468,8 +327,7 @@ const FooterArticle: React.FC<ArticleTypeProps> = (props) => {
           >
             {accountEmotionId >= 0 ? (
               <div className="w-5 h-5 ">
-                <Image
-                  layout="fill"
+                <img
                   className="w-full h-full rounded-full"
                   src={EMOTION_LIST[accountEmotionId].png}
                   alt="Not found"
@@ -504,8 +362,7 @@ const FooterArticle: React.FC<ArticleTypeProps> = (props) => {
                   }}
                   className="w-10 h-10 p-1 relative"
                 >
-                  <Image
-                    layout="fill"
+                  <img
                     className="w-full h-full rounded-full"
                     src={item.gif}
                     alt="Not found"
@@ -539,14 +396,14 @@ const FooterArticle: React.FC<ArticleTypeProps> = (props) => {
             .map((item) => (
               <SingleComment
                 key={item.commentId}
-                client={client}
+                client={commentClient}
                 articleId={article.articleId}
                 comments={article.comments ? article.comments : []}
                 onReply={onReply}
                 comment={item}
               />
             ))}
-        {isFocus && (
+        {article.isFocus && (
           <div className="flex items-center p-4 w-full">
             <div className="mr-2">Someone is typing</div>
             <div className="w-[50px] flex justify-between">
@@ -558,8 +415,7 @@ const FooterArticle: React.FC<ArticleTypeProps> = (props) => {
         )}
         <div className="flex justify-between p-2">
           <div className="min-w-[2.5rem] min-h-[2.5rem] w-10 h-10 mt-2">
-            <Image
-              layout="fill"
+            <img
               className="w-full h-full rounded-full"
               src={"https://random.imagecdn.app/500/200"}
               alt="Not found"
@@ -633,8 +489,7 @@ const FooterArticle: React.FC<ArticleTypeProps> = (props) => {
                     />
                   </video>
                 ) : (
-                  <Image
-                    layout="fill"
+                  <img
                     className="w-full h-full"
                     src={`${commentInput.fileUrl}`}
                     alt="Not found"

@@ -1,13 +1,12 @@
 "use client";
 
 import { useSearchParams } from "next/navigation";
-import LeftSidebar from "./_components/LeftSidebar";
-import Profile from "../../../../components/limb/profile/Profile";
 import { useContext, useEffect, useRef } from "react";
+import { getAccountFriendshipAndStatus } from "services/AccountService";
+import Profile from "../../../../components/limb/profile/Profile";
+import LeftSidebar from "./_components/LeftSidebar";
 import { ListFriendContext } from "./_providers/ListFriendProvider";
 import { ListFriendContextType } from "./_type/ListFriendType";
-import { getAccountFriendshipAndStatus } from "services/AccountService";
-import Image from "next/image";
 
 const SuggestsPage: React.FC = () => {
   const searchParams = useSearchParams();
@@ -67,12 +66,7 @@ const SuggestsPage: React.FC = () => {
         ) : (
           <div>
             <div className="flex justify-center w-full">
-              <Image
-                layout="fill"
-                className="w-32"
-                src="/detail-friend.svg"
-                alt="Not found"
-              />
+              <img className="w-32" src="/detail-friend.svg" alt="Not found" />
             </div>
             <h3 className="font-bold text-gray-600">
               Select the name of the person whose profile you want to preview.

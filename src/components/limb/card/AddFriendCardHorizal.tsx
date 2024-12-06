@@ -1,9 +1,8 @@
 import React from "react";
 
+import Link from "next/link";
 import { AccountWithManualFriendResponse } from "types/responses/RecommendAccountResponse";
 import Button from "../buttons/Button";
-import Link from "next/link";
-import Image from "next/image";
 
 type AddFriendCardTypeProps = {
   account: AccountWithManualFriendResponse;
@@ -21,8 +20,7 @@ const AddFriendCardHorizal: React.FC<AddFriendCardTypeProps> = (props) => {
         href={`?profile_id=${account.accountId}`}
       >
         <div className="w-12 h-12 my-2">
-          <Image
-            layout="fill"
+          <img
             className="w-full h-full rounded-full"
             src={account.profilePictureUrl}
             alt="Not found"
@@ -43,8 +41,7 @@ const AddFriendCardHorizal: React.FC<AddFriendCardTypeProps> = (props) => {
                     key={item.accountId}
                     className={"w-5 h-5" + (index > 0 ? " ml-[-10px]" : "")}
                   >
-                    <Image
-                      layout="fill"
+                    <img
                       className="w-full h-full rounded-full border-white border"
                       src={item.profilePictureUrl}
                       alt="Not found"

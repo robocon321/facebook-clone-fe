@@ -1,6 +1,12 @@
 /* eslint-disable react-hooks/exhaustive-deps */
 "use client";
 
+import { Client } from "@stomp/stompjs";
+import {
+  AccountHistoryResponse,
+  AppContextType,
+  AppStateType,
+} from "app/_type/AppType";
 import { usePathname, useRouter } from "next/navigation";
 import { createContext, useEffect, useMemo, useState } from "react";
 import {
@@ -8,13 +14,7 @@ import {
   getSummaryAccount,
   updateHistoryAccount,
 } from "services/AccountService";
-import {
-  AccountHistoryResponse,
-  AppContextType,
-  AppStateType,
-} from "app/_type/AppType";
 import { PageRequest } from "types/requests/PageRequest";
-import { Client } from "@stomp/stompjs";
 
 export const AppContext = createContext<AppContextType | null>(null);
 
@@ -57,7 +57,7 @@ const AppProvider = (props: any) => {
     const token = localStorage.getItem("token");
     if (token && appState.data.user) {
       const stompClient = new Client({
-        brokerURL: "ws://localhost:9006/realtime",
+        brokerURL: `${process.env.WEB_SOCKET_URL}/friend`,
         connectHeaders: {
           token: token,
         },

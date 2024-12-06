@@ -6,12 +6,13 @@ import {
   faXmark,
 } from "@fortawesome/free-solid-svg-icons";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
-import IconButton from "components/limb/buttons/IconButton";
 import {
   TAB_CODE,
   TAB_IMAGE_NAV_CODE,
   TAB_VIDEO_NAV_CODE,
 } from "app/(main)/home/_constant/HomeConstant";
+import { ModalContext } from "app/(main)/home/_providers/ModalProvider";
+import IconButton from "components/limb/buttons/IconButton";
 import React, { useContext, useRef } from "react";
 import { convertToBlobFile } from "utils/FileUtils";
 import { generateRandomString } from "utils/RandomUtils";
@@ -20,8 +21,6 @@ import {
   ModalContextType,
   VideoModalType,
 } from "../../../../_type/ModalType";
-import { ModalContext } from "app/(main)/home/_providers/ModalProvider";
-import Image from "next/image";
 
 export const LeftIconComponent: React.FC = () => {
   const { changeTabIndexModal } = useContext(ModalContext) as ModalContextType;
@@ -61,12 +60,7 @@ const FileComponent: React.FC<FilePropsType> = (props) => {
             <source src={`${blobUrl}`} type={"video/mp4"} />
           </video>
         ) : (
-          <Image
-            layout="fill"
-            className="w-full h-full"
-            src={`${blobUrl}`}
-            alt="Not found"
-          />
+          <img className="w-full h-full" src={`${blobUrl}`} alt="Not found" />
         )}
         <div className="tooltip invisible absolute flex top-[20px] right-[10px]">
           <IconButton

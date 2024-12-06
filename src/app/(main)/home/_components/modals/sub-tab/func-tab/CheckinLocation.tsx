@@ -1,14 +1,13 @@
 import { faArrowLeft, faSearch } from "@fortawesome/free-solid-svg-icons";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
-import IconButton from "components/limb/buttons/IconButton";
 import { TAB_CODE } from "app/(main)/home/_constant/HomeConstant";
 import { ModalContext } from "app/(main)/home/_providers/ModalProvider";
-import React, { useContext, useEffect, useState } from "react";
 import { ModalContextType } from "app/(main)/home/_type/ModalType";
-import { PageRequest } from "types/requests/PageRequest";
+import IconButton from "components/limb/buttons/IconButton";
+import React, { useContext, useEffect, useState } from "react";
 import { getCheckinLocation } from "services/CheckinService";
+import { PageRequest } from "types/requests/PageRequest";
 import { CheckinResponseType } from "types/responses/CheckinResponse";
-import Image from "next/image";
 
 export const LeftIconComponent: React.FC = () => {
   const { changeTabIndexModal } = useContext(ModalContext) as ModalContextType;
@@ -105,8 +104,7 @@ export const ChildrenIconComponent: React.FC = () => {
             }
           >
             <div className="mr-3 w-[50px] h-[50px] bg-gray-600 rounded overflow-hidden">
-              <Image
-                layout="fill"
+              <img
                 className="w-full h-full rounded-full"
                 src="/location.png"
                 alt="Not found"

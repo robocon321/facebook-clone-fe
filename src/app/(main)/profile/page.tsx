@@ -2,7 +2,6 @@
 
 import React, { useState } from "react";
 import { TArticleView } from "types/article";
-import Image from "next/image";
 
 const ProfilePage: React.FC = () => {
   const [articlesView, setArticlesView] = useState<TArticleView>("listView");
@@ -24,8 +23,7 @@ const ProfilePage: React.FC = () => {
               style={{ bottom: "-15px" }}
             >
               <div className="w-44 h-44 rounded-full bg-gray-300 border-4 border-white">
-                <Image
-                  layout="fill"
+                <img
                   className="w-full h-full rounded-full"
                   src="https://random.imagecdn.app/250/250"
                   alt="dp"

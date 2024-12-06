@@ -2,6 +2,7 @@
 const nextConfig = {
     env: {
       BACKEND_URL: 'http://localhost:9090',
+      WEB_SOCKET_URL: 'ws://localhost:9090/ws'
     },
     reactStrictMode: false,
     images: {

@@ -2,13 +2,12 @@ import InsertTextControl from "app/(main)/home/_components/modals/sub-tab/detail
 import TagControl from "app/(main)/home/_components/modals/sub-tab/detail-tab/detail-image/edit-types/TagControl";
 import { TAB_IMAGE_NAV_CODE } from "app/(main)/home/_constant/HomeConstant";
 import { ModalContext } from "app/(main)/home/_providers/ModalProvider";
-import React, { useContext, useRef } from "react";
 import {
   ImageModalType,
   ModalContextType,
 } from "app/(main)/home/_type/ModalType";
+import React, { useContext, useRef } from "react";
 import { convertToBlobFile } from "utils/FileUtils";
-import Image from "next/image";
 
 type EditImageType = {
   fileModal: ImageModalType;
@@ -39,8 +38,7 @@ const EditImageComponent: React.FC<EditImageType> = (props) => {
         <></>
       )}
       <div className="relative">
-        <Image
-          layout="fill"
+        <img
           ref={imageRef}
           onClick={(e) => editImageRef.current?.handleClick(e)}
           className="max-w-full cursor-pointer"

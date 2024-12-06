@@ -8,7 +8,7 @@ export const createComment = async ( request: CommentArticleRequest ): Promise<a
     const formData = new FormData();
     buildFormData( formData, request );
 
-    const response = await fetch( `${ process.env.BACKEND_URL }/comment-article/create`, {
+    const response = await fetch( `${ process.env.BACKEND_URL }/comment`, {
         method: "POST",
         headers: {
             'Authorization': `Bearer ${ token }`
@@ -16,12 +16,11 @@ export const createComment = async ( request: CommentArticleRequest ): Promise<a
         body: formData
     } );
     const status = response.status;
-    const data = await response.json();
     if ( status == 200 )
     {
-        return data;
+        return "Create comment successful!";
     } else
     {
-        throw new Error( data );
+        throw new Error( "Bad request" );
     }
 }

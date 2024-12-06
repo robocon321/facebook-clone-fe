@@ -1,8 +1,8 @@
 import React from "react";
+import { ArticleResponse } from "types/responses/ArticleResponse";
 import BodyArticle from "./BodyArticle";
 import FooterArticle from "./FooterArticle";
 import HeaderArticle from "./HeaderArticle";
-import { ArticleResponse } from "types/responses/ArticleResponse";
 
 type ArticleTypeProps = {
   article: ArticleResponse;

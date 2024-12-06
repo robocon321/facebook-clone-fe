@@ -1,7 +1,6 @@
-import React from "react";
 import { ImageModalType } from "app/(main)/home/_type/ModalType";
+import React from "react";
 import { convertToBlobFile } from "utils/FileUtils";
-import Image from "next/image";
 type EditImageType = {
   fileModal: ImageModalType;
 };
@@ -20,12 +19,7 @@ const CommonControl: React.FC<EditImageType> = (props) => {
         Click any position on image to tag your friends
       </div>
       <div className="relative">
-        <Image
-          layout="fill"
-          className="max-w-full"
-          src={blobUrl}
-          alt="Not found"
-        />
+        <img className="max-w-full" src={blobUrl} alt="Not found" />
       </div>
     </div>
   );

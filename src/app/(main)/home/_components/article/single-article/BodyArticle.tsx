@@ -1,8 +1,7 @@
-import Image from "next/image";
 import { useEffect, useState } from "react";
 import {
-  ImageArticleResponse,
   ArticleResponse,
+  ImageArticleResponse,
   VideoArticleResponse,
 } from "types/responses/ArticleResponse";
 
@@ -49,8 +48,7 @@ const BodyArticle: React.FC<ArticleTypeProps> = (props) => {
                 loadWidth(files.length, index)
               }
             >
-              <Image
-                layout="fill"
+              <img
                 src={
                   process.env.BACKEND_URL + "/file-management/" + item.fileUrl
                 }
@@ -88,8 +86,7 @@ const BodyArticle: React.FC<ArticleTypeProps> = (props) => {
                   loadWidth(files.length, index)
                 }
               >
-                <Image
-                  layout="fill"
+                <img
                   src={
                     process.env.BACKEND_URL + "/file-management/" + item.fileUrl
                   }

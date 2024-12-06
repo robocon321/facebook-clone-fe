@@ -4,16 +4,15 @@ import { faEllipsis } from "@fortawesome/free-solid-svg-icons";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { Client } from "@stomp/stompjs";
 import { EMOTION_LIST } from "app/(main)/home/_constant/HomeConstant";
+import { AppContext } from "app/_providers/AppProvider";
 import { EditorState, convertFromRaw } from "draft-js";
 import moment from "moment";
-import { AppContext } from "app/_providers/AppProvider";
 
-import React, { useContext, useEffect, useMemo, useState } from "react";
 import { AppContextType } from "app/_type/AppType";
+import React, { useContext, useEffect, useMemo, useState } from "react";
 
-import { CommentArticleResponse } from "types/responses/ArticleResponse";
-import Image from "next/image";
 import { SubMentionComponentProps } from "@draft-js-plugins/mention/lib/Mention";
+import { CommentArticleResponse } from "types/responses/ArticleResponse";
 
 type CommentTypeProps = {
   comment: CommentArticleResponse;
@@ -113,8 +112,7 @@ const SingleComment: React.FC<CommentTypeProps> = (props) => {
     <div>
       <div className="flex p-2">
         <div className="min-w-[2.5rem] min-h-[2.5rem] w-10 h-10 mt-2">
-          <Image
-            layout="fill"
+          <img
             className="w-full h-full rounded-full"
             src={"https://random.imagecdn.app/500/200"}
             alt="Not found"
@@ -144,15 +142,14 @@ const SingleComment: React.FC<CommentTypeProps> = (props) => {
                   {comment.file.type?.startsWith("video") ? (
                     <video controls>
                       <source
-                        src={`http://localhost:9090/file-management/${comment.file.name}`}
+                        src={`${process.env.BACKEND_URL}/file-management/${comment.file.name}`}
                         type={"video/mp4"}
                       />
                     </video>
                   ) : (
-                    <Image
-                      layout="fill"
+                    <img
                       className="w-full h-full"
-                      src={`http://localhost:9090/file-management/${comment.file.name}`}
+                      src={`${process.env.BACKEND_URL}/file-management/${comment.file.name}`}
                       alt="Not found"
                     />
                   )}
@@ -171,8 +168,7 @@ const SingleComment: React.FC<CommentTypeProps> = (props) => {
                           : "")
                       }
                     >
-                      <Image
-                        layout="fill"
+                      <img
                         className="w-full h-full rounded-full"
                         src={item.png}
                         alt="Not found"
@@ -205,8 +201,7 @@ const SingleComment: React.FC<CommentTypeProps> = (props) => {
                       key={item.id}
                       className="w-10 h-10 p-1 relative"
                     >
-                      <Image
-                        layout="fill"
+                      <img
                         className="w-full h-full rounded-full"
                         src={item.gif}
                         alt="Not found"

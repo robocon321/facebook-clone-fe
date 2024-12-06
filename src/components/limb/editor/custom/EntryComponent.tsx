@@ -1,5 +1,4 @@
 import { MentionData, MentionPluginTheme } from "@draft-js-plugins/mention";
-import Image from "next/image";
 import { MouseEvent, ReactElement } from "react";
 
 export interface EntryComponentProps {
@@ -25,8 +24,7 @@ function Entry(props: Readonly<EntryComponentProps>): ReactElement {
       className="flex items-center p-2 hover:bg-gray-200 rounded"
     >
       <span className="mr-2 w-[20px] h-[20px]">
-        <Image
-          layout="fill"
+        <img
           className="w-full h-full rounded-full"
           src="https://random.imagecdn.app/500/400"
           alt="Not found"

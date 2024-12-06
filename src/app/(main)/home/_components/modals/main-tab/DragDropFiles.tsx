@@ -6,18 +6,17 @@ import {
   faXmark,
 } from "@fortawesome/free-solid-svg-icons";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
-import IconButton from "components/limb/buttons/IconButton";
-import { useRef, useContext } from "react";
-import { convertToBlobFile } from "utils/FileUtils";
-import { generateRandomString } from "utils/RandomUtils";
+import { TAB_CODE } from "app/(main)/home/_constant/HomeConstant";
+import { ModalContext } from "app/(main)/home/_providers/ModalProvider";
 import {
   ImageModalType,
   ModalContextType,
   VideoModalType,
 } from "app/(main)/home/_type/ModalType";
-import { TAB_CODE } from "app/(main)/home/_constant/HomeConstant";
-import { ModalContext } from "app/(main)/home/_providers/ModalProvider";
-import Image from "next/image";
+import IconButton from "components/limb/buttons/IconButton";
+import { useContext, useRef } from "react";
+import { convertToBlobFile } from "utils/FileUtils";
+import { generateRandomString } from "utils/RandomUtils";
 
 const DragDropFiles = () => {
   const {
@@ -115,8 +114,7 @@ const DragDropFiles = () => {
             } else {
               return (
                 <div key={item.id} className="max-w-[250px] m-4">
-                  <Image
-                    layout="fill"
+                  <img
                     className="w-full h-full"
                     src={`${blobUrl}`}
                     alt="Not found"

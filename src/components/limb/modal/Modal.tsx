@@ -1,5 +1,5 @@
-import React from "react";
 import { ModalParameterType } from "app/(main)/home/_type/ModalType";
+import React from "react";
 
 const Modal: React.FC<ModalParameterType> = (props) => {
   const { children, isShow, width, onClickOutside } = props;
@@ -27,7 +27,7 @@ const Modal: React.FC<ModalParameterType> = (props) => {
           (width ?? "max-w-2xl")
         }
       >
-        <div className="relative bg-white rounded-lg shadow dark:bg-gray-700 overflow-hidden">
+        <div className="relative bg-white rounded-lg shadow overflow-hidden">
           {children}
         </div>
       </div>

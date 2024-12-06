@@ -1,3 +1,4 @@
+import { Client } from "@stomp/stompjs";
 import { Dispatch, SetStateAction } from "react";
 import { AccountResponse } from "types/responses/AccountResponse";
 import { ArticleResponse } from "types/responses/ArticleResponse";
@@ -9,6 +10,8 @@ export type NewsFeedContextType = {
   setNewsFeedControl: Dispatch<SetStateAction<ControlStateType>>;
   newsFeedEmotions: EmotionType[];
   setNewsFeedArticle: (article: ArticleResponse) => void;
+  commentClient: Client | null;
+  articleClient: Client | null;
 };
 
 export type DataStateType = {

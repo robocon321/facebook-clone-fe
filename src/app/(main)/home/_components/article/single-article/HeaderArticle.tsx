@@ -1,9 +1,8 @@
-import moment from "moment";
 import { NewsFeedContext } from "app/(main)/home/_providers/NewFeedsProvider";
-import { useContext } from "react";
 import { NewsFeedContextType } from "app/(main)/home/_type/NewsFeedType";
+import moment from "moment";
+import { useContext } from "react";
 import { ArticleResponse } from "types/responses/ArticleResponse";
-import Image from "next/image";
 
 type ArticleTypeProps = {
   article: ArticleResponse;
@@ -22,8 +21,7 @@ const HeaderArticle: React.FC<ArticleTypeProps> = (props) => {
     <div>
       <div className="flex items-center space-x-2 p-2.5 px-4">
         <div className="min-w-[2.5rem] min-h-[2.5rem] w-10 h-10">
-          <Image
-            layout="fill"
+          <img
             src={
               article.account.profilePictureUrl
                 ? article.account.profilePictureUrl
@@ -44,8 +42,7 @@ const HeaderArticle: React.FC<ArticleTypeProps> = (props) => {
               <div className="flex">
                 <span className="mx-1">is feeling</span>
                 <span className="mx-1">{emotion.text}</span>
-                <Image
-                  layout="fill"
+                <img
                   className="mx-1 w-[25px] h-[25px]"
                   src={emotion.imageUrl}
                   alt="Not found"

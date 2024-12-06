@@ -13,7 +13,8 @@ export type ArticleResponse = {
     images?: ImageArticleResponse[],
     videos?: VideoArticleResponse[],
     emotions?: EmotionArticleResponse[],
-    comments?: CommentArticleResponse[]
+    comments?: CommentArticleResponse[],
+    isFocus: boolean
 }
 
 export type EmotionArticleResponse = {

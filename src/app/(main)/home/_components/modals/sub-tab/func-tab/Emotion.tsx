@@ -1,11 +1,10 @@
 import { faArrowLeft, faSearch } from "@fortawesome/free-solid-svg-icons";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
-import IconButton from "components/limb/buttons/IconButton";
 import { TAB_CODE } from "app/(main)/home/_constant/HomeConstant";
 import { ModalContext } from "app/(main)/home/_providers/ModalProvider";
-import React, { useContext, useEffect, useState } from "react";
 import { EmotionType, ModalContextType } from "app/(main)/home/_type/ModalType";
-import Image from "next/image";
+import IconButton from "components/limb/buttons/IconButton";
+import React, { useContext, useEffect, useState } from "react";
 
 export const LeftIconComponent: React.FC = () => {
   const { changeTabIndexModal } = useContext(ModalContext) as ModalContextType;
@@ -88,8 +87,7 @@ export const ChildrenIconComponent: React.FC = () => {
               }
             >
               <span className="mr-2 w-[50px] h-[50px]">
-                <Image
-                  layout="fill"
+                <img
                   className="w-full h-full rounded-full"
                   src={item.imageUrl}
                   alt="Not found"

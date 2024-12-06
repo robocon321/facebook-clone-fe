@@ -1,10 +1,9 @@
 "use client";
 
-import React, { useContext } from "react";
-import Link from "next/link";
 import { AppContext } from "app/_providers/AppProvider";
 import { AppContextType } from "app/_type/AppType";
-import Image from "next/image";
+import Link from "next/link";
+import React, { useContext } from "react";
 
 const Navbar: React.FC = () => {
   const { appState } = useContext(AppContext) as AppContextType;
@@ -114,8 +113,7 @@ const Navbar: React.FC = () => {
           <Link href="/profile">
             <button className="h-10 px-2 flex space-x-1 items-center justify-center focus:outline-none hover:bg-gray-300 rounded-full">
               <div className="h-8">
-                <Image
-                  layout="fill"
+                <img
                   src="https://random.imagecdn.app/200/200"
                   className="w-8 h-8 rounded-full"
                   alt="dp"

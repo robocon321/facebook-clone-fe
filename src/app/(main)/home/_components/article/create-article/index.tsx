@@ -1,9 +1,8 @@
 "use client";
 import { TAB_CODE } from "app/(main)/home/_constant/HomeConstant";
 import { ModalContext } from "app/(main)/home/_providers/ModalProvider";
-import React, { useContext } from "react";
 import { ModalContextType } from "app/(main)/home/_type/ModalType";
-import Image from "next/image";
+import React, { useContext } from "react";
 
 const CreateArticleBox: React.FC = () => {
   const { controlModalState, setControlModalState, changeTabIndexModal } =
@@ -13,8 +12,7 @@ const CreateArticleBox: React.FC = () => {
     <div className="rounded-lg bg-white flex flex-col p-3 px-4 shadow">
       <div className="flex items-center space-x-2 border-b pb-3 mb-2">
         <div className="w-10 h-10">
-          <Image
-            layout="fill"
+          <img
             src="https://random.imagecdn.app/200/200"
             className="w-full h-full rounded-full"
             alt="dp"

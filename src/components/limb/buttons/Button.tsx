@@ -17,8 +17,8 @@ type IProps = ButtonHTMLAttributes<HTMLButtonElement> & {
   color?: IColor;
   fontWeight?: IFontWeight;
   fontSize?: IFontSize;
-  isDisabled?: string;
-  isLoading?: string;
+  isdisabled?: string;
+  isloading?: string;
   block?: string;
 };
 
@@ -29,8 +29,8 @@ const Button: React.FC<IProps> = (props) => {
     size,
     fontSize,
     fontWeight,
-    isDisabled,
-    isLoading,
+    isdisabled,
+    isloading,
     children,
     block,
   } = props;
@@ -45,9 +45,9 @@ const Button: React.FC<IProps> = (props) => {
       ${fontWeight ?? "font-semibold"}
       ${fontSize ?? "text-sm"}
        ${props.className}`}
-      disabled={!!(isDisabled == "true" || isLoading == "true")}
+      disabled={!!(isdisabled == "true" || isloading == "true")}
     >
-      {isLoading == "true" ? "..." : children}
+      {isloading == "true" ? "..." : children}
     </button>
   );
 };

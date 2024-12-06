@@ -1,21 +1,20 @@
-import React, {
-  forwardRef,
-  useContext,
-  useImperativeHandle,
-  useState,
-} from "react";
+import { faSearch, faXmark } from "@fortawesome/free-solid-svg-icons";
+import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { ModalContext } from "app/(main)/home/_providers/ModalProvider";
 import {
   ImageModalType,
   ModalContextType,
   TagImageType,
 } from "app/(main)/home/_type/ModalType";
+import React, {
+  forwardRef,
+  useContext,
+  useImperativeHandle,
+  useState,
+} from "react";
+import { getAccountFriendshipAndStatus } from "services/AccountService";
 import { AccountResponse } from "types/responses/AccountResponse";
 import { generateRandomString } from "utils/RandomUtils";
-import { getAccountFriendshipAndStatus } from "services/AccountService";
-import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
-import { faSearch, faXmark } from "@fortawesome/free-solid-svg-icons";
-import Image from "next/image";
 
 type TagEditPropsType = {
   fileModal: ImageModalType;
@@ -182,8 +181,7 @@ const Tag = forwardRef((props: TagEditPropsType, ref) => {
                       className="flex items-center p-2 hover:bg-gray-200 rounded"
                     >
                       <span className="mr-2 w-[20px] h-[20px]">
-                        <Image
-                          layout="fill"
+                        <img
                           className="w-full h-full rounded-full"
                           src="https://random.imagecdn.app/500/400"
                           alt="Not found"

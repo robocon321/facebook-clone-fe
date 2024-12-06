@@ -1,10 +1,9 @@
 "use client";
 
-import Link from "next/link";
 import { AppContext } from "app/_providers/AppProvider";
-import React, { useContext } from "react";
 import { AppContextType } from "app/_type/AppType";
-import Image from "next/image";
+import Link from "next/link";
+import React, { useContext } from "react";
 
 const LeftSidebar: React.FC = () => {
   const { appState } = useContext(AppContext) as AppContextType;
@@ -14,8 +13,7 @@ const LeftSidebar: React.FC = () => {
       <ul className="w-full text-gray-600">
         <li className="h-12 mb-2 flex items-center justify-content cursor-pointer space-x-2 p-2 rounded-md hover:bg-gray-200">
           <div>
-            <Image
-              layout="fill"
+            <img
               className="w-8 h-8 rounded-full"
               src="https://random.imagecdn.app/200/200"
               alt="user"
@@ -29,8 +27,7 @@ const LeftSidebar: React.FC = () => {
         </li>
         <li className="h-12 mb-2 flex items-center justify-content cursor-pointer space-x-2 p-2 rounded-md hover:bg-gray-200">
           <div>
-            <Image
-              layout="fill"
+            <img
               className="w-8 h-8 rounded-full"
               src="https://static.xx.fbcdn.net/rsrc.php/v3/yR/r/tInzwsw2pVX.png"
               alt="info"
