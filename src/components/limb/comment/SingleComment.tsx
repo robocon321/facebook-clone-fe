@@ -142,14 +142,14 @@ const SingleComment: React.FC<CommentTypeProps> = (props) => {
                   {comment.file.type?.startsWith("video") ? (
                     <video controls>
                       <source
-                        src={`${process.env.BACKEND_URL}/file-management/${comment.file.name}`}
+                        src={`${process.env.BACKEND_URL}/uploads/${comment.file.name}`}
                         type={"video/mp4"}
                       />
                     </video>
                   ) : (
                     <img
                       className="w-full h-full"
-                      src={`${process.env.BACKEND_URL}/file-management/${comment.file.name}`}
+                      src={`${process.env.BACKEND_URL}/uploads/${comment.file.name}`}
                       alt="Not found"
                     />
                   )}
@@ -186,7 +186,10 @@ const SingleComment: React.FC<CommentTypeProps> = (props) => {
                   onClick={() => onClickLikeButton()}
                   className={
                     accountEmotionId >= 0
-                      ? EMOTION_LIST[accountEmotionId].color
+                      ? "font-semibold " +
+                        EMOTION_LIST[accountEmotionId].color +
+                        " " +
+                        EMOTION_LIST[accountEmotionId].bg
                       : ""
                   }
                 >

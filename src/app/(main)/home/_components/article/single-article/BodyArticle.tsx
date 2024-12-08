@@ -49,9 +49,7 @@ const BodyArticle: React.FC<ArticleTypeProps> = (props) => {
               }
             >
               <img
-                src={
-                  process.env.BACKEND_URL + "/file-management/" + item.fileUrl
-                }
+                src={process.env.BACKEND_URL + "/uploads/" + item.fileUrl}
                 alt="Not found"
                 className="w-full h-76 max-h-100 object-cover"
               />
@@ -66,9 +64,7 @@ const BodyArticle: React.FC<ArticleTypeProps> = (props) => {
             >
               <video className="w-full" controls>
                 <source
-                  src={
-                    process.env.BACKEND_URL + "/file-management/" + item.fileUrl
-                  }
+                  src={process.env.BACKEND_URL + "/uploads/" + item.fileUrl}
                   type="video/mp4"
                 />
               </video>
@@ -87,9 +83,7 @@ const BodyArticle: React.FC<ArticleTypeProps> = (props) => {
                 }
               >
                 <img
-                  src={
-                    process.env.BACKEND_URL + "/file-management/" + item.fileUrl
-                  }
+                  src={process.env.BACKEND_URL + "/uploads/" + item.fileUrl}
                   alt="Not found"
                   className="w-full h-76 max-h-100 object-cover"
                 />
@@ -104,11 +98,7 @@ const BodyArticle: React.FC<ArticleTypeProps> = (props) => {
               >
                 <video className="w-full" controls>
                   <source
-                    src={
-                      process.env.BACKEND_URL +
-                      "/file-management/" +
-                      item.fileUrl
-                    }
+                    src={process.env.BACKEND_URL + "/uploads/" + item.fileUrl}
                     type="video/mp4"
                   />
                 </video>

@@ -71,6 +71,7 @@ const FooterArticle: React.FC<ArticleTypeProps> = (props) => {
   const [editorState, setEditorState] = useState(() =>
     EditorState.createEmpty()
   );
+  const commentBoxRef = useRef<HTMLDivElement | null>(null);
 
   useEffect(() => {
     let newEmotionCounts = [0, 0, 0, 0, 0, 0, 0];
@@ -215,7 +216,7 @@ const FooterArticle: React.FC<ArticleTypeProps> = (props) => {
       for (let key in raw.entityMap) {
         const ent = raw.entityMap[key];
         if (ent.type === "mention") {
-          mentionedAccounts.push(ent.data.mention.id);
+          mentionedAccounts.push(ent.data.id);
         }
       }
 
@@ -248,16 +249,28 @@ const FooterArticle: React.FC<ArticleTypeProps> = (props) => {
   const onReply = (comment: CommentArticleResponse) => {
     if (comment.account.accountId == appState.data.user?.accountId) return;
     if (editorState.getCurrentContent().hasText()) return;
-    const newContentEditor = createMentionEntities(editorState, {
-      id: comment.account.accountId,
-      name: comment.account.lastName + " " + comment.account.firstName,
-      avatar: "https://random.imagecdn.app/500/200",
+    window.scrollTo({
+      top: commentBoxRef.current?.offsetTop,
+      behavior: "smooth",
     });
-    const newEditorState = EditorState.createWithContent(newContentEditor);
-    setEditorState(newEditorState);
     setCommentInput({
       ...commentInput,
       parentId: comment.commentId,
+    });
+    setEditorState((prevEditorState: EditorState) => {
+      const newContentEditor = createMentionEntities(prevEditorState, {
+        id: comment.account.accountId,
+        name: comment.account.lastName + " " + comment.account.firstName,
+        avatar: "https://random.imagecdn.app/500/200",
+      });
+
+      const newEditorState = EditorState.push(
+        prevEditorState,
+        newContentEditor,
+        "insert-characters"
+      );
+
+      return EditorState.moveFocusToEnd(newEditorState);
     });
   };
 
@@ -423,6 +436,7 @@ const FooterArticle: React.FC<ArticleTypeProps> = (props) => {
           </div>
           <div className="ml-2 bg-gray-100 rounded-lg p-2 flex-grow">
             <div
+              ref={commentBoxRef}
               onFocus={onFocusComment}
               onBlur={onBlurComment}
               className="ml-2 bg-gray-100 rounded-lg p-2 flex-grow flex"
@@ -433,7 +447,9 @@ const FooterArticle: React.FC<ArticleTypeProps> = (props) => {
                   handleKeyCommand={handleKeyCommand}
                   editorState={editorState}
                   onChange={setEditorState}
-                  placeholder="Enter your comment"
+                  placeholder={
+                    !commentInput.fileUrl ? "Enter your comment" : ""
+                  }
                   plugins={plugins}
                 />
                 <MentionSuggestions

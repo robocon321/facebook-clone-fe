@@ -106,9 +106,7 @@ const AppProvider = (props: any) => {
 
   useEffect(() => {
     const handleBeforeUnload = (e: BeforeUnloadEvent) => {
-      updateHistoryAccount("OFFLINE")
-        .then((response) => console.log(response))
-        .catch((error) => console.log(error));
+      updateHistoryAccount("OFFLINE").catch((error) => console.error(error));
 
       if (client?.active) {
         client.publish({
@@ -178,11 +176,9 @@ const AppProvider = (props: any) => {
         .then((response) => {
           setAccountHistories(response.data);
         })
-        .catch((error) => console.log(error));
+        .catch((error) => console.error(error));
 
-      updateHistoryAccount("ONLINE")
-        .then((response) => console.log(response))
-        .catch((error) => console.log(error));
+      updateHistoryAccount("ONLINE").catch((error) => console.error(error));
     }
   };
 
