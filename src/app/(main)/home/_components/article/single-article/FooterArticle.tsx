@@ -228,9 +228,7 @@ const FooterArticle: React.FC<ArticleTypeProps> = (props) => {
         mentionedAccounts: mentionedAccounts.toString(),
       };
 
-      createComment(request)
-        .then((response) => console.log(response))
-        .catch((error) => console.error(error));
+      createComment(request).catch((error) => console.error(error));
 
       setEditorState(EditorState.createEmpty());
       setCommentInput(defaultCommentInput);
@@ -247,8 +245,6 @@ const FooterArticle: React.FC<ArticleTypeProps> = (props) => {
   }
 
   const onReply = (comment: CommentArticleResponse) => {
-    if (comment.account.accountId == appState.data.user?.accountId) return;
-    if (editorState.getCurrentContent().hasText()) return;
     window.scrollTo({
       top: commentBoxRef.current?.offsetTop,
       behavior: "smooth",
@@ -257,7 +253,11 @@ const FooterArticle: React.FC<ArticleTypeProps> = (props) => {
       ...commentInput,
       parentId: comment.commentId,
     });
+
     setEditorState((prevEditorState: EditorState) => {
+      if (comment.account.accountId == appState.data.user?.accountId)
+        return EditorState.moveFocusToEnd(prevEditorState);
+
       const newContentEditor = createMentionEntities(prevEditorState, {
         id: comment.account.accountId,
         name: comment.account.lastName + " " + comment.account.firstName,
@@ -276,6 +276,20 @@ const FooterArticle: React.FC<ArticleTypeProps> = (props) => {
 
   const isEnableComment = () => {
     return editorState.getCurrentContent().hasText() || commentInput.file;
+  };
+
+  const getChildrenComment = (parentId: any): CommentArticleResponse[] => {
+    if (parentId == null) return [];
+    const childrenComments: CommentArticleResponse[] = [];
+    article.comments?.forEach((element) => {
+      if (element.parentId == parentId) {
+        childrenComments.push(
+          element,
+          ...getChildrenComment(element.commentId)
+        );
+      }
+    });
+    return childrenComments;
   };
 
   return (
@@ -406,16 +420,41 @@ const FooterArticle: React.FC<ArticleTypeProps> = (props) => {
         {article.comments &&
           article.comments
             .filter((item) => item.parentId == null)
-            .map((item) => (
-              <SingleComment
-                key={item.commentId}
-                client={commentClient}
-                articleId={article.articleId}
-                comments={article.comments ? article.comments : []}
-                onReply={onReply}
-                comment={item}
-              />
-            ))}
+            .map((item) => {
+              const childrenComments = getChildrenComment(item.commentId);
+              return (
+                <div key={item.commentId}>
+                  <SingleComment
+                    client={commentClient}
+                    articleId={article.articleId}
+                    onReply={onReply}
+                    comment={item}
+                  />
+                  {childrenComments.length > 0 && (
+                    <div className="ml-8 children-comment">
+                      {childrenComments
+                        .sort((a, b) => {
+                          return (
+                            new Date(a.createTime).getTime() -
+                            new Date(b.createTime).getTime()
+                          );
+                        })
+                        .map((ele) => {
+                          return (
+                            <SingleComment
+                              key={ele.commentId}
+                              client={commentClient}
+                              articleId={article.articleId}
+                              onReply={onReply}
+                              comment={ele}
+                            />
+                          );
+                        })}
+                    </div>
+                  )}
+                </div>
+              );
+            })}
         {article.isFocus && (
           <div className="flex items-center p-4 w-full">
             <div className="mr-2">Someone is typing</div>

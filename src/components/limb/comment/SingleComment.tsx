@@ -16,7 +16,6 @@ import { CommentArticleResponse } from "types/responses/ArticleResponse";
 
 type CommentTypeProps = {
   comment: CommentArticleResponse;
-  comments: CommentArticleResponse[];
   onReply: (comment: CommentArticleResponse) => void;
   client: Client | null;
   articleId: number;
@@ -32,12 +31,9 @@ const MentionComponent = (mentionProps: SubMentionComponentProps) => {
 
 const SingleComment: React.FC<CommentTypeProps> = (props) => {
   const { appState } = useContext(AppContext) as AppContextType;
-  const { comment, comments, onReply, client, articleId } = props;
+  const { comment, onReply, client, articleId } = props;
   const [editorState, setEditorState] = useState(() =>
     EditorState.createWithContent(convertFromRaw(JSON.parse(comment.text)))
-  );
-  const nestedComments = comments.filter(
-    (item) => item.parentId == comment.commentId
   );
   const [accountEmotionId, setAccountEmotionId] = useState(-1);
   const [emotionCounts, setEmotionCounts] = useState([0, 0, 0, 0, 0, 0, 0]);
@@ -231,18 +227,6 @@ const SingleComment: React.FC<CommentTypeProps> = (props) => {
             <FontAwesomeIcon icon={faEllipsis} />
           </div>
         </div>
-      </div>
-      <div className="ml-8">
-        {nestedComments.map((item) => (
-          <SingleComment
-            key={item.commentId}
-            client={client}
-            articleId={articleId}
-            comments={comments}
-            onReply={onReply}
-            comment={item}
-          />
-        ))}
       </div>
     </div>
   );
